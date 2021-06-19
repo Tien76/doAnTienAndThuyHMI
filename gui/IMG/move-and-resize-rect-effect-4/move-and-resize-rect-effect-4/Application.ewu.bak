@@ -1,0 +1,337 @@
+﻿$version 10.00
+
+// This is the root component of the entire GUI application.
+$rect <20,20,220,60>
+$output false
+class Application : Core::Root
+{
+  $rect <500,0,700,40>
+  inherited property Bounds = <0,0,470,230>;
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle Background
+  {
+    preset Bounds = <0,0,470,230>;
+    preset Color = #F0F0F0FF;
+  }
+
+  // This component demonstrates how the animation direction of an Effect is changed \
+  // by modifying its property Reversed.
+  // 
+  // When you touch the screen, the Effect is played as usual with the normal direction \
+  // causing the Frame view being enlarged.
+  // 
+  // When you release the screen, the Effect is reverted causing the Frame view to \
+  // restore its original size and position.
+  // 
+  // Just press the key F5 to start the Prototyper.
+  note legend Note
+  {
+    attr Bounds = <10,260,570,430>;
+  }
+
+  // This is a generic touch handler.
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler SimpleTouchHandler
+  {
+    preset Point4 = <0,0>;
+    preset Point3 = <470,0>;
+    preset Point2 = <470,230>;
+    preset Point1 = <0,230>;
+    preset OnRelease = onRelease;
+    preset OnPress = onPress;
+  }
+
+  // This is a slot method.
+  $rect <500,120,700,160>
+  slot onPress
+  {
+    // Activate the effect to play the animation forward
+    RectEffect.Reversed = false;
+    RectEffect.Enabled  = true;
+  }
+
+  // This is a slot method.
+  $rect <500,160,700,200>
+  slot onRelease
+  {
+    // Activate the effect to play the animation backwards
+    RectEffect.Reversed = true;
+    RectEffect.Enabled  = true;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text Text2
+  {
+    preset Bounds = <180,180,280,210>;
+    preset String = "Touch me!";
+    preset Font = OldResources::FontArial24;
+    preset Color = #4A4A4AFF;
+  }
+
+  // This is a move and resize rectangle effect.
+  $rect <500,80,700,120>
+  object Effects::RectEffect RectEffect
+  {
+    preset Amplitude = 2;
+    preset Timing = Effects::Timing.Linear;
+    preset NoOfCycles = 1;
+    preset CycleDuration = 130;
+    preset Value2 = <0,0,480,272>;
+    preset Value1 = <50,70,350,160>;
+    preset Outlet = ^test.Bounds;
+  }
+
+  // This is a bitmap frame view.
+  $rect <20,20,160,60>
+  object Views::Frame Frame
+  {
+    preset Bounds = <20,80,180,170>;
+    preset Bitmap = OldResources::PanelGray;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton button
+  {
+    preset Bounds = <338,170,456,220>;
+    preset Focus = null;
+    preset OnPress = Slot;
+    preset Label = "Touch";
+    preset Appearance = WidgetSet::PushButton_Medium;
+  }
+
+  $rect <519,207,719,247>
+  slot Slot
+  {
+    test.Visible = true;
+    RectEffect.Reversed = false;
+    RectEffect.Enabled  = true;
+  }
+
+  $rect <20,20,160,60>
+  object Application::Component test
+  {
+    preset Bounds = <0,25,225,50>;
+    preset Visible = false;
+  }
+}
+
+// This example demonstrates the usage of Move and resize rect Effect to animate \
+// the position and the size of a Frame view.
+note legend Note1
+{
+  attr Bounds = <20,100,500,190>;
+}
+
+$rect <240,20,440,60>
+$output false
+class Component : Core::Group
+{
+  $rect <10,230,210,270>
+  inherited property Bounds = <0,0,300,200>;
+
+  $rect <10,390,210,430>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <10,350,210,390>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  // To do:
+  // 
+  // - Adjust the visible size of your component (the thick blue border).
+  // 
+  // - The simplest way to compose the appearance of the component is to use the \
+  // 'Views' and 'Widget Sets' from the Gallery.
+  // 
+  // - To react to touch or keyboard events use the templates from the Gallery folder \
+  // 'Event Handlers'.
+  // 
+  // - To perform transitions (animations) use the templates from the Gallery folder \
+  // 'Effects'.
+  // 
+  // - To implement the interface of the component use the 'Property' template from \
+  // the Gallery folder 'Chora'.
+  // 
+  // - To store values use the 'Variable' and 'Array' templates available in the \
+  // Gallery folder 'Chora'.
+  // 
+  // - To implement behavior use the 'Method' and 'Slot Method' templates available \
+  // in the Gallery folder 'Chora'.
+  // 
+  // - In the method 'UpdateViewState()' you can put code to update the state of \
+  // views enclosed in your component.
+  // 
+  // - In the method 'UpdateLayout()' you can put code to perform sophisticated layout \
+  // calculation for enclosed views.
+  note legend Note1
+  {
+    attr Bounds = <220,230,1000,550>;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,0,300,200>;
+    preset Color = #FF405AFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <32,36,118,60>;
+    preset AutoSize = true;
+    preset String = "Text";
+    preset Font = Resources::FontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <150,36,190,60>;
+    preset AutoSize = true;
+    preset String = "Text";
+    preset Font = Resources::FontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text2
+  {
+    preset Bounds = <55,98,95,122>;
+    preset AutoSize = true;
+    preset String = "Text";
+    preset Font = Resources::FontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text3
+  {
+    preset Bounds = <150,100,190,124>;
+    preset AutoSize = true;
+    preset String = "Text";
+    preset Font = Resources::FontMedium;
+  }
+}

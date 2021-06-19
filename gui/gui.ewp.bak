@@ -1,0 +1,116 @@
+﻿$version 10.00
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,70,240,110>
+unit Core
+{
+  attr Directory = $Mosaic;
+}
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,110,240,150>
+unit Resources
+{
+  attr Directory = $Mosaic;
+}
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,150,240,190>
+unit Graphics
+{
+  attr Directory = $Mosaic;
+}
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,190,240,230>
+unit Effects
+{
+  attr Directory = $Mosaic;
+}
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,230,240,270>
+unit Views
+{
+  attr Directory = $Mosaic;
+}
+
+// The 'default' Language. Each project has to contain at least one language brick \
+// called 'Default'
+$rect <540,70,740,110>
+language Default;
+
+// Mosaic Framework
+note group Note1
+{
+  attr Bounds = <20,20,260,400>;
+}
+
+// Profile Configuration
+note group Note2
+{
+  attr Bounds = <270,20,510,130>;
+}
+
+// Languages
+note group Note3
+{
+  attr Bounds = <520,20,760,130>;
+}
+
+// Project Units
+note group Note5
+{
+  attr Bounds = <270,140,760,290>;
+}
+
+// This is a profile member for the project. This profile controls the code generation \
+// for the target system.
+$rect <290,70,490,110>
+profile STM32F746 : STM.STM32.RGB565
+{
+  attr ScreenOrientation = Normal;
+  attr ScreenSize = <480,272>;
+  attr Optimization = High;
+  attr ApplicationClass = Application_2::Application;
+  attr ModeOfBitmapResources = Compressed;
+  attr ModeOfStringConstants = Compressed;
+  attr CleanOutputDirectories = false;
+  attr OutputFileNameExtension = c;
+  attr Verbose = false;
+  attr OutputDirectory = C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\GeneratedCode;
+  attr PostProcess = C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\Project\STM32CubeIDE\STM32F746-Discovery\STM32CubeIDE_ew_post_process.cmd;
+
+  $rect <10,10,154,50>
+  macro Author = "Dipl. Ing. Paul Banach and Dipl. Ing. Manfred Schweyer, Copyright (C) TARA Systems GmbH";
+}
+
+$rect <40,270,240,310>
+unit WidgetSet
+{
+  attr Directory = $Mosaic\;
+}
+
+$rect <40,310,240,350>
+unit Templates
+{
+  attr Directory = $Mosaic\;
+}
+
+$rect <290,180,490,220>
+unit Application_2
+{
+  attr Directory = .\;
+}
+
+$rect <40,350,240,390>
+unit Charts
+{
+  attr Directory = $Mosaic\Charts;
+}
+
+$rect <500,180,700,220>
+unit setAlarm
+{
+  attr Directory = .\;
+}

@@ -1,0 +1,2 @@
+ew_bsp_system.c:232:6:EwBspSystemInit	224	static,ignoring_inline_asm
+ew_bsp_system.c:280:6:EwBspSystemDone	0	static

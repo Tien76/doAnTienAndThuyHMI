@@ -1,0 +1,8 @@
+ew_bsp_clock.c:142:6:EwBspClockInit	0	static
+ew_bsp_clock.c:164:6:EwBspClockTickIncrement	0	static
+ew_bsp_clock.c:184:15:EwBspClockGetTicks	0	static
+ew_bsp_clock.c:204:15:EwBspClockGetTime	56	static
+ew_bsp_clock.c:262:6:EwBspClockSetTime	64	static
+ew_bsp_clock.c:356:6:EwBspClockGetCpuLoad	8	static
+ew_bsp_clock.c:392:6:EwBspClockCpuLoadSetActive	12	static
+ew_bsp_clock.c:426:6:EwBspClockCpuLoadSetIdle	0	static

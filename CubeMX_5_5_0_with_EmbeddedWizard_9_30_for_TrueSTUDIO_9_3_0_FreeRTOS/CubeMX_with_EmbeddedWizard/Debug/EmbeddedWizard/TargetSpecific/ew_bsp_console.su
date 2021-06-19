@@ -1,0 +1,2 @@
+ew_bsp_console.c:60:6:EwBspConsolePutCharacter	16	static
+ew_bsp_console.c:82:15:EwBspConsoleGetCharacter	16	static

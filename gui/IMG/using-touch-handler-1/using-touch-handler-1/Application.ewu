@@ -1,0 +1,208 @@
+$version 6.60
+
+// This is the root component of the entire GUI application.
+$rect <20,20,220,60>
+$output false
+class Application : Core::Root
+{
+  $rect <500,0,700,40>
+  inherited property Bounds = <0,0,480,300>;
+
+  // This component demonstrates how several Touch Handlers, every optimized to process \
+  // its particular gesture, are combined together.
+  // 
+  // The example contain three Touch Handler: the 'Slide Touch Handler' to scroll \
+  // the text vertically, the 'Wipe Touch Handler' to detect wipe left and wipe right \
+  // gestures and the 'Simple Touch Handler' to detect double taps.
+  // 
+  // All three Handler are arranged one above the other.
+  // 
+  // The Handler are configured with their 'RetargetCondition' properties to reject \
+  // active interaction when the user performs a gesture the Handler is not interested \
+  // in.
+  // 
+  // When the user touches the screen, the top most, 'Simple Touch Handler' reacts \
+  // first.
+  // 
+  // Later, when the user initiates a wipe gestures, the 'Slide Touch Handler' retargets \
+  // the interaction to another Handler lying in the background.
+  // 
+  // In this example, the user can scroll the text vertically. With a wipe left or \
+  // wipe right, the user can browse between text pages. With a double tap, the current \
+  // page scrolls to its begin.
+  // 
+  // Just press the key F5 to start the Prototyper.
+  note legend Note
+  {
+    attr Bounds = <10,320,910,640>;
+  }
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle Background
+  {
+    preset Bounds = <0,0,480,300>;
+    preset Color = #DDDDDDFF;
+  }
+
+  // This is a border view.
+  $rect <20,20,160,60>
+  object Views::Border Border
+  {
+    preset Bounds = <18,28,462,268>;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <20,30,460,266>;
+    preset SlideHandler = SlideTouchHandler;
+    preset WrapText = true;
+    preset Alignment = Views::TextAlignment[AlignHorzLeft, AlignVertTop];
+    preset String = Application::Page1;
+    preset Font = Application::Font;
+    preset Color = #000000FF;
+  }
+
+  // This is a slide gesture handler.
+  $rect <20,20,160,60>
+  object Core::SlideTouchHandler SlideTouchHandler
+  {
+    preset Bounds = <20,30,460,266>;
+    preset SnapNext = <0,39>;
+    preset SlideHorz = false;
+  }
+
+  // This is a variable.
+  $rect <500,50,700,90>
+  var int32 pageNo = 0;
+
+  // This is a wipe gesture handler.
+  $rect <20,20,160,60>
+  object Core::WipeTouchHandler WipeTouchHandler
+  {
+    preset Bounds = <20,30,460,266>;
+    preset OnRight = onWipeRight;
+    preset OnLeft = onWipeLeft;
+    preset RetargetCondition = Core::RetargetReason[WipeDown, WipeUp];
+    preset Threshold = 0.1;
+  }
+
+  // This is a slot method.
+  $rect <500,110,700,150>
+  slot onWipeLeft
+  {
+    // The user wants to browse to the next page.
+    // Already the last page visible?
+    if ( pageNo == 3 )
+      return;
+
+    pageNo = pageNo + 1;
+
+    // Display the page text 
+    switch ( pageNo )
+    {
+      case 1 : Text.String = Application::Page2;
+      case 2 : Text.String = Application::Page3;
+      case 3 : Text.String = Application::Page4;
+      default :;
+    }
+
+    // Scroll to the begin of the page text
+    Text.ScrollOffset = <0,0>;
+  }
+
+  // This is a slot method.
+  $rect <700,110,900,150>
+  slot onWipeRight
+  {
+    // The user wants to browse to the next page.
+    // Already the first page visible?
+    if ( pageNo == 0 )
+      return;
+
+    pageNo = pageNo - 1;
+
+    // Display the page text 
+    switch ( pageNo )
+    {
+      case 0 : Text.String = Application::Page1;
+      case 1 : Text.String = Application::Page2;
+      case 2 : Text.String = Application::Page3;
+      default :;
+    }
+
+    // Scroll to the begin of the page text
+    Text.ScrollOffset = <0,0>;
+  }
+
+  // This is a generic touch handler.
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler SimpleTouchHandler
+  {
+    preset Point4 = <20,30>;
+    preset Point3 = <460,30>;
+    preset Point2 = <460,266>;
+    preset Point1 = <20,266>;
+    preset OnRelease = onDoubleTap;
+    preset RetargetCondition = Core::RetargetReason[WipeDown, WipeLeft, WipeRight, WipeUp];
+    preset MaxStrikeCount = 2;
+    preset MinStrikeCount = 2;
+  }
+
+  // This is a slot method.
+  $rect <500,160,700,200>
+  slot onDoubleTap
+  {
+    // The event is generated because the interaction has been taken
+    // over by another handler. In such case ignore the event. This is
+    // not a real double tap.
+    if ( SimpleTouchHandler.AutoDeflected )
+      return;
+
+    // Scroll to the begin of the text.
+    Text.ScrollOffset = <0,0>;
+  }
+}
+
+// This example demonstrates how several Touch Handler are combined together to process \
+// various gestures.
+note legend Note1
+{
+  attr Bounds = <230,120,710,210>;
+}
+
+// This is a font resource.
+$rect <230,20,430,60>
+$output false
+resource Resources::Font Font
+{
+  attr fontname FontName = Arial;
+  attr fontheight Height = 38;
+  attr fontquality Quality = High;
+  attr fontranges Ranges = 0x20-0xFF;
+  attr fontaspectratio AspectRatio = 1.0;
+  attr fontbold Bold = false;
+  attr fontitalic Italic = false;
+}
+
+// This is a constant.
+$rect <20,80,220,120>
+$output false
+const string Page1 = "Page 1\nDuis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.";
+
+// This is a constant.
+$rect <20,120,220,160>
+$output false
+const string Page2 = "Page 2\nUt wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.";
+
+// This is a constant.
+$rect <20,160,220,200>
+$output false
+const string Page3 = "Page 3\nNam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.";
+
+// This is a constant.
+$rect <20,200,220,240>
+$output false
+const string Page4 = "Page 4\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";

@@ -1,0 +1,2507 @@
+﻿$version 10.00
+
+$rect <70,20,270,60>
+$output false
+class Application : Core::Root
+{
+  $rect <520,20,720,60>
+  inherited property Bounds = <0,0,480,272>;
+
+  $rect <0,-80,200,-40>
+  object Application_2::background Component;
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton PushButton
+  {
+    preset Bounds = <11,11,132,61>;
+    preset OnLeave = null;
+    preset OnEnter = null;
+    preset OnRelease = null;
+    preset OnPress = LightFunction;
+    preset Label = "Light";
+    preset Appearance = WidgetSet::PushButton_Medium;
+  }
+
+  $rect <520,180,720,220>
+  slot LightFunction
+  {
+    SetAlarm.Visible = false;
+    AirScreen.Visible = false;
+    LightScreen.Visible = true;
+    LightEffect.Reversed = false;
+    LightEffect.Enabled  = true;
+
+
+  }
+
+  $rect <520,300,720,340>
+  slot Exit
+  {
+    if(SetAlarm.Visible){
+      hourText.Color = #FFFFFFFF;
+      minText.Color = #FFFFFFFF;
+      amPmText.Color = #FFFFFFFF;
+      Text1.Color =  #FFFFFFFF;
+      SetAlarm.Visible = false;
+    }
+    else if(LightScreen.Visible){
+      if(LightScreen.colorMaster.Color!=#3300008E)
+        LightValue.String = "100";
+      else if(LightScreen.colorRead.Color!=#3300008E)
+        LightValue.String = "75";
+      else if(LightScreen.colorNight.Color != #3300008E)
+        LightValue.String = "20";
+      else
+        LightValue.String = "0";
+      LightScreen.Visible = false;
+    }
+    else{
+      TempValue.String = AirScreen.tempuText.String;
+      AirScreen.Visible = false;
+    }
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <0,220,480,272>;
+    preset ColorBL = #9A6242FF;
+    preset ColorBR = #FFD976FF;
+    preset Color = #454545FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Temp
+  {
+    preset Bounds = <3,220,120,244>;
+    preset AutoSize = true;
+    preset String = "Temperature";
+    preset Font = Resources::FontMedium;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TempValue
+  {
+    preset Bounds = <40,244,76,268>;
+    preset AutoSize = true;
+    preset String = "0";
+    preset Font = Resources::FontMedium;
+    preset Color = #F6FFF9FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Line Line
+  {
+    preset Point2 = <127,265>;
+    preset Point1 = <127,224>;
+    preset Width = 2;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Humd
+  {
+    preset Bounds = <136,221,216,245>;
+    preset AutoSize = true;
+    preset String = "Humidity";
+    preset Font = Resources::FontMedium;
+    preset Color = #F2F2F2FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text HumdValue
+  {
+    preset Bounds = <162,244,193,268>;
+    preset AutoSize = true;
+    preset String = "0 %%";
+    preset Font = Resources::FontMedium;
+    preset Color = #F6FFF9FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Line Line1
+  {
+    preset Point2 = <222,265>;
+    preset Point1 = <222,224>;
+    preset Width = 2;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Light
+  {
+    preset Bounds = <240,221,285,245>;
+    preset AutoSize = true;
+    preset String = "Light";
+    preset Font = Resources::FontMedium;
+    preset Color = #FAFAFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text LightValue
+  {
+    preset Bounds = <222,244,251,268>;
+    preset AutoSize = true;
+    preset String = "0";
+    preset Font = Resources::FontMedium;
+    preset Color = #F6FFF9FF;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton PushButton1
+  {
+    preset Bounds = <19,82,127,132>;
+    preset OnPress = AirFunction;
+    preset Label = "Air";
+    preset Appearance = WidgetSet::PushButton_Medium;
+  }
+
+  $rect <520,100,720,140>
+  object Effects::RectEffect AirEffect
+  {
+    preset NoOfCycles = 1;
+    preset CycleDuration = 130;
+    preset Value2 = <175,3,465,218>;
+    preset Value1 = <200,210,315,258>;
+    preset Outlet = ^AirScreen.Bounds;
+  }
+
+  $rect <520,220,720,260>
+  slot AirFunction
+  {
+    LightScreen.Visible = false;
+    SetAlarm.Visible = false;
+    AirScreen.Visible = true;
+    AirEffect.Reversed = false;
+    AirEffect.Enabled  = true;
+  }
+
+  $rect <20,20,160,60>
+  object Application_2::AirScreen AirScreen
+  {
+    preset Bounds = <3,220,120,244>;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Application_2::screenLight LightScreen
+  {
+    preset Bounds = <240,221,285,245>;
+    preset Visible = false;
+  }
+
+  $rect <520,140,720,180>
+  object Effects::RectEffect LightEffect
+  {
+    preset NoOfCycles = 1;
+    preset CycleDuration = 130;
+    preset Value2 = <175,3,465,218>;
+    preset Value1 = <200,210,315,258>;
+    preset Outlet = ^LightScreen.Bounds;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton PushButton2
+  {
+    preset Bounds = <19,148,127,198>;
+    preset OnPress = AlarmFunction;
+    preset Label = "Alarm";
+    preset Appearance = WidgetSet::PushButton_Medium;
+  }
+
+  $rect <520,60,720,100>
+  object Effects::RectEffect AlarmEffect
+  {
+    preset NoOfCycles = 1;
+    preset CycleDuration = 130;
+    preset Value2 = <175,3,465,218>;
+    preset Value1 = <200,210,315,258>;
+    preset Outlet = ^SetAlarm.Bounds;
+  }
+
+  $rect <520,260,720,300>
+  slot AlarmFunction
+  {
+    LightScreen.Visible = false;
+    AirScreen.Visible = false;
+    SetAlarm.Visible = true;
+    AlarmEffect.Reversed = false;
+    AlarmEffect.Enabled  = true;
+  }
+
+  $rect <20,20,160,60>
+  object setAlarm::SetAlarm SetAlarm
+  {
+    preset Bounds = <306,227,356,270>;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchExit
+  {
+    preset Point4 = <437,6>;
+    preset Point3 = <480,6>;
+    preset Point2 = <480,50>;
+    preset Point1 = <437,50>;
+    preset OnPress = Exit;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Line Line2
+  {
+    preset Point2 = <302,268>;
+    preset Point1 = <302,227>;
+    preset Width = 2;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image
+  {
+    preset Bounds = <306,227,356,270>;
+    preset Bitmap = Application_2::iconAlarmSmall;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text hourText
+  {
+    preset Bounds = <342,229,390,272>;
+    preset String = "08";
+    preset Font = Application_2::fontTimer;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <361,227,409,270>;
+    preset String = ":";
+    preset Font = Application_2::fontTimer;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text minText
+  {
+    preset Bounds = <384,229,432,272>;
+    preset String = "30";
+    preset Font = Application_2::fontTimer;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler SimpleTouchHandler
+  {
+    preset Point4 = <428,185>;
+    preset Point3 = <469,185>;
+    preset Point2 = <469,224>;
+    preset Point1 = <428,224>;
+    preset OnPress = slotSetAlarm;
+  }
+
+  $rect <520,340,720,380>
+  slot slotSetAlarm
+  {
+    hourText.String = SetAlarm.hourText.String;
+    hourText.Color = #FA0DFFFF;
+    minText.String = SetAlarm.minText.String;
+    minText.Color = #FA0DFFFF;
+    amPmText.String = SetAlarm.amPmText.String;
+    amPmText.Color= #FA0DFFFF;
+    Text1.Color = #FA0DFFFF;
+    SetAlarm.Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text amPmText
+  {
+    preset Bounds = <421,229,469,272>;
+    preset String = "AM";
+    preset Font = Application_2::fontTimer;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text lux
+  {
+    preset Bounds = <252,244,302,268>;
+    preset AutoSize = true;
+    preset String = "Lux";
+    preset Font = Resources::FontMedium;
+    preset Color = #F6FFF9FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TempValue1
+  {
+    preset Bounds = <74,245,94,269>;
+    preset AutoSize = true;
+    preset String = "°C";
+    preset Font = Resources::FontMedium;
+    preset Color = #F6FFF9FF;
+  }
+
+  $rect <720,20,920,60>
+  object Core::Timer Timer
+  {
+    preset OnTrigger = TimerTick;
+    preset Period = 5000;
+    preset Enabled = true;
+  }
+
+  $rect <720,60,920,100>
+  slot TimerTick
+  {
+    TempValue.String = string(valueTemp, 0, 1);
+    HumdValue.String = string(valueHumid,0,1);
+    LightValue.String = valueLux;
+  }
+
+  $rect <720,100,920,140>
+  var float valueTemp;
+
+  $rect <720,140,920,180>
+  var float valueHumid;
+
+  $rect <720,180,920,220>
+  var int16 valueLux;
+}
+
+$rect <270,20,470,60>
+$output false
+resource Resources::Bitmap backGroundMap
+{
+  attr bitmapfile FileName = .\IMG\res\res\anhNen.jpg;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <730,20,930,60>
+$output false
+class background : Core::Group
+{
+  $rect <570,40,770,80>
+  inherited property Bounds = <0,0,480,272>;
+
+  $rect <10,390,210,430>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <10,350,210,390>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  // To do:
+  // 
+  // - Adjust the visible size of your component (the thick blue border).
+  // 
+  // - The simplest way to compose the appearance of the component is to use the \
+  // 'Views' and 'Widget Sets' from the Gallery.
+  // 
+  // - To react to touch or keyboard events use the templates from the Gallery folder \
+  // 'Event Handlers'.
+  // 
+  // - To perform transitions (animations) use the templates from the Gallery folder \
+  // 'Effects'.
+  // 
+  // - To implement the interface of the component use the 'Property' template from \
+  // the Gallery folder 'Chora'.
+  // 
+  // - To store values use the 'Variable' and 'Array' templates available in the \
+  // Gallery folder 'Chora'.
+  // 
+  // - To implement behavior use the 'Method' and 'Slot Method' templates available \
+  // in the Gallery folder 'Chora'.
+  // 
+  // - In the method 'UpdateViewState()' you can put code to update the state of \
+  // views enclosed in your component.
+  // 
+  // - In the method 'UpdateLayout()' you can put code to perform sophisticated layout \
+  // calculation for enclosed views.
+  note legend Note1
+  {
+    attr Bounds = <220,300,1000,620>;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image
+  {
+    preset Bounds = <0,0,480,272>;
+    preset Alignment = Views::ImageAlignment[ScaleToFill];
+    preset Bitmap = Application_2::backGroundMap;
+  }
+}
+
+$rect <720,118,920,158>
+$output false
+class AirScreen : Core::Group
+{
+  $rect <730,10,930,50>
+  inherited property Bounds = <0,0,288,220>;
+
+  $rect <730,90,930,130>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <730,50,930,90>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,0,288,220>;
+    preset Color = #1A3347FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle1
+  {
+    preset Bounds = <1,0,288,36>;
+    preset Color = #3347FFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <15,6,254,30>;
+    preset AutoSize = true;
+    preset String = "AIR CONDITION CONTROL ";
+    preset Font = Resources::FontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image down_apper
+  {
+    preset Bounds = <193,49,257,110>;
+    preset Bitmap = Application_2::down;
+    preset Visible = true;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image down_hiden
+  {
+    preset Bounds = <197,48,254,109>;
+    preset Bitmap = Application_2::down1;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchDown
+  {
+    preset Point4 = <197,49>;
+    preset Point3 = <254,49>;
+    preset Point2 = <254,110>;
+    preset Point1 = <197,110>;
+    preset OnLeave = null;
+    preset OnEnter = null;
+    preset OnRelease = down1;
+    preset OnPress = down;
+    preset LimitToFinger = -1;
+  }
+
+  $rect <320,10,520,50>
+  slot down
+  {
+    down_hiden.Visible = true;
+    down_apper.Visible = false;
+    tempuText.String = tempuText.String.parse_int32(0) -1;
+    trace "da do down";
+
+  }
+
+  $rect <320,50,520,90>
+  slot down1
+  {
+    down_apper.Visible = true;
+    down_hiden.Visible = false;
+
+
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image up_apper
+  {
+    preset Bounds = <25,48,86,109>;
+    preset Bitmap = Application_2::up;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image up_hiden
+  {
+    preset Bounds = <22,48,84,109>;
+    preset Bitmap = Application_2::up1;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchUp
+  {
+    preset Point4 = <25,49>;
+    preset Point3 = <82,49>;
+    preset Point2 = <82,110>;
+    preset Point1 = <25,110>;
+    preset OnLeave = up1;
+    preset OnEnter = null;
+    preset OnRelease = up1;
+    preset OnPress = up;
+    preset RetargetDelay = 1200;
+  }
+
+  $rect <320,90,520,130>
+  slot up
+  {
+    up_hiden.Visible = true;
+    up_apper.Visible = false;
+    tempuText.String = tempuText.String.parse_int32(0) +1;
+    trace "da do up";
+
+
+
+
+  }
+
+  $rect <320,130,520,170>
+  slot up1
+  {
+    up_apper.Visible = true;
+    up_hiden.Visible = false;
+
+
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text tempuText
+  {
+    preset Bounds = <105,68,122,104>;
+    preset AutoSize = true;
+    preset String = "20";
+    preset Font = Resources::FontExtraLarge;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text2
+  {
+    preset Bounds = <138,60,184,114>;
+    preset AutoSize = true;
+    preset String = "°C";
+    preset Font = Resources::FontExtraLarge;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image power_apper
+  {
+    preset Bounds = <195,133,257,195>;
+    preset Bitmap = Application_2::On;
+  }
+
+  $rect <530,10,730,50>
+  slot On
+  {
+    power_hiden.Visible = true;
+    power_apper.Visible = false;
+    trace "da do power";
+
+
+
+
+
+  }
+
+  $rect <530,50,730,90>
+  slot Off
+  {
+    power_hiden.Visible = false;
+    power_apper.Visible = true;
+
+
+
+
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image power_hiden
+  {
+    preset Bounds = <190,129,262,199>;
+    preset Bitmap = Application_2::Off;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchOn
+  {
+    preset Point4 = <197,136>;
+    preset Point3 = <254,136>;
+    preset Point2 = <254,197>;
+    preset Point1 = <197,197>;
+    preset OnLeave = null;
+    preset OnEnter = null;
+    preset OnRelease = Off;
+    preset OnPress = On;
+    preset RetargetDelay = 1200;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image fan
+  {
+    preset Bounds = <91,145,136,195>;
+    preset Bitmap = Application_2::Fan;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Low
+  {
+    preset Bounds = <139,131,176,155>;
+    preset AutoSize = true;
+    preset String = "Low";
+    preset Font = Resources::FontMedium;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Mid
+  {
+    preset Bounds = <139,158,172,182>;
+    preset AutoSize = true;
+    preset String = "Mid";
+    preset Font = Resources::FontMedium;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text High
+  {
+    preset Bounds = <137,185,178,209>;
+    preset AutoSize = true;
+    preset String = "High";
+    preset Font = Resources::FontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image exit
+  {
+    preset Bounds = <253,-7,291,43>;
+    preset Bitmap = Application_2::exiticon;
+  }
+
+  $rect <320,170,520,210>
+  slot OnSpeed
+  {
+    speed_hiden.Visible = true;
+    speed_apper.Visible = false;
+    if(Low.Color==#FFFFFFFF && Mid.Color==#FFFFFFFF && High.Color==#FFFFFFFF){
+    Low.Color=  #FF51FCFF;
+    Mid.Color = #FFFFFFFF;
+    High.Color=#FFFFFFFF;
+    }
+    else if(Low.Color==#FF51FCFF){
+     Low.Color=  #FFFFFFFF;
+    Mid.Color = #FF51FCFF;
+    High.Color=#FFFFFFFF;
+    }
+    else if(Mid.Color == #FF51FCFF){
+     Low.Color=  #FFFFFFFF;
+    Mid.Color = #FFFFFFFF;
+    High.Color= #FF51FCFF;
+    }
+    else{
+     Low.Color=  #FF51FCFF;
+    Mid.Color = #FFFFFFFF;
+    High.Color= #FFFFFFFF;
+    }
+
+
+
+
+
+
+  }
+
+  $rect <320,210,520,250>
+  slot OffSpeed
+  {
+    speed_hiden.Visible = false;
+    speed_apper.Visible = true;
+
+
+
+
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image speed_apper
+  {
+    preset Bounds = <27,135,89,197>;
+    preset Bitmap = Application_2::SpeedON;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image speed_hiden
+  {
+    preset Bounds = <22,131,94,201>;
+    preset Bitmap = Application_2::SpeedOff;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchSpeed
+  {
+    preset Point4 = <27,136>;
+    preset Point3 = <86,136>;
+    preset Point2 = <86,195>;
+    preset Point1 = <27,195>;
+    preset OnRelease = OffSpeed;
+    preset OnPress = OnSpeed;
+  }
+}
+
+$rect <240,350,440,390>
+$output false
+class Light_Control : Core::Group
+{
+  $rect <10,230,210,270>
+  inherited property Bounds = <0,0,300,200>;
+
+  $rect <10,390,210,430>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <10,350,210,390>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  // To do:
+  // 
+  // - Adjust the visible size of your component (the thick blue border).
+  // 
+  // - The simplest way to compose the appearance of the component is to use the \
+  // 'Views' and 'Widget Sets' from the Gallery.
+  // 
+  // - To react to touch or keyboard events use the templates from the Gallery folder \
+  // 'Event Handlers'.
+  // 
+  // - To perform transitions (animations) use the templates from the Gallery folder \
+  // 'Effects'.
+  // 
+  // - To implement the interface of the component use the 'Property' template from \
+  // the Gallery folder 'Chora'.
+  // 
+  // - To store values use the 'Variable' and 'Array' templates available in the \
+  // Gallery folder 'Chora'.
+  // 
+  // - To implement behavior use the 'Method' and 'Slot Method' templates available \
+  // in the Gallery folder 'Chora'.
+  // 
+  // - In the method 'UpdateViewState()' you can put code to update the state of \
+  // views enclosed in your component.
+  // 
+  // - In the method 'UpdateLayout()' you can put code to perform sophisticated layout \
+  // calculation for enclosed views.
+  note legend Note1
+  {
+    attr Bounds = <220,230,1000,550>;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,-3,300,200>;
+    preset Color = #525252FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle1
+  {
+    preset Bounds = <0,-3,300,47>;
+    preset Color = #8C4EFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <67,10,218,34>;
+    preset AutoSize = true;
+    preset String = "LIGHT CONTROL";
+    preset Font = Resources::FontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <69,100,216,132>;
+    preset AutoSize = true;
+    preset String = "Design here";
+    preset Font = Application::Font;
+  }
+
+  $rect <20,20,160,60>
+  object Application_2::ButtonExit Exit
+  {
+    preset Bounds = <250,-2,300,48>;
+  }
+}
+
+// This class implements a 'push button' widget. When the user presses the button, \
+// a signal is sent to the slot method stored in its @OnActivate property.
+$rect <70,-40,270,0>
+$output false
+class ButtonExit : Templates::PushButton
+{
+  $rect <480,310,680,350>
+  inherited property Bounds = <0,0,50,50>;
+
+  $rect <710,190,910,230>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    // Determine the new state of the push button.
+    //
+    // isEnabled  --> the button can react to user inputs.
+    // isSelected --> the button can receive keyboard events.
+    // isPressed  --> the button should appear pressed.
+    //
+    var bool isEnabled  = aState.contains( Core::ViewState[ Enabled  ]);
+    var bool isSelected = aState.contains( Core::ViewState[ Selected ]);
+    var bool isPressed  = ( TouchHandler.Down && TouchHandler.Inside ) || 
+                            FlashTimer.Enabled;
+
+    /*
+
+      TO DO:
+
+      Depending on your button design, you have surely added some new views
+      to your button. In the below code you should update the properties of
+      these views. For example, when your button has two images to appear
+      exclusively for released and pressed button state, following can be
+      done:
+
+        imagePressed.Visible  =  isPressed;
+        imageReleased.Visible = !isPressed;
+
+      Depending on the state of the button, you can alternate any property 
+      of your views. You can change their visibility, colors, opacity,
+      bitmaps shown in image views, fonts used to render text, the position
+      and the size the view, ...
+       
+
+      HINT:
+
+      Instead of instantly alternate the views properties you can here also
+      start effects to do this with an animation. Important: To decide when
+      to start an effect you should compare the current state of the button
+      (e.g. 'isPressed') with its preceding state (e.g. variable 'pressed').
+
+      Assuming you have already added to your button component a new effect
+      member, named it 'pressedEffect' and configured it to animate e.g. the
+      opacity of an image within the button. Then following is sufficient to
+      trigger the animation:
+
+        if ( isPressed && !pressed )
+        {
+          pressedEffect.Reversed = false;
+          pressedEffect.Enabled  = true;
+        }
+        else if ( !isPressed && pressed )
+        {
+          pressedEffect.Reversed = true;
+          pressedEffect.Enabled  = true;
+        }
+
+    */
+
+    if ( !isEnabled )
+    {
+      
+    }
+
+    else if ( isPressed )
+    {
+     
+    }
+
+    else if ( isSelected )
+    {
+      
+    }
+
+    // Enabled but not pressed nor selected.
+    else
+    {
+      
+    }
+
+    // Remember the current state. Next time when the UpdateViewState() is called
+    // you can compare the 'old' state with the 'new' state and perform more
+    // sophisticated update, e.g. you can start an animation effect for the
+    // pressed <<-->> not pressed transition.
+    enabled  = isEnabled;
+    selected = isSelected;
+    pressed  = isPressed;
+  }
+
+  // To do:
+  // 
+  // - Adjust the visible size of your button (the thick blue border). This will \
+  // be the button's default size.
+  // - Resize the member 'TouchHandler' so it still fills the button's new area.
+  // - Remove the 'Background' and 'Border' members if you want other views to be \
+  // shown instead these in your button.
+  // - According to your desired button design add and configure new views (e.g. \
+  // an image view to show the icon or a text view to show the button caption, etc.).
+  // - Adapt the implementation of the 'UpdateViewState()' method. This method should \
+  // update your views so they reflect the button's current state.
+  // - You can also add and configure animation effects to your button. See 'UpdateViewState()' \
+  // implementation for hint how to start the effects.
+  // - Arrange and resize the views so they appear correctly within the visible area \
+  // of your button.
+  // - Configure the property 'Layout' of the views. In this manner you can determine \
+  // for every view how it should move/resize when the button itself is resized.
+  // - Configure the property 'Filter' of the 'KeyHandler' member if you want the \
+  // button to be activated with key other than the 'Enter' key.
+  // - Alternatively remove the members 'KeyHandler' and 'onPressKey' if you don't \
+  // want any keyboard handling.
+  // - Configure the property 'Begin' of the 'FlashTimer' member to change the duration \
+  // of the feedback flash effect. The default duration is 50 millisec.
+  // - From the Gallery folder 'Chora' add properties to your button. One property \
+  // for every button specific setting (e.g. 'Caption', 'Icon', 'Color', 'Font', \
+  // ...)
+  // - Rename the properties accordingly their usage and remove their 'OnGet...' \
+  // methods.
+  // - For every newly added property adapt their 'OnSet...' method implementation. \
+  // Ensure in the method that the assigned value is correctly passed to the corresponding \
+  // view (e.g. a property 'Icon' should update the image view in your button where \
+  // the icon is shown).
+  // - Feel free to modify any other member in this component accordingly your needs. \
+  // Please note the member description and inline comments within methods.
+  note legend Note5
+  {
+    attr Bounds = <10,370,990,750>;
+  }
+
+  // State management
+  note group Note4
+  {
+    attr Bounds = <700,150,920,360>;
+  }
+
+  // Feedback flash effect
+  note group Note3
+  {
+    attr Bounds = <470,150,690,280>;
+  }
+
+  // Keyboard events
+  note group Note2
+  {
+    attr Bounds = <240,150,460,280>;
+  }
+
+  // Touch screen events
+  note group Note1
+  {
+    attr Bounds = <10,150,230,320>;
+  }
+
+  // This variable stores the current state of the button.
+  $rect <710,310,910,350>
+  var bool pressed;
+
+  // This variable stores the current state of the button.
+  $rect <710,270,910,310>
+  var bool selected;
+
+  // This variable stores the current state of the button.
+  $rect <710,230,910,270>
+  var bool enabled;
+
+  // This timer object is used to flash the button when the user has tapped it very \
+  // quickly or the button has been activated with the keyboard. This is just a visual \
+  // feedback effect.
+  $rect <480,190,680,230>
+  object Core::Timer FlashTimer
+  {
+    preset OnTrigger = onFlashTimer;
+    preset Period = 0;
+    preset Begin = 50;
+  }
+
+  // This key handler reacts to key press events. When the user presses the key specified \
+  // in the property 'Filter' of the key handler, the handler is activated and the \
+  // method '@onPressKey' is called.
+  $rect <250,190,450,230>
+  object Core::KeyPressHandler KeyHandler
+  {
+    preset OnPress = onPressKey;
+    preset Filter = Core::KeyCode.Enter;
+  }
+
+  // This internal slot method is called when the '@FlashTimer' is expired. It ends \
+  // the short flash feedback effect.
+  $rect <480,230,680,270>
+  slot onFlashTimer
+  {
+    // The feedback flash timer is finished. Request the button to update its
+    // appearance. The update will occur in the UpdateViewState() method.
+    InvalidateViewState();
+
+    // With the end of the feedback flash effect the button is activated.
+    postsignal OnActivate;
+  }
+
+  // This internal slot method is called when the '@KeyHandler' is activated (when \
+  // the user has pressed the key specified in the property 'Filter' of the key handler).
+  $rect <250,230,450,270>
+  slot onPressKey
+  {
+    // Ignore keyboard events when the user is interacting with the button via the
+    // touch screen.
+    if ( TouchHandler.Down )
+      return;
+
+    // Ignore repetitions of key events (e.g. when the user holds the key pressed)
+    if ( KeyHandler.Repetition )
+      return;
+
+    // Pressing the key flashes the button for a short period. This is a kind of 
+    // feedback effect. Request the button to update its appearance accordingly.
+    // The update will occur in the UpdateViewState() method.
+    InvalidateViewState();
+
+    // The button is still performing the feedback flash effect from the preceding
+    // tap/key event. This can occur when the user taps the button or presses the
+    // key in a very rapid succession. Thus complete this preceding tap (simulate
+    // the timer expiration) before starting a new button interaction.
+    if ( FlashTimer.Enabled )
+    {
+      postsignal OnActivate;
+      FlashTimer.Enabled = false;
+    }
+
+    // Start the feedback flash effect.
+    FlashTimer.Enabled = true;
+
+  }
+
+  // This internal slot method is called when the user drags the finger while pressing \
+  // the button. This only updates the button to appear pressed or released.
+  $rect <20,270,220,310>
+  slot onEnterLeaveTouch
+  {
+    // Every time the user touches the button or drags the finger inside/outside
+    // the button's area request the button update its appearance. The update will
+    // occur in the UpdateViewState() method.
+    InvalidateViewState();
+  }
+
+  // This internal slot method is called when the user releases the touch screen \
+  // after touching the button's area. This activates the button.
+  $rect <20,230,220,270>
+  slot onReleaseTouch
+  {
+    // Did the user moved the finger outside the button's area? In such case
+    // the button is not activated.
+    if ( !TouchHandler.Inside )
+      return;
+
+    // The user interaction has been passed over to the another touch handler
+    if ( TouchHandler.AutoDeflected )
+      return;
+
+    // The user has pressed and held the button for longer time. This was enough
+    // long to give a visual 'press' feedback to the user. The button can be
+    // activated immediately.
+    if ( TouchHandler.HoldPeriod >= FlashTimer.Begin )
+      postsignal OnActivate;
+
+    // The user has tapped the button very quickly. Defer the button activation
+    // to give the user first a short visual feedback that the button has been
+    // pressed.
+    else
+      FlashTimer.Enabled = true;
+  }
+
+  // This internal slot method is called when the user touches the button's area.
+  $rect <20,190,220,230>
+  slot onPressTouch
+  {
+    // The button is still performing the feedback flash effect from the preceding
+    // tap. This can occur when the user taps the button in a very rapid succession. 
+    // Thus complete this preceding tap (simulate the timer expiration) before 
+    // starting a new button interaction.
+    if ( FlashTimer.Enabled )
+    {
+      postsignal OnActivate;
+      FlashTimer.Enabled = false;
+    }
+
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchHandler
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Point4 = <0,50>;
+    preset Point3 = <50,50>;
+    preset Point2 = <50,1>;
+    preset Point1 = <0,1>;
+    preset OnLeave = onEnterLeaveTouch;
+    preset OnEnter = onEnterLeaveTouch;
+    preset OnRelease = onReleaseTouch;
+    preset OnPress = onPressTouch;
+    preset RetargetCondition = Core::RetargetReason[WipeDown, WipeLeft, WipeRight, WipeUp];
+    preset MaxStrikeCount = 100;
+  }
+
+  // The property 'OnActivate' can refer to a slot method, which will receive a signal \
+  // as soon as the user has activated the button. Thereupon the method's logic will \
+  // be executed.
+  $rect <250,10,450,50>
+  property slot OnActivate = null;
+
+  $rect <20,20,160,60>
+  object Views::Image Image
+  {
+    preset Bounds = <0,0,50,50>;
+    preset Bitmap = Application_2::exiticon;
+  }
+}
+
+$rect <490,20,690,60>
+$output false
+resource Resources::Bitmap exiticon
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\pngwing.com (3).png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-300,129,-100,169>
+$output false
+class Alarm : Core::Group
+{
+  $rect <10,310,210,350>
+  inherited property Bounds = <0,0,287,220>;
+
+  $rect <10,390,210,430>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <10,350,210,390>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,0,288,220>;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image hour
+  {
+    preset Bounds = <129,52,184,109>;
+    preset AutoSize = false;
+    preset Bitmap = Application_2::buttonHour;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image power
+  {
+    preset Bounds = <162,134,219,194>;
+    preset Bitmap = Application_2::buttonPower;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image min
+  {
+    preset Bounds = <199,52,253,107>;
+    preset Bitmap = Application_2::buttonMin;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image iconAlarmm
+  {
+    preset Bounds = <7,50,108,138>;
+    preset Bitmap = Application_2::iconAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text hourText
+  {
+    preset Bounds = <12,131,61,179>;
+    preset String = "08";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text minText
+  {
+    preset Bounds = <61,131,110,179>;
+    preset String = "30";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <50,140,73,170>;
+    preset String = ":";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle1
+  {
+    preset Bounds = <0,0,287,36>;
+    preset Color = #3C3CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <35,3,230,33>;
+    preset String = "ALARM SETTING";
+    preset Font = Resources::FontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text hourText1
+  {
+    preset Bounds = <132,107,181,138>;
+    preset String = "Hour";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text minText2
+  {
+    preset Bounds = <202,107,251,138>;
+    preset String = "Min";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image
+  {
+    preset Bounds = <243,-7,293,43>;
+    preset Bitmap = Application_2::exiticon;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image hour1
+  {
+    preset Bounds = <130,53,182,105>;
+    preset Bitmap = Application_2::HourHide;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchHour
+  {
+    preset Point4 = <131,53>;
+    preset Point3 = <180,53>;
+    preset Point2 = <180,105>;
+    preset Point1 = <131,105>;
+    preset OnRelease = hourClick1;
+    preset OnPress = hourClick;
+  }
+
+  $rect <320,0,520,40>
+  slot hourClick
+  {
+    hour1.Visible = true;
+    hour.Visible = false;
+  }
+
+  $rect <320,50,520,90>
+  slot hourClick1
+  {
+    hour1.Visible = false;
+    hour.Visible = true;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image min1
+  {
+    preset Bounds = <199,51,253,106>;
+    preset Bitmap = Application_2::MinHide;
+    preset Visible = false;
+  }
+
+  $rect <320,100,520,140>
+  slot minClick
+  {
+    min1.Visible = true;
+    min.Visible = false;
+  }
+
+  $rect <320,141,520,181>
+  slot minClick1
+  {
+    min1.Visible = false;
+    min.Visible = true;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchMin
+  {
+    preset Point4 = <199,52>;
+    preset Point3 = <252,52>;
+    preset Point2 = <252,104>;
+    preset Point1 = <199,104>;
+    preset OnRelease = minClick1;
+    preset OnPress = minClick;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image power1
+  {
+    preset Bounds = <163,136,217,193>;
+    preset AutoSize = true;
+    preset Bitmap = Application_2::PowerHide;
+    preset Visible = false;
+  }
+
+  $rect <320,190,520,230>
+  slot setClick
+  {
+    power1.Visible = true;
+    power.Visible = false;
+  }
+
+  $rect <321,237,521,277>
+  slot setClick1
+  {
+    power1.Visible = false;
+    power.Visible = true;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchSet
+  {
+    preset Point4 = <163,138>;
+    preset Point3 = <216,138>;
+    preset Point2 = <216,190>;
+    preset Point1 = <163,190>;
+    preset OnRelease = setClick1;
+    preset OnPress = setClick;
+  }
+}
+
+// Air Control
+note group Note
+{
+  attr Bounds = <710,80,1180,410>;
+}
+
+$rect <720,170,920,210>
+$output false
+resource Resources::Bitmap down
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button_down.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <721,210,921,250>
+$output false
+resource Resources::Bitmap down1
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button_down_hiden.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <930,170,1130,210>
+$output false
+resource Resources::Bitmap up
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button_up.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <930,210,1130,250>
+$output false
+resource Resources::Bitmap up1
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button_up_hiden.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <720,250,920,290>
+$output false
+resource Resources::Bitmap On
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button_power.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <720,290,920,330>
+$output false
+resource Resources::Bitmap Off
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button_power_hiden.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <930,250,1130,290>
+$output false
+resource Resources::Bitmap SpeedON
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button_speed.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <930,290,1130,330>
+$output false
+resource Resources::Bitmap SpeedOff
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button_speed_hiden.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <720,330,920,370>
+$output false
+resource Resources::Bitmap Fan
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\pngwing.com (1).png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+// Light Control
+note group Note1
+{
+  attr Bounds = <230,80,700,410>;
+}
+
+// Alarm
+note group Note2
+{
+  attr Bounds = <-320,80,150,410>;
+}
+
+$rect <480,350,680,390>
+$output false
+resource Resources::Bitmap Bitmap1
+{
+  attr bitmapfile FileName;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-80,130,120,170>
+$output false
+resource Resources::Bitmap buttonMin
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button1_smallSize\button_minue.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-80,170,120,210>
+$output false
+resource Resources::Bitmap buttonPower
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button1_smallSize\button_power.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-80,210,120,250>
+$output false
+resource Resources::Bitmap buttonHour
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button1_smallSize\button_hour.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-80,250,120,290>
+$output false
+resource Resources::Bitmap iconAlarm
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\Alarm1.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-80,290,120,330>
+$output false
+resource Resources::Font fontMedium
+{
+  attr fontname FontName = @Yu Gothic UI Semibold;
+  attr fontheight Height = 12;
+  attr fontheightmode HeightMode = Popular;
+  attr fontquality Quality = High;
+  attr fontranges Ranges = 0x20-0xFF;
+  attr fontaspectratio AspectRatio = 1.0;
+  attr fontbold Bold = false;
+  attr fontitalic Italic = false;
+  attr fontkerning Kerning = true;
+  attr fontrowdistance RowDistance;
+}
+
+$rect <-80,330,120,370>
+$output false
+resource Resources::Font fontTimer
+{
+  attr fontname FontName = Arial;
+  attr fontheight Height = 18;
+  attr fontheightmode HeightMode = Popular;
+  attr fontquality Quality = High;
+  attr fontranges Ranges = 0x20-0xFF;
+  attr fontaspectratio AspectRatio = 1.0;
+  attr fontbold Bold = true;
+  attr fontitalic Italic = false;
+  attr fontkerning Kerning = true;
+  attr fontrowdistance RowDistance;
+}
+
+$rect <250,120,450,160>
+$output false
+class screenLight : Core::Group
+{
+  $rect <10,310,210,350>
+  inherited property Bounds = <0,0,288,220>;
+
+  $rect <10,390,210,430>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <10,350,210,390>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,0,288,220>;
+    preset Color = #6C6C6CFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Border Border
+  {
+    preset Bounds = <0,-2,144,108>;
+    preset Width = 2;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Border Border1
+  {
+    preset Bounds = <144,110,288,220>;
+    preset Width = 2;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Border Border2
+  {
+    preset Bounds = <0,109,144,220>;
+    preset Width = 2;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image imgMaster
+  {
+    preset Bounds = <0,-1,144,109>;
+    preset FrameNumber = 24;
+    preset Bitmap = Resources::SymbolIconsLarge;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text master
+  {
+    preset Bounds = <0,-2,144,28>;
+    preset String = "MASTER";
+    preset Font = Resources::FontSmall;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image imgNight
+  {
+    preset Bounds = <0,109,144,220>;
+    preset Bitmap = Application_2::bedRoom;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <0,110,144,140>;
+    preset String = "NIGHT LIGHT";
+    preset Font = Resources::FontSmall;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <144,110,288,138>;
+    preset String = "READING LIGHT";
+    preset Font = Resources::FontSmall;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle colorMaster
+  {
+    preset Bounds = <0,0,144,110>;
+    preset Color = #3300008E;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image imgRead
+  {
+    preset Bounds = <144,110,288,220>;
+    preset Bitmap = Application_2::readingBook;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle colorNight
+  {
+    preset Bounds = <0,110,144,221>;
+    preset Color = #3300008E;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle colorRead
+  {
+    preset Bounds = <144,109,288,219>;
+    preset Color = #3300008E;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text2
+  {
+    preset Bounds = <153,15,278,97>;
+    preset String = "LIGHT \n CONTROL";
+    preset Font = Templates::DefaultFontPicker;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler touchMaster
+  {
+    preset Point4 = <4,2>;
+    preset Point3 = <141,2>;
+    preset Point2 = <141,102>;
+    preset Point1 = <4,102>;
+    preset OnEnter = null;
+    preset OnHold = null;
+    preset OnRelease = null;
+    preset OnPress = changeColorMaster;
+    preset EnableMultiTouch = true;
+  }
+
+  $rect <320,0,520,40>
+  slot changeColorMaster
+  {
+    colorMaster.Color=#FFFFFF99;
+    colorNight.Color =  #3300008E;
+    colorRead.Color=  #3300008E;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image
+  {
+    preset Bounds = <247,-10,297,40>;
+    preset Bitmap = Application_2::exiticon;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler touchNight
+  {
+    preset Point4 = <4,114>;
+    preset Point3 = <141,114>;
+    preset Point2 = <141,214>;
+    preset Point1 = <4,214>;
+    preset OnEnter = null;
+    preset OnHold = null;
+    preset OnRelease = null;
+    preset OnPress = changeColorNight;
+    preset EnableMultiTouch = true;
+  }
+
+  $rect <320,40,520,80>
+  slot changeColorNight
+  {
+    colorNight.Color=#9F7AB1A1;
+    colorMaster.Color =  #3300008E;
+    colorRead.Color=  #3300008E;
+     
+  }
+
+  $rect <320,80,520,120>
+  slot changeColorRead
+  {
+    colorRead.Color=#D9D63D97;
+    colorNight.Color =  #3300008E;
+    colorMaster.Color=  #3300008E;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler touchRead
+  {
+    preset Point4 = <147,114>;
+    preset Point3 = <284,114>;
+    preset Point2 = <284,214>;
+    preset Point1 = <147,214>;
+    preset OnEnter = null;
+    preset OnHold = null;
+    preset OnRelease = null;
+    preset OnPress = changeColorRead;
+    preset EnableMultiTouch = true;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler toughtLight
+  {
+    preset Point4 = <153,28>;
+    preset Point3 = <272,28>;
+    preset Point2 = <272,97>;
+    preset Point1 = <153,97>;
+    preset OnPress = changLight;
+  }
+
+  $rect <320,120,520,160>
+  slot changLight
+  {
+    colorMaster.Color=#3300008E;
+    colorNight.Color =  #3300008E;
+    colorRead.Color=  #3300008E;
+  }
+}
+
+$rect <480,120,680,160>
+$output false
+resource Resources::Bitmap readingBook
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\readingBook.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <480,160,680,200>
+$output false
+resource Resources::Bitmap bedRoom
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\BEDROOM.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <480,200,680,240>
+$output false
+resource Resources::Bitmap Bitmap4
+{
+  attr bitmapfile FileName;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-299,173,-99,213>
+$output false
+resource Resources::Bitmap PowerHide
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button1_smallSize\button_power_hiden.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-300,218,-100,258>
+$output false
+resource Resources::Bitmap HourHide
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button1_smallSize\button_hour_hiden.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <-300,260,-100,300>
+$output false
+resource Resources::Bitmap MinHide
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\button1_smallSize\button_minue_hiden.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <940,20,1140,60>
+$output false
+resource Resources::Bitmap iconAlarmSmall
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\iconAlarmSmall.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}

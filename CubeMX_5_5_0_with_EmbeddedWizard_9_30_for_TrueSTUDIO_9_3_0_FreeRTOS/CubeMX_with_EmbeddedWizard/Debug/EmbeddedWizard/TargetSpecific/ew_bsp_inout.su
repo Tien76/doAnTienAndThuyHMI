@@ -1,0 +1,6 @@
+ew_bsp_inout.c:59:6:HAL_GPIO_EXTI_Callback	8	static
+ew_bsp_inout.c:87:6:EwBspInOutInitButton	0	static
+ew_bsp_inout.c:107:6:EwBspInOutInitLed	0	static
+ew_bsp_inout.c:127:6:EwBspInOutLedOn	0	static
+ew_bsp_inout.c:147:6:EwBspInOutLedOff	0	static
+ew_bsp_inout.c:168:6:EwBspInOutEventHandler	8	static

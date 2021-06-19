@@ -1,0 +1,10 @@
+ew_bsp_display.c:80:6:HAL_LTDC_MspInit	72	static
+ew_bsp_display.c:163:6:HAL_LTDC_MspDeInit	0	static
+ew_bsp_display.c:173:6:LTDC_IRQHandler	0	static
+ew_bsp_display.c:179:6:HAL_LTDC_LineEventCallback	16	static
+ew_bsp_display.c:273:5:EwBspDisplayInit	32	static
+ew_bsp_display.c:420:6:EwBspDisplayDone	0	static
+ew_bsp_display.c:446:5:EwBspDisplayGetUpdateArea	0	static
+ew_bsp_display.c:511:6:EwBspDisplayWaitForCompletion	16	static
+ew_bsp_display.c:567:6:EwBspDisplayCommitBuffer	0	static
+ew_bsp_display.c:595:6:EwBspDisplaySetClut	8	static

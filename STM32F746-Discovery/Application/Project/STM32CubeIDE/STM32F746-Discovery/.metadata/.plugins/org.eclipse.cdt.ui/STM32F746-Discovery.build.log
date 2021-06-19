@@ -1,0 +1,10 @@
+14:56:25 **** Incremental Build of configuration BUILD for project STM32F746-Discovery ****
+make -j8 all 
+arm-none-eabi-size   EmbeddedWizard-STM32F746-Discovery.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 752164	    176	  21100	 773440	  bcd40	EmbeddedWizard-STM32F746-Discovery.elf
+Finished building: default.size.stdout
+ 
+
+14:56:25 Build Finished. 0 errors, 0 warnings. (took 485ms)
+

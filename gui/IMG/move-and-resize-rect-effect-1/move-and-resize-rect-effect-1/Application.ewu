@@ -1,0 +1,57 @@
+$version 6.60
+
+// This is the root component of the entire GUI application.
+$rect <20,20,220,60>
+$output false
+class Application : Core::Root
+{
+  $rect <500,0,700,40>
+  inherited property Bounds = <0,0,470,230>;
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle Background
+  {
+    preset Bounds = <0,0,470,230>;
+    preset Color = #F0F0F0FF;
+  }
+
+  // This component demonstrates how the Move and resize rect Effect is connected \
+  // with the Bounds property of a Frame view.
+  // 
+  // The Effect object is configured with key values <130,70,350,160> and <20,30,450,200>. \
+  // Accordingly, at the runtime, the Effect object modifies the affected property \
+  // with values interpolated between <130,70,350,160> ... <20,30,450,200> causing \
+  // the Frame view being moved and resized.
+  // 
+  // Just press the key F5 to start the Prototyper.
+  note legend Note
+  {
+    attr Bounds = <10,260,660,430>;
+  }
+
+  // This is a move and resize rectangle effect.
+  $rect <500,90,700,130>
+  object Effects::RectEffect RectEffect
+  {
+    preset Enabled = true;
+    preset Value2 = <20,30,450,200>;
+    preset Value1 = <130,70,350,160>;
+    preset Outlet = ^Frame.Bounds;
+  }
+
+  // This is a bitmap frame view.
+  $rect <20,20,160,60>
+  object Views::Frame Frame
+  {
+    preset Bounds = <130,70,350,160>;
+    preset Bitmap = Resources::PanelGray;
+  }
+}
+
+// This example demonstrates the usage of Move and resize rect Effect to animate \
+// the Bounds property of a view.
+note legend Note1
+{
+  attr Bounds = <20,100,500,190>;
+}

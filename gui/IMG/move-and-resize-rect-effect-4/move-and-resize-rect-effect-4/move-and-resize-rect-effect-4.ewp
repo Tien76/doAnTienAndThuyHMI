@@ -1,0 +1,119 @@
+﻿$version 10.00
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,70,240,110>
+unit Core
+{
+  attr Directory = $Mosaic;
+}
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,110,240,150>
+unit Resources
+{
+  attr Directory = $Mosaic;
+}
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,150,240,190>
+unit Graphics
+{
+  attr Directory = $Mosaic;
+}
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,190,240,230>
+unit Effects
+{
+  attr Directory = $Mosaic;
+}
+
+// This unit is a part of the Embedded Wizard class library 'Mosaic20'
+$rect <40,230,240,270>
+unit Views
+{
+  attr Directory = $Mosaic;
+}
+
+// This is a profile member for the project. This profile controls the code generation \
+// for the target system.
+$rect <290,100,490,140>
+profile Profile : Tara.Win32.RGBA8888
+{
+  attr ScreenSize = <480,320>;
+  attr Optimization = High;
+  attr ApplicationClass = Application::Application;
+  attr CleanOutputDirectories = false;
+  attr OutputFileNameExtension = c;
+  attr Verbose = false;
+
+  $rect <10,10,154,50>
+  macro Author = "Dipl. Ing. Paul Banach and Dipl. Ing. Manfred Schweyer, Copyright (C) TARA Systems GmbH";
+}
+
+// The 'default' Language. Each project has to contain at least one language brick \
+// called 'Default'
+$rect <540,100,740,140>
+language Default;
+
+// This unit is intended to contain the application class and another GUI components.
+$rect <290,230,490,270>
+unit Application
+{
+  attr Directory = .\;
+}
+
+// Mosaic Framework
+note group Note1
+{
+  attr Bounds = <20,20,260,290>;
+}
+
+// Configuration for the target code generation
+note group Note2
+{
+  attr Bounds = <270,20,510,160>;
+}
+
+// The default language identifier
+note group Note3
+{
+  attr Bounds = <520,20,760,160>;
+}
+
+// To do:
+// 
+// - Verify whether the attribute 'PlatformPackage' of the member 'Profile' does \
+// match your desired target system. With 'PlatformPackage' you determine the code \
+// generators und resource converters needed when your project is translated for \
+// the target system.
+// 
+// - Verify whether the attribute 'ScreenSize' of the member 'Profile' does correspond \
+// to the resolution of your display.
+// 
+// - Open the unit 'Application'. You will find there the application component (the \
+// root component of your GUI). Implement there your desired GUI look and feel.
+// 
+// - To better structure your project you can add more units here. Use for this purpose \
+// the template 'Unit' from the Gallery folder 'Chora'. Afterwards you can open the \
+// unit and put there your own GUI components.
+// 
+// - If you plan to develop a multilingual GUI application, you can add more language \
+// members to the project. Use for this purpose the template 'Language' found in \
+// the Gallery folder 'Chora'.
+note legend Note4
+{
+  attr Bounds = <20,310,760,610>;
+}
+
+$rect <40,270,240,310>
+unit OldResources
+{
+  attr Directory = $Mosaic\;
+}
+
+$rect <40,310,240,350>
+unit WidgetSet
+{
+  attr Directory = $Mosaic\;
+}

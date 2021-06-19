@@ -1,0 +1,483 @@
+﻿$version 10.00
+
+// Application
+note group Note
+{
+  attr Bounds = <10,0,340,140>;
+}
+
+// Assets
+note group Note1
+{
+  attr Bounds = <370,0,790,140>;
+}
+
+// GUI of the component
+note group Note2
+{
+  attr Bounds = <10,150,340,350>;
+}
+
+$rect <20,50,220,90>
+$output false
+class SetAlarm : Core::Group
+{
+  $rect <10,310,210,350>
+  inherited property Bounds = <0,0,288,220>;
+
+  $rect <10,390,210,430>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <10,350,210,390>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,1,288,221>;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Border Border
+  {
+    preset Bounds = <70,100,228,150>;
+    preset Color = #FF26F8FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image upHour
+  {
+    preset Bounds = <70,75,120,100>;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image upMin
+  {
+    preset Bounds = <124,75,174,100>;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image upPmAm
+  {
+    preset Bounds = <178,75,228,100>;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image downHour
+  {
+    preset Bounds = <70,150,120,175>;
+    preset FrameNumber = 1;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image dowmMin
+  {
+    preset Bounds = <124,150,174,175>;
+    preset FrameNumber = 1;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image downAmPm
+  {
+    preset Bounds = <178,150,228,175>;
+    preset FrameNumber = 1;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text hourText
+  {
+    preset Bounds = <70,100,116,150>;
+    preset String = "07";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <116,100,125,150>;
+    preset String = ":";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text minText
+  {
+    preset Bounds = <129,100,175,150>;
+    preset String = "30";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text amPmText
+  {
+    preset Bounds = <178,100,224,150>;
+    preset String = "AM";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle colorChoise
+  {
+    preset Bounds = <181,100,225,150>;
+    preset Color = #D7D7D75A;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image2
+  {
+    preset Bounds = <239,186,288,220>;
+    preset Bitmap = setAlarm::save1;
+  }
+
+  $rect <300,0,500,40>
+  slot SlotUpHour
+  {
+    var int32 valueNew;
+    var int32 test;
+    colorChoise.Bounds = <70,100,116,150>;
+      if (pushUpHour.OnPress){
+        test = hourText.String.parse_int32(0);
+        if(test<12){
+          valueNew=test +1 ;
+          hourText.String= valueNew ;
+             }
+        else
+          hourText.String = 1;
+        }
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushUpHour
+  {
+    preset Bounds = <80,75,107,100>;
+    preset OnEnter = null;
+    preset OnPress = SlotUpHour;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushUpMin
+  {
+    preset Bounds = <135,75,164,100>;
+    preset OnEnter = null;
+    preset OnPress = SlotUpMin;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushUpAmPm
+  {
+    preset Bounds = <188,75,216,100>;
+    preset OnEnter = null;
+    preset OnPress = SlotUpAm;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushDoHour
+  {
+    preset Bounds = <80,150,107,175>;
+    preset OnEnter = null;
+    preset OnPress = SlotDoHour;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushDoMin
+  {
+    preset Bounds = <135,150,164,175>;
+    preset OnEnter = null;
+    preset OnPress = SlotDoMin;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushDoAmPm
+  {
+    preset Bounds = <188,150,216,175>;
+    preset OnPress = SlotUpAm;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushSave
+  {
+    preset Bounds = <239,186,288,220>;
+    preset OnRelease = null;
+    preset OnPress = SlotUpHour;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <300,40,500,80>
+  slot SlotDoHour
+  {
+    var int32 valueNew;
+    var int32 test;
+    colorChoise.Bounds = <70,100,116,150>;
+      if (pushDoHour.OnPress){
+        test = hourText.String.parse_int32(0);
+        if(test>1){
+          valueNew=test-1 ;
+           hourText.String= valueNew ;
+          }
+        else
+          hourText.String = 12;
+        }
+  }
+
+  $rect <300,80,500,120>
+  slot SlotUpMin
+  {
+    var int32 valueNew;
+    var int32 test;
+    colorChoise.Bounds = <129,100,175,150>;
+      if (pushUpMin.OnPress){
+        test = minText.String.parse_int32(0);
+        if(test<59){
+          valueNew=test +1 ;
+          minText.String= valueNew ;
+             }
+        else
+          minText.String = 0;
+        }
+  }
+
+  $rect <300,120,500,160>
+  slot SlotDoMin
+  {
+    var int32 valueNew;
+    var int32 test;
+    colorChoise.Bounds = <129,100,175,150>;
+      if (pushDoMin.OnPress){
+        test = minText.String.parse_int32(0);
+        if(test>1){
+          valueNew=test-1 ;
+           minText.String= valueNew ;
+          }
+        else
+          minText.String = 59;
+        }
+  }
+
+  $rect <300,160,500,200>
+  slot SlotUpAm
+  {
+    colorChoise.Bounds = <181,100,225,150>;
+    if(amPmText.String=="AM"){
+      amPmText.String="PM";
+      }
+    else amPmText.String="AM";
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle2
+  {
+    preset Bounds = <0,0,287,36>;
+    preset Color = #3C3CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image
+  {
+    preset Bounds = <256,0,288,36>;
+    preset Bitmap = Application_2::exiticon;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <55,2,228,32>;
+    preset String = "ALARM SETTING";
+    preset Font = Application_2::fontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image1
+  {
+    preset Bounds = <0,34,61,94>;
+    preset Bitmap = Application_2::iconAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushButtonSave
+  {
+    preset Bounds = <239,186,288,220>;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushButtonExit
+  {
+    preset Bounds = <256,-2,288,36>;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+}
+
+$rect <580,40,780,80>
+$output false
+resource Resources::Bitmap save
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\save.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <580,80,780,120>
+$output false
+resource Resources::Bitmap save1
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\save1.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <30,200,270,240>
+$output false
+autoobject WidgetSet::PushButtonConfig buttonSetAlarm;

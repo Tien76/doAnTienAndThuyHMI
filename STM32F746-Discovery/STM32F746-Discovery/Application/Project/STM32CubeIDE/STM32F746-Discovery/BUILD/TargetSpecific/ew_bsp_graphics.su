@@ -1,0 +1,13 @@
+ew_bsp_graphics.c:193:6:EwBspGraphicsWaitForCompletion.part.0	8	static
+ew_bsp_graphics.c:80:6:HAL_DMA2D_MspInit	16	static
+ew_bsp_graphics.c:98:6:HAL_DMA2D_MspDeInit	8	static
+ew_bsp_graphics.c:123:5:EwBspGraphicsInit	24	static
+ew_bsp_graphics.c:170:6:EwBspGraphicsDone	0	static
+ew_bsp_graphics.c:193:6:EwBspGraphicsWaitForCompletion	0	static
+ew_bsp_graphics.c:247:6:EwBspGraphicsConcurrentOperation	0	static
+ew_bsp_graphics.c:274:6:EwBspGraphicsFill	48	static
+ew_bsp_graphics.c:330:6:EwBspGraphicsFillBlend	40	static
+ew_bsp_graphics.c:411:6:EwBspGraphicsCopy	64	static
+ew_bsp_graphics.c:491:6:EwBspGraphicsCopyBlend	56	static
+ew_bsp_graphics.c:574:6:EwBspGraphicsLoadClut	40	static
+ew_bsp_graphics.c:623:6:DMA2D_IRQHandler	8	static

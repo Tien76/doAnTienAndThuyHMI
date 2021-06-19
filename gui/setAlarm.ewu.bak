@@ -1,0 +1,1387 @@
+﻿$version 10.00
+
+// Application
+note group Note
+{
+  attr Bounds = <10,0,340,140>;
+}
+
+// Assets
+note group Note1
+{
+  attr Bounds = <370,0,790,140>;
+}
+
+$rect <20,40,220,80>
+$output false
+class setAlarm : Core::Group
+{
+  $rect <0,310,275,350>
+  inherited property Bounds = <0,0,275,167>;
+
+  $rect <10,390,210,430>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <10,350,210,390>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,0,275,167>;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object setAlarm::numSetAlarm numSetAlarm
+  {
+    preset Bounds = <103,77,191,167>;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text hourText
+  {
+    preset Bounds = <106,23,147,63>;
+    preset String = "00";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <139,28,155,58>;
+    preset String = ":";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text minText1
+  {
+    preset Bounds = <147,23,188,63>;
+    preset String = "00";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image
+  {
+    preset Bounds = <216,83,275,137>;
+    preset Bitmap = Application_2::buttonHour;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image1
+  {
+    preset Bounds = <250,0,275,25>;
+    preset Bitmap = Application_2::exiticon;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <216,137,268,167>;
+    preset String = "SET";
+    preset Font = Resources::DefaultFont;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle1
+  {
+    preset Bounds = <113,28,139,58>;
+    preset Color = #A4A4A458;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle2
+  {
+    preset Bounds = <0,0,74,167>;
+    preset Color = #CFCCCF62;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text hourTextM1
+  {
+    preset Bounds = <0,43,27,68>;
+    preset String = "00";
+    preset Font = Resources::DefaultFont;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text textAmo1
+  {
+    preset Bounds = <10,43,37,68>;
+    preset String = ":";
+    preset Font = Resources::DefaultFont;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text minTextM1
+  {
+    preset Bounds = <24,43,51,68>;
+    preset String = "00";
+    preset Font = Resources::DefaultFont;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::ToggleButton ToggleButton
+  {
+    preset Bounds = <40,39,70,68>;
+    preset IconOnFrameActive = -1;
+    preset IconOnFrameFocused = -1;
+    preset IconOnFrameDisabled = -1;
+    preset IconOnFrameDefault = -1;
+    preset IconOffFrameActive = -1;
+    preset IconOffFrameFocused = -1;
+    preset IconOffFrameDisabled = -1;
+    preset IconOffFrameDefault = -1;
+    preset IconOnFrame = -1;
+    preset IconOffFrame = -1;
+    preset IconFrame = -1;
+    preset Icon = null;
+    preset Label = "";
+    preset Appearance = setAlarm::toggleTich;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text hourTextM2
+  {
+    preset Bounds = <0,80,27,105>;
+    preset String = "00";
+    preset Font = Resources::DefaultFont;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text textAmo2
+  {
+    preset Bounds = <10,80,37,105>;
+    preset String = ":";
+    preset Font = Resources::DefaultFont;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text minTextM2
+  {
+    preset Bounds = <23,80,50,105>;
+    preset String = "00";
+    preset Font = Resources::DefaultFont;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::ToggleButton ToggleButton1
+  {
+    preset Bounds = <40,78,70,107>;
+    preset IconOnFrameActive = -1;
+    preset IconOnFrameFocused = -1;
+    preset IconOnFrameDisabled = -1;
+    preset IconOnFrameDefault = -1;
+    preset IconOffFrameActive = -1;
+    preset IconOffFrameFocused = -1;
+    preset IconOffFrameDisabled = -1;
+    preset IconOffFrameDefault = -1;
+    preset IconOnFrame = -1;
+    preset IconOffFrame = -1;
+    preset IconFrame = -1;
+    preset Icon = null;
+    preset Label = "";
+    preset Appearance = setAlarm::toggleTich;
+  }
+}
+
+// GUI of the component
+note group Note2
+{
+  attr Bounds = <10,150,340,350>;
+}
+
+// This component implements a virtual keyboard.
+$rect <30,190,230,230>
+$output false
+class numSetAlarm : Templates::NumKeyboard
+{
+  $rect <250,370,450,410>
+  inherited property Bounds = <0,0,88,90>;
+
+  $rect <480,250,680,290>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    // Determine the new state of the affected keyboard.
+    //
+    // isKeyView --> the 'text' or 'image' view representing the pressed key.
+    // isPressed --> the affected key should appear pressed.
+    //
+    var Core::View isKeyView = null;
+    var bool       isPressed = ( TouchHandler.Down && TouchHandler.Inside ) || 
+                                 FlashTimer.Enabled;
+
+    // Search for the view representing the key at the recent touch position.
+    // Do this however only when the position is valid - it lies inside the
+    // area where keys are found (here the area of the TouchHandler) and the
+    // key should appear pressed (isPressed == true)
+    if ( isPressed && ( recentPosition == TouchHandler.GetExtent()))
+      isKeyView = FindViewAtPosition( null, recentPosition, Core::ViewState[]);
+
+    /*
+       In this template, the keys are represented by simple 'text' and 'image'
+       views. Any other view is considered as not corresponding to a key. Thus
+       ignore every view, which is not an instance of 'text' or 'image'.
+     
+       TO DO:
+
+       If you are using other views (not image nor text) to represent the keys,
+       adapt the object runtime cast operations in the condition below to react
+       on your particular views only. After this condition, 'isKeyView' should
+       be either 'null' if the user is not pressing a key or it should refer to
+       the view which represents the affected key.
+    */
+
+    if (((Views::Text)isKeyView == null ) && ((Views::Image)isKeyView == null ))
+      isKeyView = null;
+
+    /*
+
+      TO DO:
+
+      Depending on your keyboard design, you have surely added some new views
+      to your keyboard. In the below code you should update the properties of
+      these views. For example, when the user drags the finger between two keys
+      one key should appear pressed while the other released.
+
+      Whether the user has pressed/released a key can be estimated by comparing
+      the variable 'isKeyView' with 'keyView'. If they differ, the user has
+      pressed/released a key.
+
+        if ( isKeyView != keyView )
+          ...
+
+      In practice, the variable 'isKeyView' represents the just pressed key.
+      Your implementation should thus ensure, that the affected key appears
+      pressed. If the user is not pressing any key, the variable is 'null'.
+
+      The variable 'keyView' represents the key pressed in the preceding
+      interaction. This key has thus to appear released. If there was no key
+      pressed, the variable is 'null'.
+
+      In the simplest case you modify the properties of the affected views, so
+      they reflect their new state. Please note, the variables 'isKeyView' and
+      'keyView' are declared with the generic Core::View class. In order to
+      modify view specific properties you have to apply an object runtime cast
+      operation on them. For example, if you are using 'text' views to represent
+      keys, cast the variable to (Views::Text).
+
+        if ( isKeyView != null )
+          ((Views::Text)isKeyView).Color = color for a pressed key
+
+        if ( keyView != null )
+          ((Views::Text)keyView).Color = color for a released key
+
+      Or you use, as demonstrated below, another views to highlight the area
+      occupied by the affected key. For example, arrange some 'border' view
+      to appear at the position of the pressed key with additional 5 pixel 
+      padding:
+
+        if ( isKeyView != null )
+          BorderView.Bounds = isKeyView.GetExtent() * <5,5>;
+
+      HINT:
+
+      Instead of instantly alternate the views properties you can also start
+      here effects to do this with an animation. Important: To decide when
+      to start an effect you should compare the current state of the keyboard
+      (e.g. 'isKeyView') with its preceding state (e.g. variable 'keyView').
+
+      Assuming you have already added to your keyboard component a new effect
+      member, named it 'pressedEffect' and configured it to animate e.g. the
+      opacity of an image lying behind the pressed key. Then following is 
+      sufficient to trigger the animation:
+
+        if (( isKeyView != null ) && ( keyView == null ))
+        {
+          pressedEffect.Reversed = false;
+          pressedEffect.Enabled  = true;
+        }
+        else if (( isKeyView == null ) && ( keyView != null ))
+        {
+          pressedEffect.Reversed = true;
+          pressedEffect.Enabled  = true;
+        }
+
+    */
+
+    // Detect a state alternation when the user presses a new or releases a
+    // previously pressed key.
+    if ( isKeyView != keyView )
+    {
+      var Views::Text  isTextKeyView  = (Views::Text)isKeyView;
+      var Views::Text  textKeyView    = (Views::Text)keyView;
+      var Views::Image isImageKeyView = (Views::Image)isKeyView;
+      var Views::Image imageKeyView   = (Views::Image)keyView;
+
+      // If the user is actually pressing a key, arrange the background view
+      // just behind the affected key view so it appears selected. If no key
+      // is pressed, the background should disappear.
+      if ( isKeyView != null )
+      {
+        Highlight.Bounds  = isKeyView.GetExtent();
+        Highlight.Visible = true;
+      }
+      else
+        Highlight.Visible = false;
+
+      // If the user has pressed a key represented by a 'text' view, change the
+      // color of the text to appear highlighted.
+      if ( isTextKeyView != null )
+        isTextKeyView.Color = #FFFFFFFF;
+
+      // If the user has released a key represented by a 'text' view, restore
+      // the color of the text.
+      if ( textKeyView != null )
+        textKeyView.Color = #000000FF;
+
+      // If the user has pressed a key represented by an 'image' view, change the
+      // color of the bitmap to appear highlighted.
+      if ( isImageKeyView != null )
+        isImageKeyView.Color = #FFFFFFFF;
+
+      // If the user has released a key represented by an 'image' view, restore
+      // the color of the view.
+      if ( imageKeyView != null )
+        imageKeyView.Color = #000000FF;
+    }
+
+    // Remember the current state. Next time when the UpdateViewState() is called
+    // you can compare the 'old' state with the 'new' state and perform more
+    // sophisticated update, e.g. you can start an animation effect for the
+    // pressed <<-->> not pressed transition.
+    keyView = isKeyView;
+  }
+
+  // State management
+  note group Note3
+  {
+    attr Bounds = <470,210,690,380>;
+  }
+
+  // Feedback flash effect
+  note group Note2
+  {
+    attr Bounds = <240,210,460,340>;
+  }
+
+  // Touch screen events
+  note group Note1
+  {
+    attr Bounds = <10,210,230,420>;
+  }
+
+  // This variable refers to the view representing the actually pressed key or it \
+  // is 'null' if the user is not touching a key.
+  $rect <480,330,680,370>
+  var Core::View keyView;
+
+  // This variable stores the recent position inside the keyboard area where the \
+  // user is touching the screen.
+  $rect <20,370,220,410>
+  var point recentPosition;
+
+  // This timer object is used to flash the pressed key when the user has tapped \
+  // it very quickly. This is just a visual feedback effect.
+  $rect <250,250,450,290>
+  object Core::Timer FlashTimer
+  {
+    preset OnTrigger = onFlashTimer;
+    preset Period = 0;
+    preset Begin = 50;
+  }
+
+  // This internal slot method is called when the recently pressed key should be \
+  // activated. This is when the user presses on a key and then releases the finger \
+  // again.
+  $rect <480,290,680,330>
+  slot activateKey
+  {
+    // Applying the object runtime casting test whether the user is
+    // touching a key with 'text' caption.
+    var Views::Text textKeyView = (Views::Text)keyView;
+
+    // Depending on the pressed key, the following variables will be
+    // initialized with the corresponding code.
+    var char          charCode = '\0';
+    var Core::KeyCode keyCode  = Core::KeyCode.NoKey;
+
+    // Has the user touched (activated) one of the keys with text
+    // as caption? Use the text as character code to feed the application 
+    // with a keyboard event.
+    if ( textKeyView != null )
+      charCode = textKeyView.String[0];
+
+    // Has the user touched the 'Enter' key?
+    else if ( keyView == ImageKeyEnter )
+      keyCode = Core::KeyCode.Enter;
+
+    // Has the user touched the 'Clear' key?
+    //else if ( keyView == ImageKeyClear )
+    //  keyCode = Core::KeyCode.Backspace;
+
+    // The user has pressed a regular character/digit key. Feed it as keyboard
+    // event to the application.
+    if ( charCode != '\0' )
+    {
+      GetRoot().DriveKeyboardHitting( Core::KeyCode.NoKey, charCode, true );
+      GetRoot().DriveKeyboardHitting( Core::KeyCode.NoKey, charCode, false );
+    }
+
+    // The user has pressed a special key (e.g. Enter). Feed it as keyboard
+    // event to the application.
+    if ( keyCode != Core::KeyCode.NoKey )
+    {
+      GetRoot().DriveKeyboardHitting( keyCode, '\0', true );
+      GetRoot().DriveKeyboardHitting( keyCode, '\0', false );
+    }
+  }
+
+  // This internal slot method is called when the '@FlashTimer' is expired. It ends \
+  // the short flash feedback effect.
+  $rect <250,290,450,330>
+  slot onFlashTimer
+  {
+    // The feedback flash timer is finished. Request the keyboard to update 
+    // its appearance. The update will occur in the UpdateViewState() method.
+    InvalidateViewState();
+
+    // With the end of the feedback flash effect the key is activated.
+    signal activateKey;
+  }
+
+  // This internal slot method is called when the user drags the finger while pressing \
+  // the keyboard. This updates the keyboard to highlight the key at the new touch \
+  // position.
+  $rect <20,330,220,370>
+  slot onDragTouch
+  {
+    // Every time the user touches the keyboard or drags the finger inside/outside
+    // a key area request the keyboard update its appearance. The update will occur
+    // in the UpdateViewState() method.
+    InvalidateViewState();
+
+    // Remember the new position where the user recently touched the screen
+    recentPosition = TouchHandler.CurrentPos;
+  }
+
+  // This internal slot method is called when the user releases the touch screen \
+  // after touching the keyboard area. This activates the key the user has touched.
+  $rect <20,290,220,330>
+  slot onReleaseTouch
+  {
+    // Every time the user touches the keyboard or drags the finger inside/outside
+    // a key area request the keyboard update its appearance. The update will occur
+    // in the UpdateViewState() method.
+    InvalidateViewState();
+
+    // Did the user moved the finger outside the keyboard's area? In such case
+    // the keyboard is not activated.
+    if ( !TouchHandler.Inside )
+      return;
+
+    // The user has pressed and held a key for longer time. This was enough
+    // long to give a visual 'press' feedback to the user. The keyboard can be
+    // activated immediately.
+    if ( TouchHandler.HoldPeriod >= FlashTimer.Begin )
+      signal activateKey;
+
+    // The user has tapped the keyboard very quickly. Defer the key activation
+    // to give the user first a short visual feedback that the key has been
+    // pressed.
+    else
+      FlashTimer.Enabled = true;
+  }
+
+  // This internal slot method is called when the user touches the keyboard area.
+  $rect <20,250,220,290>
+  slot onPressTouch
+  {
+    // Every time the user touches the keyboard or drags the finger inside/outside
+    // a key area request the keyboard update its appearance. The update will occur
+    // in the UpdateViewState() method.
+    InvalidateViewState();
+
+    // The keyboard is still performing the feedback flash effect from the preceding
+    // tap. This can occur when the user taps the keyboard in a very rapid succession. 
+    // Thus complete this preceding tap (simulate the timer expiration) before 
+    // starting a new key interaction.
+    if ( FlashTimer.Enabled )
+    {
+      signal activateKey;
+      FlashTimer.Enabled = false;
+    }
+
+    // Remember the new position where the user has touched the screen
+    recentPosition = TouchHandler.CurrentPos;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Background
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <0,0,88,90>;
+    preset Color = #000000FF;
+  }
+
+  // This is a border view.
+  $rect <20,20,160,60>
+  object Views::Border Border
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <0,0,88,90>;
+    preset Width = 2;
+    preset Color = #FFFFFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchHandler
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Point4 = <6,85>;
+    preset Point3 = <81,85>;
+    preset Point2 = <81,5>;
+    preset Point1 = <6,5>;
+    preset OnDrag = onDragTouch;
+    preset OnRelease = onReleaseTouch;
+    preset OnPress = onPressTouch;
+    preset EnableMultiTouch = true;
+    preset MaxStrikeCount = 100;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Highlight
+  {
+    preset Bounds = <6,5,31,25>;
+    preset Color = #FF0000FF;
+    preset Visible = false;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <7,6,30,24>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey1
+  {
+    preset Layout = Core::Layout[AlignToLeft, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <6,5,31,25>;
+    preset String = "1";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle1
+  {
+    preset Bounds = <32,6,55,24>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey2
+  {
+    preset Layout = Core::Layout[AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <31,5,56,25>;
+    preset String = "2";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle2
+  {
+    preset Bounds = <57,6,80,24>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey3
+  {
+    preset Layout = Core::Layout[AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <56,5,81,25>;
+    preset String = "3";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle3
+  {
+    preset Bounds = <7,26,30,44>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey4
+  {
+    preset Layout = Core::Layout[AlignToLeft, ResizeHorz, ResizeVert];
+    preset Bounds = <6,25,31,45>;
+    preset String = "4";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle4
+  {
+    preset Bounds = <32,26,55,44>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey5
+  {
+    preset Layout = Core::Layout[ResizeHorz, ResizeVert];
+    preset Bounds = <31,25,56,45>;
+    preset String = "5";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle5
+  {
+    preset Bounds = <57,26,80,44>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey6
+  {
+    preset Layout = Core::Layout[AlignToRight, ResizeHorz, ResizeVert];
+    preset Bounds = <56,25,81,45>;
+    preset String = "6";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle6
+  {
+    preset Bounds = <7,46,30,64>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey7
+  {
+    preset Layout = Core::Layout[AlignToLeft, ResizeHorz, ResizeVert];
+    preset Bounds = <6,45,31,65>;
+    preset String = "7";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle7
+  {
+    preset Bounds = <32,46,55,64>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey8
+  {
+    preset Layout = Core::Layout[ResizeHorz, ResizeVert];
+    preset Bounds = <31,45,56,65>;
+    preset String = "8";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle8
+  {
+    preset Bounds = <57,46,80,64>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey9
+  {
+    preset Layout = Core::Layout[AlignToRight, ResizeHorz, ResizeVert];
+    preset Bounds = <56,45,81,65>;
+    preset String = "9";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle9
+  {
+    preset Bounds = <32,66,55,84>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text TextKey0
+  {
+    preset Layout = Core::Layout[AlignToBottom, ResizeHorz, ResizeVert];
+    preset Bounds = <31,65,56,85>;
+    preset String = "0";
+    preset Font = Resources::FontSmall;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle10
+  {
+    preset Bounds = <57,66,80,84>;
+    preset Color = #B1B1B1FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image ImageKeyEnter
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToRight, ResizeHorz, ResizeVert];
+    preset Bounds = <56,65,81,85>;
+    preset Color = #000000FF;
+    preset FrameNumber = 12;
+    preset Bitmap = Resources::KeyIconsSmall;
+  }
+}
+
+$rect <20,230,260,270>
+$output false
+autoobject WidgetSet::ToggleButtonConfig toggleTich
+{
+  preset IconOnTintActive = #FFFFFFFF;
+  preset IconAlignment = Views::ImageAlignment[ScaleToFill];
+  preset FaceOnTintActive = #FFFFFFFF;
+  preset FaceOnTintFocused = #FFFFFFFF;
+  preset FaceOnTintDefault = #FFFFFFFF;
+  preset FaceOnActive = setAlarm::buttonTichHiden;
+  preset FaceOnFocused = setAlarm::buttonTichHiden;
+  preset FaceOnDefault = setAlarm::buttonTichHiden;
+  preset FaceOffActive = setAlarm::buttonTich;
+  preset FaceOffFocused = setAlarm::buttonTich;
+  preset FaceOffDefault = setAlarm::buttonTich;
+}
+
+$rect <380,40,580,80>
+$output false
+resource Resources::Bitmap buttonTich
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\buttonTich.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <380,80,580,120>
+$output false
+resource Resources::Bitmap buttonTichHiden
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\buttonTich_hiden.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <20,80,220,120>
+$output false
+class SetAlarm : Core::Group
+{
+  $rect <10,310,210,350>
+  inherited property Bounds = <0,0,288,220>;
+
+  $rect <10,390,210,430>
+  inherited method UpdateLayout()
+  {
+    // Always invoke the inherited method.
+    super( aSize );
+
+    /*
+
+      HINT:
+
+      This method exists for sophisticated layout calculation. Please note, that in 
+      most cases it is completely sufficient to use the views property 'Layout' to
+      determine how the view should behave when the component is resized.
+
+    */
+
+    /*
+
+      TO DO:
+
+      Put here the code to calculate new position and size of enclosed views. The
+      current (new) size of the component itself is passed in the parameter aSize.
+      For example:
+
+        SomeView.Bounds = rect( 10, 10, aSize.x - 20, aSize.y - 20 );
+
+    */
+  }
+
+  $rect <10,350,210,390>
+  inherited method UpdateViewState()
+  {
+    // Always invoke the inherited method.
+    super( aState );
+
+    /*
+
+      HINT 1:
+
+      This method is invoked automatically when the state set of the component has
+      been changed. The new state set can be found in the parameter aState.
+      Following are the important states:
+
+        Enabled   --> The component can react to user inputs.
+
+        Selected  --> The component is selected in context of its owner.
+
+        Focused   --> The component is selected in context of its owner and 
+                      the owner can react to keyboard events. In this manner the
+                      component is also able to react to keyboard events.
+
+        Modal     --> The component is modal. All events are redirected to this
+                      component.
+
+      To determine whether a state is currently active or not you have to test
+      the aState parameter. For example to test the 'Selected' state:
+
+        if ( aState.contains( Core::ViewState[ Selected ]))
+        {
+          ... yes, this component is currently selected.
+        }
+
+    */
+
+    /*
+
+      HINT 2:
+
+      Alternatively you can request this method invocation by executing explicitly
+      following code:
+
+
+        InvalidateViewState();
+
+    */
+      
+    /*
+
+      TO DO 1:
+
+      Put here the code to ensure that the visual aspect of the component does
+      reflect its current state. For example, depending on its 'Enabled' state
+      a component may appear with full colors or pale if it is disabled:
+
+        if ( aState.contains( Core::ViewState[ Enabled ]))
+        {
+          SomeBackgroundView.Opacity = 255;
+          SomeTextView.Color         = #000000FF;
+        }
+        else
+        {
+          SomeBackgroundView.Opacity = 128;
+          SomeTextView.Color         = #00000080;
+        }
+
+
+      TO DO 2:
+
+      You can evaluate here also the state of any other member in your component.
+      For example in a push-button component, the button should appear highlighted
+      as long as the user holds the finger within a touch area of the button:
+
+        if ( SomeTouchHandler.Down && SomeTouchHandler.Inside )
+          HighlightedBackground.Visible = true;
+        else
+          HighlightedBackground.Visible = false;
+
+      The touch handler itself only requests the update method to be called. Use
+      for this purpose 'InvalidateViewState()' method.
+
+
+      TO DO 3:
+
+      You can calculate here also the position/size of views accordingly to the
+      state of any other member in your component. For example in a slider you
+      can calculate the position of the slider knob from some properties like
+      'SliderValue' and 'SliderRange':
+
+        SliderKnob.Bounds.origin.x = ( SliderValue * Bounds.w ) / SliderRange;
+
+      Changing the 'SliderValue' or 'SliderRange' property should only request
+      the update method to be called. Use for this purpose 'InvalidateViewState()'
+      method.
+
+    */
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,1,288,221>;
+    preset Color = #000000FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Border Border
+  {
+    preset Bounds = <70,100,228,150>;
+    preset Color = #FF26F8FF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image upHour
+  {
+    preset Bounds = <70,75,120,100>;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image upMin
+  {
+    preset Bounds = <124,75,174,100>;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image upPmAm
+  {
+    preset Bounds = <178,75,228,100>;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image downHour
+  {
+    preset Bounds = <70,150,120,175>;
+    preset FrameNumber = 1;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image dowmMin
+  {
+    preset Bounds = <124,150,174,175>;
+    preset FrameNumber = 1;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image downAmPm
+  {
+    preset Bounds = <178,150,228,175>;
+    preset FrameNumber = 1;
+    preset Bitmap = Resources::NavigationIconsMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text hourText
+  {
+    preset Bounds = <70,100,116,150>;
+    preset String = "07";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <116,100,125,150>;
+    preset String = ":";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text minText
+  {
+    preset Bounds = <129,100,175,150>;
+    preset String = "30";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text amPmText
+  {
+    preset Bounds = <178,100,224,150>;
+    preset String = "AM";
+    preset Font = Application_2::fontTimer;
+    preset Color = #1D2CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle colorChoise
+  {
+    preset Bounds = <181,100,225,150>;
+    preset Color = #D7D7D75A;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image2
+  {
+    preset Bounds = <239,186,288,220>;
+    preset Bitmap = setAlarm::save1;
+  }
+
+  $rect <300,0,500,40>
+  slot SlotUpHour
+  {
+    var int32 valueNew;
+    var int32 test;
+    colorChoise.Bounds = <70,100,116,150>;
+      if (pushUpHour.OnPress){
+        test = hourText.String.parse_int32(0);
+        if(test<12){
+          valueNew=test +1 ;
+          hourText.String= valueNew ;
+             }
+        else
+          hourText.String = 1;
+        }
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushUpHour
+  {
+    preset Bounds = <80,75,107,100>;
+    preset OnEnter = null;
+    preset OnPress = SlotUpHour;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushUpMin
+  {
+    preset Bounds = <135,75,164,100>;
+    preset OnEnter = null;
+    preset OnPress = SlotUpMin;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushUpAmPm
+  {
+    preset Bounds = <188,75,216,100>;
+    preset OnEnter = null;
+    preset OnPress = SlotUpAm;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushDoHour
+  {
+    preset Bounds = <80,150,107,175>;
+    preset OnEnter = null;
+    preset OnPress = SlotDoHour;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushDoMin
+  {
+    preset Bounds = <135,150,164,175>;
+    preset OnEnter = null;
+    preset OnPress = SlotDoMin;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushDoAmPm
+  {
+    preset Bounds = <188,150,216,175>;
+    preset OnPress = SlotUpAm;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushSave
+  {
+    preset Bounds = <239,186,288,220>;
+    preset OnRelease = null;
+    preset OnPress = SlotUpHour;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <300,40,500,80>
+  slot SlotDoHour
+  {
+    var int32 valueNew;
+    var int32 test;
+    colorChoise.Bounds = <70,100,116,150>;
+      if (pushDoHour.OnPress){
+        test = hourText.String.parse_int32(0);
+        if(test>1){
+          valueNew=test-1 ;
+           hourText.String= valueNew ;
+          }
+        else
+          hourText.String = 12;
+        }
+  }
+
+  $rect <300,80,500,120>
+  slot SlotUpMin
+  {
+    var int32 valueNew;
+    var int32 test;
+    colorChoise.Bounds = <129,100,175,150>;
+      if (pushUpMin.OnPress){
+        test = minText.String.parse_int32(0);
+        if(test<59){
+          valueNew=test +1 ;
+          minText.String= valueNew ;
+             }
+        else
+          minText.String = 0;
+        }
+  }
+
+  $rect <300,120,500,160>
+  slot SlotDoMin
+  {
+    var int32 valueNew;
+    var int32 test;
+    colorChoise.Bounds = <129,100,175,150>;
+      if (pushDoMin.OnPress){
+        test = minText.String.parse_int32(0);
+        if(test>1){
+          valueNew=test-1 ;
+           minText.String= valueNew ;
+          }
+        else
+          minText.String = 59;
+        }
+  }
+
+  $rect <300,160,500,200>
+  slot SlotUpAm
+  {
+    colorChoise.Bounds = <181,100,225,150>;
+    if(amPmText.String=="AM"){
+      amPmText.String="PM";
+      }
+    else amPmText.String="AM";
+  }
+
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle2
+  {
+    preset Bounds = <0,0,287,36>;
+    preset Color = #3C3CFFFF;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image
+  {
+    preset Bounds = <256,0,288,36>;
+    preset Bitmap = Application_2::exiticon;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <55,2,228,32>;
+    preset String = "ALARM SETTING";
+    preset Font = Application_2::fontMedium;
+  }
+
+  $rect <20,20,160,60>
+  object Views::Image Image1
+  {
+    preset Bounds = <0,34,61,94>;
+    preset Bitmap = Application_2::iconAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushButtonSave
+  {
+    preset Bounds = <239,186,288,220>;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+
+  $rect <20,20,160,60>
+  object WidgetSet::PushButton pushButtonExit
+  {
+    preset Bounds = <256,-2,288,36>;
+    preset Label = "Caption";
+    preset Appearance = setAlarm::buttonSetAlarm;
+  }
+}
+
+$rect <580,40,780,80>
+$output false
+resource Resources::Bitmap save
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\save.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <580,80,780,120>
+$output false
+resource Resources::Bitmap save1
+{
+  attr bitmapfile FileName = .\IMG\res\res\Button_new\save1.png;
+  attr bitmapformat Format = Native;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+  attr bitmapdithering Dithering = Auto;
+  attr bitmapmode Mode = Default;
+}
+
+$rect <30,270,270,310>
+$output false
+autoobject WidgetSet::PushButtonConfig buttonSetAlarm;

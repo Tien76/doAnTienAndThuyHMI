@@ -1,0 +1,38 @@
+!SESSION 2021-05-16 14:21:04.738 -----------------------------------------------
+eclipse.buildId=Version 1.5.1
+java.version=1.8.0_272
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\Project\STM32CubeIDE\STM32F746-Discovery\.cproject
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\Project\STM32CubeIDE\STM32F746-Discovery\.cproject
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2021-05-16 14:21:31.758
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2021-05-16 14:21:31.831
+!MESSAGE Log4j initialized with config file C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\Project\STM32CubeIDE\STM32F746-Discovery\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2021-05-16 14:21:33.639
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 4 4 2021-05-16 14:21:36.830
+!MESSAGE com.st.stm32cube.ide.mcu.ide/META-INF/version/build_ref file not found, build reference will not be reported into properties
+!SESSION 2021-05-16 14:23:13.895 -----------------------------------------------
+eclipse.buildId=Version 1.5.1
+java.version=1.8.0_272
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\Project\STM32CubeIDE\STM32F746-Discovery\.cproject
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\Project\STM32CubeIDE\STM32F746-Discovery C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\Project\STM32CubeIDE\STM32F746-Discovery\.cproject
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2021-05-16 14:23:19.068
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2021-05-16 14:23:19.135
+!MESSAGE Log4j initialized with config file C:\Embedded wizard\HMI_4\STM32F746-Discovery\STM32F746-Discovery\Application\Project\STM32CubeIDE\STM32F746-Discovery\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2021-05-16 14:23:23.196
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 4 4 2021-05-16 14:23:25.669
+!MESSAGE com.st.stm32cube.ide.mcu.ide/META-INF/version/build_ref file not found, build reference will not be reported into properties

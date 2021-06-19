@@ -1,0 +1,10 @@
+ew_bsp_clock.c:140:6:HAL_RTC_MspInit	192	static
+ew_bsp_clock.c:174:6:HAL_RTC_MspDeInit	0	static
+ew_bsp_clock.c:195:6:EwBspClockInit	16	static
+ew_bsp_clock.c:236:6:EwBspClockTickIncrement	0	static
+ew_bsp_clock.c:256:15:EwBspClockGetTicks	0	static
+ew_bsp_clock.c:276:15:EwBspClockGetTime	48	static
+ew_bsp_clock.c:334:6:EwBspClockSetTime	56	static
+ew_bsp_clock.c:428:6:EwBspClockGetCpuLoad	12	static
+ew_bsp_clock.c:464:6:EwBspClockCpuLoadSetActive	12	static
+ew_bsp_clock.c:498:6:EwBspClockCpuLoadSetIdle	4	static

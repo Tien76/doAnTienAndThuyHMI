@@ -1,0 +1,9 @@
+ew_bsp_graphics.c:86:5:EwBspGraphicsInit	24	static
+ew_bsp_graphics.c:133:6:EwBspGraphicsDone	0	static
+ew_bsp_graphics.c:156:6:EwBspGraphicsWaitForCompletion	8	static
+ew_bsp_graphics.c:210:6:EwBspGraphicsConcurrentOperation	0	static
+ew_bsp_graphics.c:237:6:EwBspGraphicsFill	40	static
+ew_bsp_graphics.c:293:6:EwBspGraphicsFillBlend	40	static
+ew_bsp_graphics.c:374:6:EwBspGraphicsCopy	56	static
+ew_bsp_graphics.c:454:6:EwBspGraphicsCopyBlend	56	static
+ew_bsp_graphics.c:537:6:EwBspGraphicsLoadClut	40	static

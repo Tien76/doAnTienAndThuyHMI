@@ -1,0 +1,2 @@
+ew_bsp_event.c:74:6:EwBspEventWait	32	static
+ew_bsp_event.c:132:6:EwBspEventTrigger	0	static

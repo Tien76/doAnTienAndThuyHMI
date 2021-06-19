@@ -1,0 +1,17 @@
+ewextgfx.c:936:13:GfxSelectSurfaces	12	static,ignoring_inline_asm
+ewextgfx.c:157:5:GfxInitGfx	12	static
+ewextgfx.c:215:15:GfxInitViewport	32	static
+ewextgfx.c:357:6:GfxDoneViewport	8	static
+ewextgfx.c:407:15:GfxBeginUpdate	8	static
+ewextgfx.c:459:15:GfxBeginUpdateArea	8	static
+ewextgfx.c:543:6:GfxEndUpdate	32	static,ignoring_inline_asm
+ewextgfx.c:609:15:GfxCreateSurface	40	static
+ewextgfx.c:688:15:GfxCreateConstSurface	32	static
+ewextgfx.c:750:6:GfxDestroySurface	8	static
+ewextgfx.c:824:15:GfxLockSurface	24	static,ignoring_inline_asm
+ewextgfx.c:908:6:GfxUnlockSurface	0	static
+ewextgfx.c:1008:6:GfxFillDriver	184	static
+ewextgfx.c:1108:6:GfxCopyDriver	224	static
+ewextgfx.c:1259:6:GfxBlendDriver	224	static
+ewextgfx.c:1392:6:GfxUseGraphicsAccelerator	0	static
+ewextgfx.c:1432:5:GfxIsGraphicsAcceleratorUsed	0	static

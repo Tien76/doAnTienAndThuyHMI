@@ -1,0 +1,11 @@
+setAlarm.c:533:6:setAlarmbuttonSetAlarm__Init	0	static
+setAlarm.c:97:6:setAlarmSetAlarm__Init	152	static
+setAlarm.c:277:6:setAlarmSetAlarm__ReInit	8	static
+setAlarm.c:313:6:setAlarmSetAlarm__Done	8	static
+setAlarm.c:358:6:setAlarmSetAlarm_UpdateLayout	8	static
+setAlarm.c:377:6:setAlarmSetAlarm_UpdateViewState	0	static
+setAlarm.c:383:6:setAlarmSetAlarm_SlotUpHour	24	static
+setAlarm.c:408:6:setAlarmSetAlarm_SlotDoHour	24	static
+setAlarm.c:433:6:setAlarmSetAlarm_SlotUpMin	24	static
+setAlarm.c:458:6:setAlarmSetAlarm_SlotDoMin	24	static
+setAlarm.c:483:6:setAlarmSetAlarm_SlotUpAm	24	static
