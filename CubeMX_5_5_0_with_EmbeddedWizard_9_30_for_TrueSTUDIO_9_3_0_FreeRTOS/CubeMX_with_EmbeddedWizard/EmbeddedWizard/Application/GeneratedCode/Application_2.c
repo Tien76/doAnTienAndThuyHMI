@@ -23,7 +23,10 @@
 #include "Templates.h"
 #include "Views.h"
 #include "WidgetSet.h"
+#include "main.h"
 
+float temp , humid;
+unsigned int lux = 0;
 /* Compressed strings for the language 'Default'. */
 static const unsigned int _StringsDefault0[] =
 {
@@ -570,8 +573,9 @@ void Application_2Application_slotSetAlarm( Application_2Application _this, XObj
 }
 
 /* 'C' function for method : 'Application_2::Application.TimerTick()' */
-float temp , humid;
-unsigned int lux = 0;
+
+//float temp , humid;
+//unsigned int lux = 0;
 void Application_2Application_TimerTick( Application_2Application _this, XObject 
   sender )
 {

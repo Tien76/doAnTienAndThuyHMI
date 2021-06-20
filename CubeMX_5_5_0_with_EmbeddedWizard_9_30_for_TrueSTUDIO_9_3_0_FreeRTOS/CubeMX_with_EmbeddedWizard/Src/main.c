@@ -21,8 +21,8 @@
 /* USER CODE BEGIN PTD */
 extern float tempDHT;
 extern float humidDHT;
-extern float temp;
-extern float humid;
+float temp;
+float humid;
 extern unsigned int lux;
 /* USER CODE END PTD */
 
@@ -156,9 +156,8 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of EwThreadHandle */
-  osThreadDef(EwThreadHandle, GuiThread, osPriorityNormal, 0, 1280);
+  osThreadDef(EwThreadHandle, GuiThread, osPriorityNormal, 0, 1024);
   EwThreadHandleHandle = osThreadCreate(osThread(EwThreadHandle), NULL);
-
   /* definition and creation of DHT11 */
   osThreadDef(DHT11, StartTask02, osPriorityNormal, 0, 512);
   DHT11Handle = osThreadCreate(osThread(DHT11), NULL);
@@ -167,6 +166,9 @@ int main(void)
   EwPrint( "[OK]\n" );
   #endif
   /* USER CODE END RTOS_THREADS */
+
+   /* definition and creation of DHT11 */
+
 
   /* Start scheduler */
   osKernelStart();
@@ -782,9 +784,9 @@ void StartTask02(void const * argument)
   for(;;)
   {
 	DHT11_init();
-	temp = 3;		//tempDHT;
-	humid = 4;		//humidDHT;
-    osDelay(100);
+	temp = 30; //tempDHT;
+	humid = 65; //humidDHT;
+    osDelay(3000);
   }
   /* USER CODE END StartTask02 */
 }
