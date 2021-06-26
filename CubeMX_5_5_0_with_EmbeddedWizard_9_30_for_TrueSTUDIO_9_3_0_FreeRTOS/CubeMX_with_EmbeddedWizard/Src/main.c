@@ -784,8 +784,8 @@ void StartTask02(void const * argument)
   for(;;)
   {
 	DHT11_init();
-	temp = 30; //tempDHT;
-	humid = 65; //humidDHT;
+	temp = tempDHT;
+	humid = humidDHT;
     osDelay(3000);
   }
   /* USER CODE END StartTask02 */
