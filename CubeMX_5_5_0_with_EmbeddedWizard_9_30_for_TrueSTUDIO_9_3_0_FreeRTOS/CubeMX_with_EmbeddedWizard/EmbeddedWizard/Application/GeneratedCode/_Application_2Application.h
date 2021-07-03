@@ -104,6 +104,12 @@
 #define _CoreView_
 #endif
 
+/* Forward declaration of the class Effects::Fader */
+#ifndef _EffectsFader_
+  EW_DECLARE_CLASS( EffectsFader )
+#define _EffectsFader_
+#endif
+
 /* Forward declaration of the class Graphics::Canvas */
 #ifndef _GraphicsCanvas_
   EW_DECLARE_CLASS( GraphicsCanvas )
@@ -145,7 +151,6 @@ EW_DEFINE_FIELDS( Application_2Application, CoreRoot )
   EW_OBJECT  ( Timer,           CoreTimer )
   EW_VARIABLE( valueTemp,       XFloat )
   EW_VARIABLE( valueHumid,      XFloat )
-  EW_VARIABLE( valueLux,        XInt16 )
 EW_END_OF_FIELDS( Application_2Application )
 
 /* Virtual Method Table (VMT) for the class : 'Application_2::Application' */
@@ -166,6 +171,7 @@ EW_DEFINE_METHODS( Application_2Application, CoreRoot )
   EW_METHOD( ChangeViewState,   void )( CoreRoot _this, XSet aSetState, XSet aClearState )
   EW_METHOD( OnSetBounds,       void )( CoreGroup _this, XRect value )
   EW_METHOD( OnSetFocus,        void )( CoreRoot _this, CoreView value )
+  EW_METHOD( OnSetOpacity,      void )( CoreRoot _this, XInt32 value )
   EW_METHOD( DispatchEvent,     XObject )( CoreRoot _this, CoreEvent aEvent )
   EW_METHOD( BroadcastEvent,    XObject )( CoreRoot _this, CoreEvent aEvent, XSet 
     aFilter )

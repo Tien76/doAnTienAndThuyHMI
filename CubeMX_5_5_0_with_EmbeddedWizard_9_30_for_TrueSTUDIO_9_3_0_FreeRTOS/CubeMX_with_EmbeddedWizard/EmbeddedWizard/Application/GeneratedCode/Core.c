@@ -50,25 +50,49 @@
 #include "_CoreTaskQueue.h"
 #include "_CoreTimer.h"
 #include "_CoreView.h"
+#include "_EffectsFader.h"
+#include "_EffectsFaderTask.h"
+#include "_EffectsShowHideTransition.h"
+#include "_EffectsTransition.h"
 #include "_GraphicsCanvas.h"
 #include "_ResourcesBitmap.h"
 #include "Core.h"
+#include "Effects.h"
 
 /* Compressed strings for the language 'Default'. */
 static const unsigned int _StringsDefault0[] =
 {
-  0x0000024A, /* ratio 51.88 % */
+  0x0000042C, /* ratio 47.57 % */
   0xB8005300, 0x000A8452, 0x00CA0034, 0x0EC00100, 0x01093480, 0x800859DC, 0x1137800C,
   0x737450E7, 0x8A1D0011, 0xE9B22262, 0xC50CF1C8, 0x7E19188F, 0x23510844, 0x3A729343,
-  0x070001D6, 0x030ACD80, 0xC8E9388B, 0x854421D0, 0x04F25513, 0xC6A15310, 0x8C00618F,
-  0x26C6B001, 0xAD390E00, 0x74188C3C, 0x1C004BAA, 0x08647E31, 0x9650A391, 0x94C2AE00,
-  0x8529D349, 0x36533B9C, 0xE4F40A9C, 0xDA00A2D0, 0xD0A87474, 0x43B40466, 0xAB75527D,
-  0x8B45A936, 0x65443536, 0xD262912B, 0x02FD7091, 0xABB143C8, 0x31638A61, 0x7369ACCE,
-  0x11294E46, 0xA98CCE97, 0xC6DD2211, 0x9E1ED758, 0x47E9316A, 0x6E2D0C85, 0xF1F25A9E,
-  0x239E8FD2, 0x115C9C32, 0x4AD96980, 0xA91EE717, 0x2BD385D0, 0x44220D39, 0x4449600D,
-  0x668850C6, 0x89000B0C, 0x7916D0ED, 0x9CCAE72B, 0x21B942A1, 0x688DFE15, 0x8844E191,
-  0xF63F592B, 0x9AA431DA, 0x76371ECC, 0xBB200ADC, 0x23A99378, 0x9DAD8CC6, 0x18E519A2,
-  0xD21C32E5, 0x000EAE11, 0x1F811DFF, 0xE6F9B400, 0x01015394, 0x00000000
+  0x070001D6, 0x03164D80, 0xC88C1E0B, 0x30C422D0, 0x34624600, 0xC74C70C9, 0x46493436,
+  0x6191F8E4, 0x47408A4B, 0xD40854C6, 0x358A1E62, 0xA8D002A7, 0x8B446990, 0x34E46336,
+  0xCF615088, 0x76A20087, 0x28C00A24, 0x3135A446, 0x91EAEC72, 0x408653E2, 0xA99C7E8D,
+  0x8655E476, 0x4D36311C, 0x002B95AA, 0x02C10AAF, 0x49D39180, 0xD2668647, 0x53188C56,
+  0x0AA4E3E5, 0x18C64663, 0xB2E5A913, 0x8D572314, 0xC72D02D8, 0x32EB3217, 0xB33358C4,
+  0xE5108FE4, 0x625004DA, 0x5798802C, 0x793C9621, 0xCFE1A679, 0x464AB73C, 0xE880166A,
+  0x4F2DAEC9, 0xA1546884, 0x71B61FCD, 0x16C0069B, 0x16C96865, 0x0DD69615, 0x99C63500,
+  0xBCBE8183, 0xC326BA9D, 0xEEDB2C89, 0xA1521864, 0x85D4C3D0, 0x39294E5B, 0x95D05D70,
+  0x4B9C4E3B, 0xC68566DE, 0x91043997, 0x47CD1342, 0xE5756151, 0xB31AC005, 0x15939071,
+  0x97681168, 0x3609F07C, 0xDDC04721, 0xDF4C5F15, 0x05136525, 0x6027D200, 0x45D60544,
+  0x6148569F, 0x007390E4, 0x45221044, 0x20684A23, 0xA629935E, 0x4A1183C1, 0xE4505504,
+  0x5FD93551, 0x1E38D1D3, 0x54CC0087, 0xE4334D93, 0x46444524, 0x469314CD, 0x6178AD10,
+  0x048D9243, 0x7D404591, 0x4E459C54, 0x8296C74E, 0x9C5951B0, 0x19659391, 0x1957519C,
+  0x2E429235, 0x6D8576CC, 0x44B431A0, 0xD1415744, 0x211A70A3, 0x6B64DF51, 0x8514E792,
+  0x5ED5210A, 0xB4515F8D, 0xEE417DDC, 0x21001AB9, 0x6AA4C1A9, 0x283A4215, 0x47656C77,
+  0x4285945E, 0x145BDE46, 0x5691D10D, 0xEA10003A, 0x99169B11, 0xCDB39B54, 0x00001016,
+  0x00000000
+};
+
+/* Compressed strings for the language 'Default'. */
+static const unsigned int _StringsDefault1[] =
+{
+  0x000000B6, /* ratio 68.13 % */
+  0xB8006F00, 0x000A8452, 0x00F20039, 0x0DC00348, 0x40003380, 0xE003A000, 0x6300444D,
+  0x88698400, 0x00194011, 0x946E2E6C, 0x1CE37148, 0x3A2E6B00, 0xA25148B4, 0x2B208F18,
+  0xD0C88472, 0x32924421, 0x0859A271, 0x38C4A4E0, 0x14C0EA00, 0x800431FA, 0x160622A3,
+  0xA790983C, 0x2D148BCD, 0x10E8FC4A, 0x30A0D128, 0xA89C8E25, 0xA84A27B1, 0xCCF0EE00,
+  0xD9A8F458, 0x000101A3, 0x00000000
 };
 
 /* Constant values used in this 'C' module only. */
@@ -76,13 +100,20 @@ static const XPoint _Const0000 = { 0, 0 };
 static const XRect _Const0001 = {{ 0, 0 }, { 0, 0 }};
 static const XStringRes _Const0002 = { _StringsDefault0, 0x0002 };
 static const XStringRes _Const0003 = { _StringsDefault0, 0x002B };
-static const XStringRes _Const0004 = { _StringsDefault0, 0x0040 };
-static const XStringRes _Const0005 = { _StringsDefault0, 0x005C };
-static const XStringRes _Const0006 = { _StringsDefault0, 0x0070 };
-static const XStringRes _Const0007 = { _StringsDefault0, 0x0081 };
-static const XColor _Const0008 = { 0x00, 0x00, 0x00, 0x00 };
-static const XStringRes _Const0009 = { _StringsDefault0, 0x009B };
-static const XStringRes _Const000A = { _StringsDefault0, 0x00CE };
+static const XStringRes _Const0004 = { _StringsDefault0, 0x0057 };
+static const XStringRes _Const0005 = { _StringsDefault0, 0x0088 };
+static const XStringRes _Const0006 = { _StringsDefault0, 0x00B8 };
+static const XStringRes _Const0007 = { _StringsDefault0, 0x00DD };
+static const XStringRes _Const0008 = { _StringsDefault0, 0x011C };
+static const XStringRes _Const0009 = { _StringsDefault0, 0x0131 };
+static const XStringRes _Const000A = { _StringsDefault0, 0x014D };
+static const XStringRes _Const000B = { _StringsDefault0, 0x0161 };
+static const XStringRes _Const000C = { _StringsDefault0, 0x0172 };
+static const XColor _Const000D = { 0x00, 0x00, 0x00, 0x00 };
+static const XStringRes _Const000E = { _StringsDefault0, 0x018C };
+static const XStringRes _Const000F = { _StringsDefault0, 0x01BF };
+static const XStringRes _Const0010 = { _StringsDefault1, 0x0002 };
+static const XStringRes _Const0011 = { _StringsDefault1, 0x0039 };
 
 #ifndef EW_DONT_CHECK_INDEX
   /* This function is used to check the indices when accessing an array.
@@ -2650,6 +2681,31 @@ void CoreGroup__OnSetFocus( void* _this, CoreView value )
   ((CoreGroup)_this)->_VMT->OnSetFocus((CoreGroup)_this, value );
 }
 
+/* 'C' function for method : 'Core::Group.OnSetOpacity()' */
+void CoreGroup_OnSetOpacity( CoreGroup _this, XInt32 value )
+{
+  if ( value > 255 )
+    value = 255;
+
+  if ( value < 0 )
+    value = 0;
+
+  if ( value == _this->Opacity )
+    return;
+
+  _this->Opacity = value;
+
+  if (( _this->Super2.Owner != 0 ) && (( _this->Super2.viewState & CoreViewStateVisible ) 
+      == CoreViewStateVisible ))
+    CoreGroup__InvalidateArea( _this->Super2.Owner, _this->Super1.Bounds );
+}
+
+/* Wrapper function for the virtual method : 'Core::Group.OnSetOpacity()' */
+void CoreGroup__OnSetOpacity( void* _this, XInt32 value )
+{
+  ((CoreGroup)_this)->_VMT->OnSetOpacity((CoreGroup)_this, value );
+}
+
 /* 'C' function for method : 'Core::Group.OnGetVisible()' */
 XBool CoreGroup_OnGetVisible( CoreGroup _this )
 {
@@ -2663,6 +2719,455 @@ void CoreGroup_OnSetVisible( CoreGroup _this, XBool value )
     CoreView__ChangeViewState( _this, CoreViewStateVisible, 0 );
   else
     CoreView__ChangeViewState( _this, 0, CoreViewStateVisible );
+}
+
+/* The method SwitchToDialog() schedules an operation to show in context of 'this' 
+   component another component passed in the parameter aDialogGroup. The operation 
+   to show the component is performed with an animation specified in the parameter 
+   aPresentTransition. If the parameter aPresentTransition is 'null', the show operation 
+   uses the default transition presenting the new dialog component instantly in 
+   the center of 'this' component without performing any smooth animation effects. 
+   Calling the method SwitchToDialog() causes the new dialog component to replace 
+   the entry on top of an internal stack containing all dialogs existing at the 
+   moment in context of 'this' owner component. The dialog component on top of the 
+   stack is considered as the active dialog - the dialog, the user may interact 
+   with. Other dialogs lying in the background are automatically deactivated and 
+   they are suppressed from being able to receive and process user inputs. If not 
+   needed anymore, the dialog component can be hidden again by calling the method 
+   @DismissDialog() or SwitchToDialog(), which causes the corresponding dialog stack 
+   entry to be removed or replaced. Accordingly, with the method @PresentDialog() 
+   new dialog component can be pushed on top of this stack overlaying all other 
+   dialogs in the background. If there was already an active dialog component presented 
+   in context of 'this' owner, this old component looses its active state and it 
+   is dismissed.
+   With the parameter aDismissTransition you can specify the animation to perform 
+   when the just presented dialog component is dismissed again, which is caused 
+   when calling the method @DismissDialog() or SwitchToDialog(). If the parameter 
+   aDismissTransition is 'null', the dialog will disappear with the same transition 
+   as used to show it (resulting from the parameter aPresentTransition).
+   With the parameter aOverlayTransition you determine an optional animation to 
+   apply on the just presented component when a further dialog component is presented 
+   overlying it (by using the method @PresentDialog()). In this way you can control, 
+   whether and how the component should disappear when a new component is presented 
+   above it. With the parameter aRestoreTransition you specify the opposite animation 
+   to perform when after dismissing the overlaying component, the component in the 
+   background becomes active again.
+   Usually, when presenting a new component by using the method SwitchToDialog(), 
+   the previously presented component disappears with the dismiss transition specified 
+   at its own presentation time (see the parameter aDismissTransition). This behavior 
+   can be overridden by specifying in the parameter aOverrideDismissTransition other 
+   animation to hide the old component.
+   Switching the dialog in foreground may affect the visibility state of the dialog 
+   component lying further in the background. In particular, the component in the 
+   background will schedule a restore transition as expected to be after the dialog 
+   in foreground is dismissed, and an overlay transition as resulting from the just 
+   presented new dialog component. Which transitions are performed results primarily 
+   from the parameters aOverlayTransition and aRestoreTransition specified at the 
+   presentation time of the background dialog component and the parameter aOverrideRestoreTransition 
+   specified at the presentation time of the overlaying (just dismissed) dialog 
+   component. Furthermore, you can override this behavior by specifying other animations 
+   in the parameters aOverrideOverlayTransition and aOverrideRestoreTransition in 
+   the invocation of the method SwitchToDialog().
+   The both parameters aComplete and aCancel can be provided with references to 
+   slot methods, which are signaled as soon as the present operation is finished 
+   (aComplete) or it has been canceled (aCancel) due to other transition being scheduled 
+   for the same GUI component aDialogGroup making the actual operation obsolete.
+   The present operation is enqueued, so calling SwitchToDialog(), @PresentDialog() 
+   and @DismissDialog() several times in sequence for different components in context 
+   of 'this' owner component causes the resulting transitions to be executed strictly 
+   one after another. This behavior can be changed by passing the value 'true' in 
+   the parameter aCombine. In this case, the new operation will be executed together 
+   with last prepared but not yet started operation. In this manner several independent 
+   transitions can run simultaneously. */
+void CoreGroup_SwitchToDialog( CoreGroup _this, CoreGroup aDialogGroup, EffectsTransition 
+  aPresentTransition, EffectsTransition aDismissTransition, EffectsTransition aOverlayTransition, 
+  EffectsTransition aRestoreTransition, EffectsTransition aOverrideDismissTransition, 
+  EffectsTransition aOverrideOverlayTransition, EffectsTransition aOverrideRestoreTransition, 
+  XSlot aComplete, XSlot aCancel, XBool aCombine )
+{
+  CoreDialogContext oldDialog;
+  CoreDialogContext nextDialog;
+  CoreDialogContext newDialog;
+  EffectsTransition dismissTransition;
+  EffectsTransition restoreTransition;
+  EffectsTransition overlayTransition;
+
+  if ( _this->dialogStack == 0 )
+  {
+    CoreGroup_PresentDialog( _this, aDialogGroup, aPresentTransition, aDismissTransition, 
+    aOverlayTransition, aRestoreTransition, 0, 0, aComplete, aCancel, aCombine );
+    return;
+  }
+
+  oldDialog = _this->dialogStack;
+  nextDialog = oldDialog->next;
+
+  if ((( aDialogGroup->Super2.viewState & CoreViewStateDialog ) == CoreViewStateDialog ) 
+      && ( _this->dialogStack->group != aDialogGroup ))
+  {
+    EwThrow( EwLoadString( &_Const0003 ));
+    return;
+  }
+
+  newDialog = EwNewObject( CoreDialogContext, 0 );
+  dismissTransition = oldDialog->dismissTransition;
+  restoreTransition = 0;
+  overlayTransition = 0;
+
+  if ( nextDialog != 0 )
+  {
+    restoreTransition = nextDialog->restoreTransition;
+    overlayTransition = nextDialog->overlayTransition;
+  }
+
+  if (( nextDialog != 0 ) && ( oldDialog->overrideRestoreTransition != 0 ))
+    restoreTransition = oldDialog->overrideRestoreTransition;
+
+  if (( nextDialog != 0 ) && ( aOverrideOverlayTransition != 0 ))
+    overlayTransition = aOverrideOverlayTransition;
+
+  if ( aOverrideDismissTransition != 0 )
+    dismissTransition = aOverrideDismissTransition;
+
+  if ( aPresentTransition == 0 )
+    aPresentTransition = ((EffectsTransition)EwGetAutoObject( &EffectsShowHideCentered, 
+    EffectsShowHideTransition ));
+
+  if ( aDismissTransition == 0 )
+    aDismissTransition = aPresentTransition;
+
+  if ( aRestoreTransition == 0 )
+    aRestoreTransition = aOverlayTransition;
+
+  if ( aOverlayTransition == 0 )
+    aOverlayTransition = aRestoreTransition;
+
+  newDialog->dismissTransition = aDismissTransition;
+  newDialog->overlayTransition = aOverlayTransition;
+  newDialog->restoreTransition = aRestoreTransition;
+  newDialog->overrideRestoreTransition = aOverrideRestoreTransition;
+  newDialog->group = aDialogGroup;
+  newDialog->next = _this->dialogStack->next;
+  _this->dialogStack->next = 0;
+  _this->dialogStack = newDialog;
+
+  if ( _this->Focus == (CoreView)aDialogGroup )
+    CoreGroup__OnSetFocus( _this, 0 );
+
+  CoreView__ChangeViewState( oldDialog->group, 0, CoreViewStateDialog | CoreViewStateFocused );
+
+  if ((( _this->Super2.viewState & CoreViewStateFocused ) == CoreViewStateFocused ) 
+      && (( aDialogGroup->Super2.viewState & ( CoreViewStateEnabled | CoreViewStateFocusable )) 
+      == ( CoreViewStateEnabled | CoreViewStateFocusable )))
+    CoreView__ChangeViewState( aDialogGroup, CoreViewStateDialog | CoreViewStateFocused, 
+    0 );
+  else
+    CoreView__ChangeViewState( aDialogGroup, CoreViewStateDialog, 0 );
+
+  if ( overlayTransition != 0 )
+  {
+    CoreGroup_FadeGroup( _this, nextDialog->group, EffectsTransition__CreateOverlayFader( 
+    overlayTransition ), EwNullSlot, EwNullSlot, aCombine );
+    CoreGroup_FadeGroup( _this, oldDialog->group, EffectsTransition__CreateDismissFader( 
+    dismissTransition ), EwNullSlot, EwNullSlot, 1 );
+    CoreGroup_FadeGroup( _this, newDialog->group, EffectsTransition__CreatePresentFader( 
+    aPresentTransition ), aComplete, aCancel, 1 );
+  }
+  else
+    if ( restoreTransition != 0 )
+    {
+      CoreGroup_FadeGroup( _this, nextDialog->group, EffectsTransition__CreateRestoreFader( 
+      restoreTransition ), EwNullSlot, EwNullSlot, aCombine );
+      CoreGroup_FadeGroup( _this, oldDialog->group, EffectsTransition__CreateDismissFader( 
+      dismissTransition ), EwNullSlot, EwNullSlot, 1 );
+      CoreGroup_FadeGroup( _this, newDialog->group, EffectsTransition__CreatePresentFader( 
+      aPresentTransition ), aComplete, aCancel, 1 );
+    }
+    else
+      if ( dismissTransition != 0 )
+      {
+        CoreGroup_FadeGroup( _this, oldDialog->group, EffectsTransition__CreateDismissFader( 
+        dismissTransition ), EwNullSlot, EwNullSlot, aCombine );
+        CoreGroup_FadeGroup( _this, newDialog->group, EffectsTransition__CreatePresentFader( 
+        aPresentTransition ), aComplete, aCancel, 1 );
+      }
+      else
+        CoreGroup_FadeGroup( _this, newDialog->group, EffectsTransition__CreatePresentFader( 
+        aPresentTransition ), aComplete, aCancel, aCombine );
+}
+
+/* The method DismissDialog() schedules an operation to hide again the component 
+   passed in the parameter aDialogGroup. The component has to be presented by a 
+   preceding @PresentDialog() or @SwitchToDialog() method invocation. Calling the 
+   method DismissDialog() causes the corresponding entry to be removed from the 
+   internal stack containing all dialogs existing at the moment in context of 'this' 
+   owner component. The dialog component on top of the stack is considered as the 
+   active dialog - the dialog, the user may interact with. Other dialogs lying in 
+   the background are automatically deactivated and they are suppressed from being 
+   able to receive and process user inputs. Accordingly, applying the dismiss operation 
+   on the actually active (top) dialog causes the dialog existing eventually behind 
+   it to restore its active state.
+   The operation to hide the component is performed with an animation specified 
+   at its presentation time (in the parameter aDismissTransition of the method @PresentDialog() 
+   or @SwitchToDialog()). Alternatively, other transition to hide the component 
+   can be specified in the parameter aOverrideDismissTransition.
+   Dismissing a dialog may affect the visibility state of the dialog component lying 
+   further in the background. In particular, the component in the background will 
+   schedule a restore transition as expected to be after the dialog overlaying it 
+   is dismissed. When dismissing a dialog, which is not the active one (not on top 
+   of the stack), the component in the background will also schedule an overlay 
+   transition as resulting from the new overlaying dialog component. Which transitions 
+   are performed results primarily from the parameters aOverlayTransition and aRestoreTransition 
+   specified at the presentation time of the background dialog component and the 
+   parameters aOverrideRestoreTransition specified at the presentation time of the 
+   overlaying (just dismissed) dialog component. Furthermore, you can override this 
+   behavior by specifying other animations in the parameters aOverrideOverlayTransition 
+   and aOverrideRestoreTransition in the invocation of the method DismissDialog().
+   The both parameters aComplete and aCancel can be provided with references to 
+   slot methods, which are signaled as soon as the dismiss operation is finished 
+   (aComplete) or it has been canceled (aCancel) due to other transition being scheduled 
+   for the same GUI component aDialogGroup making the actual operation obsolete.
+   The dismiss operation is enqueued, so calling @SwitchToDialog(), @PresentDialog() 
+   and DismissDialog() several times in sequence for different components in context 
+   of 'this' owner component causes the resulting transitions to be executed strictly 
+   one after another. This behavior can be changed by passing the value 'true' in 
+   the parameter aCombine. In this case, the new operation will be executed together 
+   with last prepared but not yet started operation. In this manner several independent 
+   transitions can run simultaneously. */
+void CoreGroup_DismissDialog( CoreGroup _this, CoreGroup aDialogGroup, EffectsTransition 
+  aOverrideDismissTransition, EffectsTransition aOverrideOverlayTransition, EffectsTransition 
+  aOverrideRestoreTransition, XSlot aComplete, XSlot aCancel, XBool aCombine )
+{
+  CoreDialogContext dialog;
+  CoreDialogContext nextDialog;
+  CoreDialogContext prevDialog;
+  EffectsTransition dismissTransition;
+  EffectsTransition restoreTransition;
+  EffectsTransition overlayTransition;
+
+  if ( _this->dialogStack == 0 )
+    return;
+
+  if ( aDialogGroup == 0 )
+    return;
+
+  dialog = _this->dialogStack;
+  nextDialog = _this->dialogStack->next;
+  prevDialog = 0;
+
+  while ((( dialog != 0 ) && ( dialog->group != aDialogGroup )) && ( dialog->next 
+         != 0 ))
+  {
+    prevDialog = dialog;
+    dialog = nextDialog;
+    nextDialog = dialog->next;
+  }
+
+  if (( dialog == 0 ) || ( dialog->group != aDialogGroup ))
+  {
+    EwThrow( EwLoadString( &_Const0004 ));
+    return;
+  }
+
+  if ( prevDialog == 0 )
+  {
+    _this->dialogStack = nextDialog;
+    dialog->next = 0;
+  }
+  else
+  {
+    prevDialog->next = nextDialog;
+    dialog->next = 0;
+  }
+
+  CoreView__ChangeViewState( dialog->group, 0, CoreViewStateDialog | CoreViewStateFocused );
+
+  if ((((( _this->Super2.viewState & CoreViewStateFocused ) == CoreViewStateFocused ) 
+      && ( nextDialog != 0 )) && ( prevDialog == 0 )) && (( nextDialog->group->Super2.viewState 
+      & ( CoreViewStateEnabled | CoreViewStateFocusable )) == ( CoreViewStateEnabled 
+      | CoreViewStateFocusable )))
+    CoreView__ChangeViewState( nextDialog->group, CoreViewStateFocused, 0 );
+
+  dismissTransition = dialog->dismissTransition;
+  restoreTransition = 0;
+  overlayTransition = 0;
+
+  if ( nextDialog != 0 )
+    restoreTransition = nextDialog->restoreTransition;
+
+  if (( nextDialog != 0 ) && ( dialog->overrideRestoreTransition != 0 ))
+    restoreTransition = dialog->overrideRestoreTransition;
+
+  if (( nextDialog != 0 ) && ( aOverrideRestoreTransition != 0 ))
+    restoreTransition = aOverrideRestoreTransition;
+
+  if (( prevDialog != 0 ) && ( nextDialog != 0 ))
+    overlayTransition = nextDialog->overlayTransition;
+
+  if ((( prevDialog != 0 ) && ( nextDialog != 0 )) && ( aOverrideOverlayTransition 
+      != 0 ))
+    overlayTransition = aOverrideOverlayTransition;
+
+  if ( aOverrideDismissTransition != 0 )
+    dismissTransition = aOverrideDismissTransition;
+
+  if ( overlayTransition != 0 )
+  {
+    CoreGroup_FadeGroup( _this, nextDialog->group, EffectsTransition__CreateOverlayFader( 
+    overlayTransition ), EwNullSlot, EwNullSlot, aCombine );
+    CoreGroup_FadeGroup( _this, dialog->group, EffectsTransition__CreateDismissFader( 
+    dismissTransition ), aComplete, aCancel, 1 );
+  }
+  else
+    if ( restoreTransition != 0 )
+    {
+      CoreGroup_FadeGroup( _this, nextDialog->group, EffectsTransition__CreateRestoreFader( 
+      restoreTransition ), EwNullSlot, EwNullSlot, aCombine );
+      CoreGroup_FadeGroup( _this, dialog->group, EffectsTransition__CreateDismissFader( 
+      dismissTransition ), aComplete, aCancel, 1 );
+    }
+    else
+      CoreGroup_FadeGroup( _this, dialog->group, EffectsTransition__CreateDismissFader( 
+      dismissTransition ), aComplete, aCancel, aCombine );
+}
+
+/* The method PresentDialog() schedules an operation to show in context of 'this' 
+   component another component passed in the parameter aDialogGroup. The operation 
+   to show the component is performed with an animation specified in the parameter 
+   aPresentTransition. If the parameter aPresentTransition is 'null', the show operation 
+   uses the default transition presenting the new dialog component instantly in 
+   the center of 'this' component without performing any smooth animation effects. 
+   Calling the method PresentDialog() causes the new dialog component to be pushed 
+   on top of an internal stack containing all dialogs existing at the moment in 
+   context of 'this' owner component. The dialog component on top of the stack is 
+   considered as the active dialog - the dialog, the user may interact with. Other 
+   dialogs lying in the background are automatically deactivated and they are suppressed 
+   from being able to receive and process user inputs. If not needed anymore, the 
+   dialog component can be hidden again by calling the method @DismissDialog() or 
+   @SwitchToDialog(), which causes the corresponding dialog stack entry to be removed 
+   or replaced. Accordingly, if there was already an active dialog component presented 
+   in context of 'this' owner, this old component looses its active state and it 
+   is overlaid by the new component.
+   With the parameter aDismissTransition you can specify the animation to perform 
+   when the just presented dialog component is dismissed again, which is caused 
+   when calling the method @DismissDialog() or @SwitchToDialog(). If the parameter 
+   aDismissTransition is 'null', the dialog will disappear with the same transition 
+   as used to show it (resulting from the parameter aPresentTransition).
+   With the parameter aOverlayTransition you determine an optional animation to 
+   apply on the just presented component when a further dialog component is presented 
+   overlying it. In this way you can control, whether and how the component should 
+   disappear when a new component is presented above it. With the parameter aRestoreTransition 
+   you specify the opposite animation to perform when after dismissing the overlaying 
+   component, the component in the background becomes active again. When calling 
+   PresentDialog(), you can override these originally specified transitions to overlay 
+   and restore the component in the background. With the parameter aOverrideOverlayTransition 
+   you can specify the animation to hide the component in the background instead 
+   of using the animation specified at its own presentation time. Similarly, with 
+   the parameter aOverrideRestoreTransition you can specify another animation to 
+   use when the component in the background restores its active state again.
+   The both parameters aComplete and aCancel can be provided with references to 
+   slot methods, which are signaled as soon as the present operation is finished 
+   (aComplete) or it has been canceled (aCancel) due to other transition being scheduled 
+   for the same GUI component aDialogGroup making the actual operation obsolete.
+   The present operation is enqueued, so calling PresentDialog(), @SwitchToDialog() 
+   and @DismissDialog() several times in sequence for different components in context 
+   of 'this' owner component causes the resulting transitions to be executed strictly 
+   one after another. This behavior can be changed by passing the value 'true' in 
+   the parameter aCombine. In this case, the new operation will be executed together 
+   with last prepared but not yet started operation. In this manner several independent 
+   transitions can run simultaneously. */
+void CoreGroup_PresentDialog( CoreGroup _this, CoreGroup aDialogGroup, EffectsTransition 
+  aPresentTransition, EffectsTransition aDismissTransition, EffectsTransition aOverlayTransition, 
+  EffectsTransition aRestoreTransition, EffectsTransition aOverrideOverlayTransition, 
+  EffectsTransition aOverrideRestoreTransition, XSlot aComplete, XSlot aCancel, 
+  XBool aCombine )
+{
+  CoreDialogContext dialog;
+  EffectsTransition overlayTransition;
+
+  if ( aDialogGroup == 0 )
+    return;
+
+  if (( _this->dialogStack != 0 ) && ( _this->dialogStack->group == aDialogGroup ))
+  {
+    CoreGroup_SwitchToDialog( _this, aDialogGroup, aPresentTransition, aDismissTransition, 
+    aOverlayTransition, aRestoreTransition, 0, aOverrideOverlayTransition, aOverrideRestoreTransition, 
+    aComplete, aCancel, aCombine );
+    return;
+  }
+
+  if ((( aDialogGroup->Super2.viewState & CoreViewStateDialog ) == CoreViewStateDialog ))
+  {
+    EwThrow( EwLoadString( &_Const0003 ));
+    return;
+  }
+
+  dialog = EwNewObject( CoreDialogContext, 0 );
+
+  if (( _this->dialogStack != 0 ) && ( _this->dialogStack->overlayTransition == 
+      0 ))
+  {
+    if ( aOverrideRestoreTransition == 0 )
+      aOverrideRestoreTransition = aOverrideOverlayTransition;
+
+    if ( aOverrideOverlayTransition == 0 )
+      aOverrideOverlayTransition = aOverrideRestoreTransition;
+  }
+
+  overlayTransition = 0;
+
+  if ( _this->dialogStack != 0 )
+    overlayTransition = _this->dialogStack->overlayTransition;
+
+  if (( _this->dialogStack != 0 ) && ( aOverrideOverlayTransition != 0 ))
+    overlayTransition = aOverrideOverlayTransition;
+
+  if ( aPresentTransition == 0 )
+    aPresentTransition = ((EffectsTransition)EwGetAutoObject( &EffectsShowHideCentered, 
+    EffectsShowHideTransition ));
+
+  if ( aDismissTransition == 0 )
+    aDismissTransition = aPresentTransition;
+
+  if ( aRestoreTransition == 0 )
+    aRestoreTransition = aOverlayTransition;
+
+  if ( aOverlayTransition == 0 )
+    aOverlayTransition = aRestoreTransition;
+
+  dialog->dismissTransition = aDismissTransition;
+  dialog->overlayTransition = aOverlayTransition;
+  dialog->restoreTransition = aRestoreTransition;
+  dialog->overrideRestoreTransition = aOverrideRestoreTransition;
+
+  if ( _this->Focus == (CoreView)aDialogGroup )
+    CoreGroup__OnSetFocus( _this, 0 );
+
+  if ( _this->dialogStack != 0 )
+    CoreView__ChangeViewState( _this->dialogStack->group, 0, CoreViewStateFocused );
+
+  if ((( _this->Super2.viewState & CoreViewStateFocused ) == CoreViewStateFocused ) 
+      && (( aDialogGroup->Super2.viewState & ( CoreViewStateEnabled | CoreViewStateFocusable )) 
+      == ( CoreViewStateEnabled | CoreViewStateFocusable )))
+    CoreView__ChangeViewState( aDialogGroup, CoreViewStateDialog | CoreViewStateFocused, 
+    0 );
+  else
+    CoreView__ChangeViewState( aDialogGroup, CoreViewStateDialog, 0 );
+
+  dialog->group = aDialogGroup;
+  dialog->next = _this->dialogStack;
+  _this->dialogStack = dialog;
+
+  if ( overlayTransition != 0 )
+  {
+    CoreGroup_FadeGroup( _this, _this->dialogStack->next->group, EffectsTransition__CreateOverlayFader( 
+    overlayTransition ), EwNullSlot, EwNullSlot, aCombine );
+    CoreGroup_FadeGroup( _this, aDialogGroup, EffectsTransition__CreatePresentFader( 
+    aPresentTransition ), aComplete, aCancel, 1 );
+  }
+  else
+    CoreGroup_FadeGroup( _this, aDialogGroup, EffectsTransition__CreatePresentFader( 
+    aPresentTransition ), aComplete, aCancel, aCombine );
 }
 
 /* The method LocalPosition() converts the given position aPoint from the screen 
@@ -2982,6 +3487,74 @@ CoreView CoreGroup_FindSiblingView( CoreGroup _this, CoreView aView, XSet aFilte
   return 0;
 }
 
+/* The method FadeGroup() schedules an operation to fade-in or fade-out the GUI 
+   component passed in the parameter aGroup in context of 'this' GUI component. 
+   The kind of the fade-in/out animation is determined by the fader object specified 
+   in the parameter aFader. In this manner, depending on the used fader, individual 
+   transitions to show or hide the GUI component can be determined.
+   The operation is enqueued, so calling FadeGroup() several times in sequence for 
+   different groups in context of 'this' owner component causes the resulting transitions 
+   to be executed strictly one after another. This behavior can be changed by passing 
+   the value 'true' in the parameter aCombine. In this case, the new operation will 
+   be executed together with last prepared but not yet started operation. In this 
+   manner several independent transitions can run simultaneously.
+   If the affected GUI component aGroup is already scheduled for an animation, but 
+   this animation is not yet started, the new animation aFader replaces this old 
+   one, so that always only one animation per affected GUI component is pending 
+   for execution.
+   The both parameters aComplete and aCancel can be provided with references to 
+   slot methods, which are signaled as soon as the transition is finished (aComplete) 
+   or it has been canceled (aCancel) because of a newer transition being scheduled 
+   for the same GUI component aGroup. */
+void CoreGroup_FadeGroup( CoreGroup _this, CoreGroup aGroup, EffectsFader aFader, 
+  XSlot aComplete, XSlot aCancel, XBool aCombine )
+{
+  if ( aGroup == 0 )
+    return;
+
+  if ( aFader == 0 )
+  {
+    EwThrow( EwLoadString( &_Const0005 ));
+    return;
+  }
+
+  if ((( aFader->Group != 0 ) || ( aFader->Owner != 0 )) || ( aFader->task != 0 ))
+  {
+    EwThrow( EwLoadString( &_Const0006 ));
+    return;
+  }
+
+  if (( aGroup->Super2.Owner != 0 ) && ( aGroup->Super2.Owner != _this ))
+  {
+    EwThrow( EwLoadString( &_Const0007 ));
+    return;
+  }
+
+  if ( _this->fadersQueue == 0 )
+    _this->fadersQueue = EwNewObject( CoreTaskQueue, 0 );
+
+  aFader->Owner = _this;
+  aFader->Group = aGroup;
+  aFader->onCancel = aCancel;
+  aFader->onComplete = aComplete;
+
+  if ( aGroup->pendingFader != 0 )
+    EffectsFaderTask_RemoveFader( aGroup->pendingFader->task, aGroup->pendingFader );
+
+  aGroup->pendingFader = aFader;
+  aGroup->Super2.viewState = aGroup->Super2.viewState | CoreViewStatePendingFader;
+
+  if (( aCombine && ( _this->fadersQueue->last != 0 )) && !CoreTask_IsCurrent( _this->fadersQueue->last ))
+    EffectsFaderTask_AddFader( EwCastObject( _this->fadersQueue->last, EffectsFaderTask ), 
+    aFader );
+  else
+  {
+    EffectsFaderTask task = EwNewObject( EffectsFaderTask, 0 );
+    EffectsFaderTask_AddFader( task, aFader );
+    CoreTaskQueue_ScheduleTask( _this->fadersQueue, ((CoreTask)task ), 0 );
+  }
+}
+
 /* The method RestackTop() elevates the view aView to the top of its component. 
    After this operation the view is usually not covered by any sibling views. This 
    method modifies the Z-order of the view. The effective stacking position of the 
@@ -2999,13 +3572,13 @@ void CoreGroup_RestackTop( CoreGroup _this, CoreView aView )
 
   if ( aView == 0 )
   {
-    EwThrow( EwLoadString( &_Const0003 ));
+    EwThrow( EwLoadString( &_Const0008 ));
     return;
   }
 
   if ( aView->Owner != _this )
   {
-    EwThrow( EwLoadString( &_Const0004 ));
+    EwThrow( EwLoadString( &_Const0009 ));
     return;
   }
 
@@ -3072,13 +3645,13 @@ void CoreGroup_Remove( CoreGroup _this, CoreView aView )
 {
   if ( aView == 0 )
   {
-    EwThrow( EwLoadString( &_Const0005 ));
+    EwThrow( EwLoadString( &_Const000A ));
     return;
   }
 
   if ( aView->Owner != _this )
   {
-    EwThrow( EwLoadString( &_Const0004 ));
+    EwThrow( EwLoadString( &_Const0009 ));
     return;
   }
 
@@ -3147,13 +3720,13 @@ void CoreGroup_Add( CoreGroup _this, CoreView aView, XInt32 aOrder )
 
   if ( aView == 0 )
   {
-    EwThrow( EwLoadString( &_Const0006 ));
+    EwThrow( EwLoadString( &_Const000B ));
     return;
   }
 
   if ( aView->Owner != 0 )
   {
-    EwThrow( EwLoadString( &_Const0007 ));
+    EwThrow( EwLoadString( &_Const000C ));
     return;
   }
 
@@ -3251,6 +3824,7 @@ EW_DEFINE_CLASS( CoreGroup, CoreRectView, first, Opacity, Opacity, Opacity, Opac
   CoreGroup_ChangeViewState,
   CoreGroup_OnSetBounds,
   CoreGroup_OnSetFocus,
+  CoreGroup_OnSetOpacity,
   CoreGroup_DispatchEvent,
   CoreGroup_BroadcastEvent,
   CoreGroup_UpdateLayout,
@@ -3350,8 +3924,8 @@ void CoreRoot_Draw( CoreRoot _this, GraphicsCanvas aCanvas, XRect aClip, XPoint
 
   if ( !fullScreenUpdate )
     GraphicsCanvas_FillRectangle( aCanvas, aClip, EwMoveRectPos( EwMoveRectPos( 
-    aClip, aOffset ), _this->Super2.Bounds.Point1 ), _Const0008, _Const0008, _Const0008, 
-    _Const0008, 0 );
+    aClip, aOffset ), _this->Super2.Bounds.Point1 ), _Const000D, _Const000D, _Const000D, 
+    _Const000D, 0 );
 
   CoreGroup_Draw((CoreGroup)_this, aCanvas, aClip, aOffset, aOpacity, aBlend );
 }
@@ -3387,6 +3961,18 @@ void CoreRoot_OnSetFocus( CoreRoot _this, CoreView value )
 {
   if (( value != (CoreView)_this->VirtualKeyboard ) || ( value == 0 ))
     CoreGroup_OnSetFocus((CoreGroup)_this, value );
+}
+
+/* 'C' function for method : 'Core::Root.OnSetOpacity()' */
+void CoreRoot_OnSetOpacity( CoreRoot _this, XInt32 value )
+{
+  XInt32 oldValue = _this->Super1.Opacity;
+
+  CoreGroup_OnSetOpacity((CoreGroup)_this, value );
+
+  if ((( oldValue != _this->Super1.Opacity ) && ( _this->Super3.Owner == 0 )) && 
+      (( _this->Super3.viewState & CoreViewStateVisible ) == CoreViewStateVisible ))
+    CoreGroup__InvalidateArea( _this, EwGetRectORect( _this->Super2.Bounds ));
 }
 
 /* The method DispatchEvent() feeds the component with the event passed in the parameter 
@@ -3492,7 +4078,7 @@ void CoreRoot_InvalidateArea( CoreRoot _this, XRect aArea )
 
   if ( _this->updateLock > 0 )
   {
-    EwThrow( EwLoadString( &_Const0009 ));
+    EwThrow( EwLoadString( &_Const000E ));
     return;
   }
 
@@ -4627,6 +5213,7 @@ EW_DEFINE_CLASS( CoreRoot, CoreGroup, keyLastTarget, cursorHoldTimer, cursorHold
   CoreRoot_ChangeViewState,
   CoreGroup_OnSetBounds,
   CoreRoot_OnSetFocus,
+  CoreRoot_OnSetOpacity,
   CoreRoot_DispatchEvent,
   CoreRoot_BroadcastEvent,
   CoreGroup_UpdateLayout,
@@ -5890,7 +6477,7 @@ void CoreKeyPressHandler_Init( CoreKeyPressHandler _this, XHandle aArg )
 
   if ( group == 0 )
   {
-    EwThrow( EwLoadString( &_Const000A ));
+    EwThrow( EwLoadString( &_Const000F ));
     return;
   }
 
@@ -6227,13 +6814,172 @@ void CoreTaskQueue__Done( CoreTaskQueue _this )
   XObject__Done( &_this->_Super );
 }
 
+/* 'C' function for method : 'Core::TaskQueue.completeTask()' */
+void CoreTaskQueue_completeTask( CoreTaskQueue _this )
+{
+  CoreTask task;
+
+  if ( _this->current == 0 )
+    return;
+
+  task = _this->current;
+  _this->current->queue = 0;
+  _this->current = 0;
+  _this->toContinue = 0;
+
+  if ( _this->isInOnStart )
+    EwPostSignal( EwNewSlot( _this, CoreTaskQueue_onPreDispatchNext ), ((XObject)_this ));
+  else
+    EwPostSignal( EwNewSlot( _this, CoreTaskQueue_onDispatchNext ), ((XObject)_this ));
+
+  CoreTask__OnComplete( task, _this );
+}
+
+/* 'C' function for method : 'Core::TaskQueue.onDispatchNext()' */
+void CoreTaskQueue_onDispatchNext( CoreTaskQueue _this, XObject sender )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( sender );
+
+  if ( _this->current != 0 )
+    return;
+
+  if ( _this->first == 0 )
+  {
+    EwPostSignal( _this->OnDone, ((XObject)_this ));
+    return;
+  }
+
+  _this->current = _this->first;
+  _this->first = _this->first->next;
+
+  if ( _this->first != 0 )
+    _this->first->prev = 0;
+  else
+    _this->last = 0;
+
+  _this->current->next = 0;
+  _this->isInOnStart = 1;
+  CoreTask__OnStart( _this->current, _this );
+  _this->isInOnStart = 0;
+}
+
+/* 'C' function for method : 'Core::TaskQueue.onPreDispatchNext()' */
+void CoreTaskQueue_onPreDispatchNext( CoreTaskQueue _this, XObject sender )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( sender );
+
+  EwPostSignal( EwNewSlot( _this, CoreTaskQueue_onDispatchNext ), ((XObject)_this ));
+}
+
+/* The method CancelTask() allows the application to remove a previously registered 
+   task from the task queue. The affected task is determined by the parameter aTask.
+   If the affected task is currently executed, the task is notified to immediately 
+   finalize its work. Afterwards the queue starts the next available task. The method 
+   will throw an error if you try to cancel a task not belonging to this queue. */
+void CoreTaskQueue_CancelTask( CoreTaskQueue _this, CoreTask aTask )
+{
+  XBool wasStarted;
+
+  if (( aTask == 0 ) || ( aTask->queue == 0 ))
+    return;
+
+  if ( aTask->queue != _this )
+  {
+    EwThrow( EwLoadString( &_Const0010 ));
+    return;
+  }
+
+  wasStarted = 0;
+
+  if ( _this->current == aTask )
+  {
+    _this->current = 0;
+    _this->toContinue = 0;
+    wasStarted = 1;
+
+    if ( _this->isInOnStart )
+      EwPostSignal( EwNewSlot( _this, CoreTaskQueue_onPreDispatchNext ), ((XObject)_this ));
+    else
+      EwPostSignal( EwNewSlot( _this, CoreTaskQueue_onDispatchNext ), ((XObject)_this ));
+  }
+  else
+  {
+    if ( aTask->next != 0 )
+      aTask->next->prev = aTask->prev;
+    else
+      _this->last = aTask->prev;
+
+    if ( aTask->prev != 0 )
+      aTask->prev->next = aTask->next;
+    else
+      _this->first = aTask->next;
+
+    aTask->prev = 0;
+    aTask->next = 0;
+  }
+
+  aTask->queue = 0;
+
+  if ( wasStarted )
+    CoreTask__OnCancel( aTask, _this );
+}
+
+/* The method ScheduleTask() registers the task passed in the parameter aTask for 
+   later execution.
+   The tasks are executed in the order in which they have been previously scheduled. 
+   If the parameter aWithPriority is false, the new task will be arranged at the 
+   end of the list with waiting tasks. If the parameter is true, the task is enqueued 
+   in front of all waiting tasks.
+   The method will throw an error if you try to schedule the same task twice. */
+void CoreTaskQueue_ScheduleTask( CoreTaskQueue _this, CoreTask aTask, XBool aWithPriority )
+{
+  if ( aTask == 0 )
+    return;
+
+  if ( aTask->queue != 0 )
+  {
+    EwThrow( EwLoadString( &_Const0011 ));
+    return;
+  }
+
+  aTask->queue = _this;
+
+  if ( aWithPriority )
+  {
+    aTask->next = _this->first;
+
+    if ( _this->first != 0 )
+      _this->first->prev = aTask;
+    else
+      _this->last = aTask;
+
+    _this->first = aTask;
+  }
+  else
+  {
+    aTask->prev = _this->last;
+
+    if ( _this->last != 0 )
+      _this->last->next = aTask;
+    else
+      _this->first = aTask;
+
+    _this->last = aTask;
+  }
+
+  if ( _this->current == 0 )
+    EwPostSignal( EwNewSlot( _this, CoreTaskQueue_onDispatchNext ), ((XObject)_this ));
+}
+
 /* Variants derived from the class : 'Core::TaskQueue' */
 EW_DEFINE_CLASS_VARIANTS( CoreTaskQueue )
 EW_END_OF_CLASS_VARIANTS( CoreTaskQueue )
 
 /* Virtual Method Table (VMT) for the class : 'Core::TaskQueue' */
-EW_DEFINE_CLASS( CoreTaskQueue, XObject, current, _None, _None, _None, _None, _None, 
-                 "Core::TaskQueue" )
+EW_DEFINE_CLASS( CoreTaskQueue, XObject, toContinue, OnDone, isInOnStart, isInOnStart, 
+                 isInOnStart, isInOnStart, "Core::TaskQueue" )
 EW_END_OF_CLASS( CoreTaskQueue )
 
 /* Initializer for the class 'Core::Task' */
@@ -6266,12 +7012,128 @@ void CoreTask__Done( CoreTask _this )
   XObject__Done( &_this->_Super );
 }
 
+/* The method OnComplete() is called when the task is done with its work. The default 
+   implementation of this method does nothing. You can override this method in derived 
+   task classes and implement what to do when the task is finished. For example, 
+   you can release resources used temporarily during animations.
+   To complete a task you should call explicitly the method @Complete(). The parameter 
+   aQueue refers to the queue this task belonged to. It can be used e.g. to schedule 
+   again a task to the same queue, etc. */
+void CoreTask_OnComplete( CoreTask _this, CoreTaskQueue aQueue )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( _this );
+  EW_UNUSED_ARG( aQueue );
+}
+
+/* Wrapper function for the virtual method : 'Core::Task.OnComplete()' */
+void CoreTask__OnComplete( void* _this, CoreTaskQueue aQueue )
+{
+  ((CoreTask)_this)->_VMT->OnComplete((CoreTask)_this, aQueue );
+}
+
+/* The method OnCancel() is called when the task is canceled after being started. 
+   The default implementation of this method does nothing. You can override this 
+   method in derived task classes and implement what to do when the task is prematurely 
+   aborted. For example, you can stop running timers and effects started in the 
+   preceding @OnStart() method.
+   To cancel a task you should call explicitly the method @Cancel(). The parameter 
+   aQueue refers to the queue this task belonged to. It can be used e.g. to schedule 
+   again a task to the same queue, etc. */
+void CoreTask_OnCancel( CoreTask _this, CoreTaskQueue aQueue )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( _this );
+  EW_UNUSED_ARG( aQueue );
+}
+
+/* Wrapper function for the virtual method : 'Core::Task.OnCancel()' */
+void CoreTask__OnCancel( void* _this, CoreTaskQueue aQueue )
+{
+  ((CoreTask)_this)->_VMT->OnCancel((CoreTask)_this, aQueue );
+}
+
+/* The method OnStart() is called at the begin of the execution of this task. The 
+   default implementation of the method simply cancels the task causing the next 
+   available task in the task queue to be started. You should override this method 
+   in derived task classes to implement what the task should do.
+   There are three typical application cases how to implement the OnStart() method:
+   - In its simplest case the entire task algorithm is implemented in the OnStart() 
+   method. In this case the method @Complete() should be called before leaving OnStart().
+   - If the task does take long time for execution by using timers or effects, you 
+   should put in OnStart() the code necessary to start the timers/effects. Don't 
+   forget to call @Complete() when all timers/effects are done.
+   - If the task is divided in many small execution steps, the OnStart() method 
+   should call @Continue() to request the @OnContinue() method to be executed after 
+   a short delay (usually after the next screen update). In @OnContinue() you can 
+   perform the next step of the task. If necessary, @OnContinue() can also request 
+   to be called again after a short delay. At the end of the task, after the last 
+   step is terminated, don't forget to call @Complete().
+   The parameter aQueue refers to the queue this task belongs to. It can be used 
+   to schedule more task to execute later. */
+void CoreTask_OnStart( CoreTask _this, CoreTaskQueue aQueue )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( aQueue );
+
+  CoreTask_Cancel( _this );
+}
+
+/* Wrapper function for the virtual method : 'Core::Task.OnStart()' */
+void CoreTask__OnStart( void* _this, CoreTaskQueue aQueue )
+{
+  ((CoreTask)_this)->_VMT->OnStart((CoreTask)_this, aQueue );
+}
+
+/* The method Complete() informs the task queue about the completion of this task. 
+   Thereupon the next available task in the queue can be executed. This method is 
+   usually called in context of the @OnStart() or @OnContinue() method when the 
+   task has finalized its work. Calling the method for a not current task has no 
+   effect. */
+void CoreTask_Complete( CoreTask _this )
+{
+  if (( _this->queue != 0 ) && ( _this->queue->current == _this ))
+    CoreTaskQueue_completeTask( _this->queue );
+}
+
+/* Wrapper function for the virtual method : 'Core::Task.Complete()' */
+void CoreTask__Complete( void* _this )
+{
+  ((CoreTask)_this)->_VMT->Complete((CoreTask)_this );
+}
+
+/* The method Cancel() removes this task from the task queue where the task has 
+   been previously scheduled. In the case the task is already in progress, the queue 
+   will advise the task to abort its work immediately before the task is removed 
+   from the queue (see @OnCancel()).
+   Whether a task is waiting for execution can be determined by @IsScheduled(). 
+   Whether a task is in progress can be determined by @IsCurrent().
+   Canceling a running task will cause the task queue to start the next available 
+   task. */
+void CoreTask_Cancel( CoreTask _this )
+{
+  if ( _this->queue != 0 )
+    CoreTaskQueue_CancelTask( _this->queue, _this );
+}
+
+/* The method IsCurrent() returns 'true' if the affected task is currently performed. 
+   The method returns 'false' if the task is done, waiting for execution or it simply 
+   doesn't belong to any task queue. */
+XBool CoreTask_IsCurrent( CoreTask _this )
+{
+  return (XBool)(( _this->queue != 0 ) && ( _this->queue->current == _this ));
+}
+
 /* Variants derived from the class : 'Core::Task' */
 EW_DEFINE_CLASS_VARIANTS( CoreTask )
 EW_END_OF_CLASS_VARIANTS( CoreTask )
 
 /* Virtual Method Table (VMT) for the class : 'Core::Task' */
-EW_DEFINE_CLASS( CoreTask, XObject, _None, _None, _None, _None, _None, _None, "Core::Task" )
+EW_DEFINE_CLASS( CoreTask, XObject, queue, _None, _None, _None, _None, _None, "Core::Task" )
+  CoreTask_OnComplete,
+  CoreTask_OnCancel,
+  CoreTask_OnStart,
+  CoreTask_Complete,
 EW_END_OF_CLASS( CoreTask )
 
 /* Initializer for the class 'Core::Resource' */

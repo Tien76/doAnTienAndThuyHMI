@@ -54,10 +54,21 @@
 #define _CoreGroup_
 #endif
 
+/* Forward declaration of the class Effects::Transition */
+#ifndef _EffectsTransition_
+  EW_DECLARE_CLASS( EffectsTransition )
+#define _EffectsTransition_
+#endif
+
 
 /* Deklaration of class : 'Core::DialogContext' */
 EW_DEFINE_FIELDS( CoreDialogContext, XObject )
   EW_VARIABLE( group,           CoreGroup )
+  EW_VARIABLE( next,            CoreDialogContext )
+  EW_VARIABLE( dismissTransition, EffectsTransition )
+  EW_VARIABLE( restoreTransition, EffectsTransition )
+  EW_VARIABLE( overlayTransition, EffectsTransition )
+  EW_VARIABLE( overrideRestoreTransition, EffectsTransition )
 EW_END_OF_FIELDS( CoreDialogContext )
 
 /* Virtual Method Table (VMT) for the class : 'Core::DialogContext' */

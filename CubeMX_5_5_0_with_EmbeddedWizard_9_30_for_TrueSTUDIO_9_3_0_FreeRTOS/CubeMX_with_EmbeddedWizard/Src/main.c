@@ -95,6 +95,15 @@ void StartTask02(void const * argument);
   * @brief  The application entry point.
   * @retval int
   */
+int flag_time = 0;
+//void timer2_callBack(TIM_HandleTypeDef *htim){
+//	if( htim->Instance == TIM2 ){
+//		DHT11_init();
+//		temp = tempDHT;
+//		humid = humidDHT;
+//	}
+//}
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -127,9 +136,10 @@ int main(void)
   MX_QUADSPI_Init();
   MX_UART7_Init();
   MX_TIM2_Init();
-//  DHT11_init();
+ // DHT11_init();
   /* USER CODE BEGIN 2 */
   EW_SDRAM_Init();
+//  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -468,7 +478,9 @@ static void MX_TIM2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM2_Init 2 */
-
+ // flag_time = 1;
+//  __HAL_TIM_CLEAR_FLAG(&htim2, TIM_SR_UIF);
+//  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END TIM2_Init 2 */
 
 }
@@ -784,8 +796,8 @@ void StartTask02(void const * argument)
   for(;;)
   {
 	DHT11_init();
-	temp = 30; //tempDHT;
-	humid = 65; //humidDHT;
+	temp = tempDHT;
+	humid = humidDHT;
     osDelay(3000);
   }
   /* USER CODE END StartTask02 */

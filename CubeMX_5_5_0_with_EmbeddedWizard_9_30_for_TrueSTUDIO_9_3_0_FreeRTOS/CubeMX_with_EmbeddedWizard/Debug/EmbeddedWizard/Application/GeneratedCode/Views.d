@@ -2,16 +2,16 @@ EmbeddedWizard/Application/GeneratedCode/Views.o: \
  ../EmbeddedWizard/Application/GeneratedCode/Views.c \
  ../EmbeddedWizard/Application/GeneratedCode/ewlocale.h \
  ../EmbeddedWizard/Application/GeneratedCode/_CoreGroup.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfx.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdriver.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextgfx.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdefs.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextbmp.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextfnt.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxcore.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfx.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdriver.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextgfx.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdefs.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextbmp.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextfnt.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxcore.h \
  ../EmbeddedWizard/Application/GeneratedCode/_CoreRectView.h \
  ../EmbeddedWizard/Application/GeneratedCode/_CoreView.h \
  ../EmbeddedWizard/Application/GeneratedCode/_CoreTimer.h \
@@ -48,8 +48,13 @@ EmbeddedWizard/Application/GeneratedCode/Views.o: \
  ../EmbeddedWizard/Application/GeneratedCode/_CoreTaskQueue.h \
  ../EmbeddedWizard/Application/GeneratedCode/Effects.h \
  ../EmbeddedWizard/Application/GeneratedCode/_EffectsEffect.h \
+ ../EmbeddedWizard/Application/GeneratedCode/_EffectsFader.h \
+ ../EmbeddedWizard/Application/GeneratedCode/_EffectsFaderTask.h \
  ../EmbeddedWizard/Application/GeneratedCode/_EffectsRectEffect.h \
+ ../EmbeddedWizard/Application/GeneratedCode/_EffectsShowHideTransition.h \
+ ../EmbeddedWizard/Application/GeneratedCode/_EffectsTransition.h \
  ../EmbeddedWizard/Application/GeneratedCode/_EffectsTimingList.h \
+ ../EmbeddedWizard/Application/GeneratedCode/_EffectsVisibilityFader.h \
  ../EmbeddedWizard/Application/GeneratedCode/Graphics.h \
  ../EmbeddedWizard/Application/GeneratedCode/Resources.h \
  ../EmbeddedWizard/Application/GeneratedCode/Views.h
@@ -58,25 +63,25 @@ EmbeddedWizard/Application/GeneratedCode/Views.o: \
 
 ../EmbeddedWizard/Application/GeneratedCode/_CoreGroup.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfx.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfx.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdriver.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdriver.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextgfx.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextgfx.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdefs.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdefs.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextbmp.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextbmp.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextfnt.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextfnt.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxcore.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxcore.h:
 
 ../EmbeddedWizard/Application/GeneratedCode/_CoreRectView.h:
 
@@ -150,9 +155,19 @@ C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard
 
 ../EmbeddedWizard/Application/GeneratedCode/_EffectsEffect.h:
 
+../EmbeddedWizard/Application/GeneratedCode/_EffectsFader.h:
+
+../EmbeddedWizard/Application/GeneratedCode/_EffectsFaderTask.h:
+
 ../EmbeddedWizard/Application/GeneratedCode/_EffectsRectEffect.h:
 
+../EmbeddedWizard/Application/GeneratedCode/_EffectsShowHideTransition.h:
+
+../EmbeddedWizard/Application/GeneratedCode/_EffectsTransition.h:
+
 ../EmbeddedWizard/Application/GeneratedCode/_EffectsTimingList.h:
+
+../EmbeddedWizard/Application/GeneratedCode/_EffectsVisibilityFader.h:
 
 ../EmbeddedWizard/Application/GeneratedCode/Graphics.h:
 

@@ -1,8 +1,35 @@
+/*******************************************************************************
+*
+* E M B E D D E D   W I Z A R D   P R O J E C T
+*
+*                                                Copyright (c) TARA Systems GmbH
+*                                    written by Paul Banach and Manfred Schweyer
+*
+********************************************************************************
+*
+* This file was generated automatically by Embedded Wizard Studio.
+*
+* Please do not make any modifications of this file! The modifications are lost
+* when the file is generated again by Embedded Wizard Studio!
+*
+* The template of this heading text can be found in the file 'head.ewt' in the
+* directory 'Platforms' of your Embedded Wizard installation directory. If you
+* wish to adapt this text, please copy the template file 'head.ewt' into your
+* project directory and edit the copy only. Please avoid any modifications of
+* the original template file!
+*
+* Version  : 10.00
+* Profile  : STM32F746
+* Platform : STM.STM32.RGB565
+*
+*******************************************************************************/
+
 #include "ewlocale.h"
 #include "_Application_2AirScreen.h"
 #include "_Application_2Application.h"
 #include "_Application_2background.h"
 #include "_Application_2screenLight.h"
+#include "_CoreGroup.h"
 #include "_CoreSimpleTouchHandler.h"
 #include "_CoreTimer.h"
 #include "_CoreView.h"
@@ -23,25 +50,23 @@
 #include "Templates.h"
 #include "Views.h"
 #include "WidgetSet.h"
-#include "main.h"
 
-float temp , humid;
-unsigned int lux = 0;
+float temp, humid;
+
 /* Compressed strings for the language 'Default'. */
 static const unsigned int _StringsDefault0[] =
 {
-  0x000001EA, /* ratio 59.59 % */
+  0x0000019E, /* ratio 61.84 % */
   0xB8001100, 0x80098452, 0x00CE0034, 0x0E800340, 0x060E8780, 0xA002A116, 0x0036800C,
   0x200454E0, 0x86984007, 0xDC70EA00, 0x448090F8, 0x2C010F18, 0xE4248890, 0xC80083C5,
   0x279874C0, 0x009381E5, 0xB1280040, 0x8901A533, 0x7C766041, 0x50609028, 0x62471E36,
   0x2700587C, 0x0926948E, 0x94D948EA, 0x28000CE0, 0xD0050299, 0x8344A7C4, 0x9550F122,
   0x10C00B08, 0x606304AF, 0xE095AB5D, 0xC635000D, 0x16C19412, 0x49AD8640, 0x69C94800,
   0x0013C016, 0x0110004E, 0xDE629790, 0x9E7581BF, 0xE2800C45, 0x7506BFDE, 0xD049FC3E,
-  0x77001BE0, 0x8AE916D0, 0x9BC3E650, 0x54225B04, 0x0361F0C8, 0xEA3F3289, 0x35797994,
-  0xDD99CB80, 0x30495CA4, 0x7CD65F35, 0x88846A45, 0xD6EBA93A, 0xDE635F19, 0x02401438,
-  0x4E835D89, 0x88A00C69, 0x091194DE, 0x047BCE06, 0x3A8A4B40, 0xCEB7520D, 0x890421FC,
-  0x1D079D7B, 0xF570379C, 0x540184EC, 0xC2529EBF, 0x99EBF4D7, 0x77C054EB, 0x8FE66031,
-  0x994C1801, 0x00002032, 0x00000000
+  0x77001BE0, 0x8AE916D0, 0x9BC3E650, 0x54225B04, 0x0261F0C8, 0x4E835D89, 0x88A00C69,
+  0x091194DE, 0x047BCE06, 0x3A8A4B40, 0xCDB6D20D, 0x890421FA, 0x1D075D7B, 0xED70379C,
+  0xD40184DC, 0xC2529DBE, 0x59CBE4D7, 0x77C054EB, 0x8FD66031, 0x994C1801, 0x00002032,
+  0x00000000
 };
 
 /* Constant values used in this 'C' module only. */
@@ -77,10 +102,10 @@ static const XRect _Const001C = {{ 200, 210 }, { 315, 258 }};
 static const XRect _Const001D = {{ 19, 148 }, { 127, 198 }};
 static const XStringRes _Const001E = { _StringsDefault0, 0x0034 };
 static const XRect _Const001F = {{ 306, 227 }, { 356, 270 }};
-static const XPoint _Const0020 = { 437, 6 };
-static const XPoint _Const0021 = { 480, 6 };
-static const XPoint _Const0022 = { 480, 50 };
-static const XPoint _Const0023 = { 437, 50 };
+static const XPoint _Const0020 = { 432, 11 };
+static const XPoint _Const0021 = { 460, 11 };
+static const XPoint _Const0022 = { 460, 36 };
+static const XPoint _Const0023 = { 432, 36 };
 static const XPoint _Const0024 = { 302, 268 };
 static const XPoint _Const0025 = { 302, 227 };
 static const XRect _Const0026 = {{ 342, 229 }, { 390, 272 }};
@@ -89,10 +114,10 @@ static const XRect _Const0028 = {{ 361, 227 }, { 409, 270 }};
 static const XStringRes _Const0029 = { _StringsDefault0, 0x0041 };
 static const XRect _Const002A = {{ 384, 229 }, { 432, 272 }};
 static const XStringRes _Const002B = { _StringsDefault0, 0x0045 };
-static const XPoint _Const002C = { 428, 185 };
-static const XPoint _Const002D = { 469, 185 };
-static const XPoint _Const002E = { 469, 224 };
-static const XPoint _Const002F = { 428, 224 };
+static const XPoint _Const002C = { 421, 188 };
+static const XPoint _Const002D = { 464, 188 };
+static const XPoint _Const002E = { 464, 211 };
+static const XPoint _Const002F = { 421, 212 };
 static const XRect _Const0030 = {{ 421, 229 }, { 469, 272 }};
 static const XStringRes _Const0031 = { _StringsDefault0, 0x004A };
 static const XRect _Const0032 = {{ 252, 244 }, { 302, 268 }};
@@ -137,53 +162,49 @@ static const XRect _Const0058 = {{ 139, 158 }, { 172, 182 }};
 static const XStringRes _Const0059 = { _StringsDefault0, 0x0089 };
 static const XRect _Const005A = {{ 137, 185 }, { 178, 209 }};
 static const XStringRes _Const005B = { _StringsDefault0, 0x008F };
-static const XRect _Const005C = {{ 253, -7 }, { 291, 43 }};
+static const XRect _Const005C = {{ 247, -10 }, { 297, 40 }};
 static const XRect _Const005D = {{ 27, 135 }, { 89, 197 }};
 static const XRect _Const005E = {{ 22, 131 }, { 94, 201 }};
 static const XPoint _Const005F = { 27, 136 };
 static const XPoint _Const0060 = { 86, 136 };
 static const XPoint _Const0061 = { 86, 195 };
 static const XPoint _Const0062 = { 27, 195 };
-static const XStringRes _Const0063 = { _StringsDefault0, 0x0096 };
-static const XStringRes _Const0064 = { _StringsDefault0, 0x00A3 };
-static const XStringRes _Const0065 = { _StringsDefault0, 0x00AE };
-static const XColor _Const0066 = { 0xFF, 0x51, 0xFC, 0xFF };
-static const XColor _Const0067 = { 0x6C, 0x6C, 0x6C, 0xFF };
-static const XRect _Const0068 = {{ 0, -2 }, { 144, 108 }};
-static const XRect _Const0069 = {{ 144, 110 }, { 288, 220 }};
-static const XRect _Const006A = {{ 0, 109 }, { 144, 220 }};
-static const XRect _Const006B = {{ 0, -1 }, { 144, 109 }};
-static const XRect _Const006C = {{ 0, -2 }, { 144, 28 }};
-static const XStringRes _Const006D = { _StringsDefault0, 0x00BC };
-static const XRect _Const006E = {{ 0, 110 }, { 144, 140 }};
-static const XStringRes _Const006F = { _StringsDefault0, 0x00C5 };
-static const XRect _Const0070 = {{ 144, 110 }, { 288, 138 }};
-static const XStringRes _Const0071 = { _StringsDefault0, 0x00D3 };
-static const XRect _Const0072 = {{ 0, 0 }, { 144, 110 }};
-static const XRect _Const0073 = {{ 0, 110 }, { 144, 221 }};
-static const XRect _Const0074 = {{ 144, 109 }, { 288, 219 }};
-static const XRect _Const0075 = {{ 153, 15 }, { 278, 97 }};
-static const XStringRes _Const0076 = { _StringsDefault0, 0x00E3 };
-static const XPoint _Const0077 = { 4, 2 };
-static const XPoint _Const0078 = { 141, 2 };
-static const XPoint _Const0079 = { 141, 102 };
-static const XPoint _Const007A = { 4, 102 };
-static const XRect _Const007B = {{ 247, -10 }, { 297, 40 }};
-static const XPoint _Const007C = { 4, 114 };
-static const XPoint _Const007D = { 141, 114 };
-static const XPoint _Const007E = { 141, 214 };
-static const XPoint _Const007F = { 4, 214 };
-static const XPoint _Const0080 = { 147, 114 };
-static const XPoint _Const0081 = { 284, 114 };
-static const XPoint _Const0082 = { 284, 214 };
-static const XPoint _Const0083 = { 147, 214 };
-static const XPoint _Const0084 = { 153, 28 };
-static const XPoint _Const0085 = { 272, 28 };
-static const XPoint _Const0086 = { 272, 97 };
-static const XPoint _Const0087 = { 153, 97 };
-static const XColor _Const0088 = { 0xFF, 0xFF, 0xFF, 0x99 };
-static const XColor _Const0089 = { 0x9F, 0x7A, 0xB1, 0xA1 };
-static const XColor _Const008A = { 0xD9, 0xD6, 0x3D, 0x97 };
+static const XColor _Const0063 = { 0xFF, 0x51, 0xFC, 0xFF };
+static const XColor _Const0064 = { 0x6C, 0x6C, 0x6C, 0xFF };
+static const XRect _Const0065 = {{ 0, -2 }, { 144, 108 }};
+static const XRect _Const0066 = {{ 144, 110 }, { 288, 220 }};
+static const XRect _Const0067 = {{ 0, 109 }, { 144, 220 }};
+static const XRect _Const0068 = {{ 0, -1 }, { 144, 109 }};
+static const XRect _Const0069 = {{ 0, -2 }, { 144, 28 }};
+static const XStringRes _Const006A = { _StringsDefault0, 0x0096 };
+static const XRect _Const006B = {{ 0, 110 }, { 144, 140 }};
+static const XStringRes _Const006C = { _StringsDefault0, 0x009F };
+static const XRect _Const006D = {{ 144, 110 }, { 288, 138 }};
+static const XStringRes _Const006E = { _StringsDefault0, 0x00AD };
+static const XRect _Const006F = {{ 0, 0 }, { 144, 110 }};
+static const XRect _Const0070 = {{ 0, 110 }, { 144, 221 }};
+static const XRect _Const0071 = {{ 144, 109 }, { 288, 219 }};
+static const XRect _Const0072 = {{ 153, 15 }, { 278, 97 }};
+static const XStringRes _Const0073 = { _StringsDefault0, 0x00BD };
+static const XPoint _Const0074 = { 4, 2 };
+static const XPoint _Const0075 = { 141, 2 };
+static const XPoint _Const0076 = { 141, 102 };
+static const XPoint _Const0077 = { 4, 102 };
+static const XPoint _Const0078 = { 4, 114 };
+static const XPoint _Const0079 = { 141, 114 };
+static const XPoint _Const007A = { 141, 214 };
+static const XPoint _Const007B = { 4, 214 };
+static const XPoint _Const007C = { 147, 114 };
+static const XPoint _Const007D = { 284, 114 };
+static const XPoint _Const007E = { 284, 214 };
+static const XPoint _Const007F = { 147, 214 };
+static const XPoint _Const0080 = { 153, 28 };
+static const XPoint _Const0081 = { 272, 28 };
+static const XPoint _Const0082 = { 272, 97 };
+static const XPoint _Const0083 = { 153, 97 };
+static const XColor _Const0084 = { 0xFF, 0xFF, 0xFF, 0x99 };
+static const XColor _Const0085 = { 0x9F, 0x7A, 0xB1, 0xA1 };
+static const XColor _Const0086 = { 0xD9, 0xD6, 0x3D, 0x97 };
 
 /* Initializer for the class 'Application_2::Application' */
 void Application_2Application__Init( Application_2Application _this, XObject aLink, XHandle aArg )
@@ -480,11 +501,22 @@ void Application_2Application_LightFunction( Application_2Application _this, XOb
   /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
   EW_UNUSED_ARG( sender );
 
-  CoreGroup_OnSetVisible((CoreGroup)&_this->SetAlarm, 0 );
-  CoreGroup_OnSetVisible((CoreGroup)&_this->AirScreen, 0 );
-  CoreGroup_OnSetVisible((CoreGroup)&_this->LightScreen, 1 );
-  EffectsEffect_OnSetReversed((EffectsEffect)&_this->LightEffect, 0 );
+  CoreSimpleTouchHandler_OnSetEnabled( &_this->SimpleTouchHandler, 0 );
+
+  if ( CoreGroup_OnGetVisible((CoreGroup)&_this->SetAlarm ))
+    CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->SetAlarm ), 0, 
+    0, 0, EwNullSlot, EwNullSlot, 0 );
+  else
+    if ( CoreGroup_OnGetVisible((CoreGroup)&_this->AirScreen ))
+      CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->AirScreen ), 
+      0, 0, 0, EwNullSlot, EwNullSlot, 0 );
+    else
+      CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->LightScreen ), 
+      0, 0, 0, EwNullSlot, EwNullSlot, 0 );
+
   EffectsEffect_OnSetEnabled((EffectsEffect)&_this->LightEffect, 1 );
+  CoreGroup_PresentDialog((CoreGroup)_this, ((CoreGroup)&_this->LightScreen ), 0, 
+  0, 0, 0, 0, 0, EwNullSlot, EwNullSlot, 0 );
 }
 
 /* 'C' function for method : 'Application_2::Application.Exit()' */
@@ -495,15 +527,19 @@ void Application_2Application_Exit( Application_2Application _this, XObject send
 
   if ( CoreGroup_OnGetVisible((CoreGroup)&_this->SetAlarm ))
   {
+    CoreSimpleTouchHandler_OnSetEnabled( &_this->SimpleTouchHandler, 0 );
     ViewsText_OnSetColor( &_this->hourText, _Const0009 );
     ViewsText_OnSetColor( &_this->minText, _Const0009 );
     ViewsText_OnSetColor( &_this->amPmText, _Const0009 );
     ViewsText_OnSetColor( &_this->Text1, _Const0009 );
-    CoreGroup_OnSetVisible((CoreGroup)&_this->SetAlarm, 0 );
+    CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->SetAlarm ), 0, 
+    0, 0, EwNullSlot, EwNullSlot, 0 );
   }
   else
     if ( CoreGroup_OnGetVisible((CoreGroup)&_this->LightScreen ))
     {
+      CoreSimpleTouchHandler_OnSetEnabled( &_this->SimpleTouchHandler, 0 );
+
       if ( EwCompColor( ViewsRectangle_OnGetColor( &_this->LightScreen.colorMaster ), 
           _Const0036 ))
         ViewsText_OnSetString( &_this->LightValue, EwLoadString( &_Const0037 ));
@@ -518,12 +554,14 @@ void Application_2Application_Exit( Application_2Application _this, XObject send
           else
             ViewsText_OnSetString( &_this->LightValue, EwLoadString( &_Const000B ));
 
-      CoreGroup_OnSetVisible((CoreGroup)&_this->LightScreen, 0 );
+      CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->LightScreen ), 
+      0, 0, 0, EwNullSlot, EwNullSlot, 0 );
     }
     else
     {
-      ViewsText_OnSetString( &_this->TempValue, _this->AirScreen.tempuText.String );
-      CoreGroup_OnSetVisible((CoreGroup)&_this->AirScreen, 0 );
+      CoreSimpleTouchHandler_OnSetEnabled( &_this->SimpleTouchHandler, 0 );
+      CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->AirScreen ), 
+      0, 0, 0, EwNullSlot, EwNullSlot, 0 );
     }
 }
 
@@ -534,11 +572,22 @@ void Application_2Application_AirFunction( Application_2Application _this, XObje
   /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
   EW_UNUSED_ARG( sender );
 
-  CoreGroup_OnSetVisible((CoreGroup)&_this->LightScreen, 0 );
-  CoreGroup_OnSetVisible((CoreGroup)&_this->SetAlarm, 0 );
-  CoreGroup_OnSetVisible((CoreGroup)&_this->AirScreen, 1 );
-  EffectsEffect_OnSetReversed((EffectsEffect)&_this->AirEffect, 0 );
+  CoreSimpleTouchHandler_OnSetEnabled( &_this->SimpleTouchHandler, 0 );
+
+  if ( CoreGroup_OnGetVisible((CoreGroup)&_this->SetAlarm ))
+    CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->SetAlarm ), 0, 
+    0, 0, EwNullSlot, EwNullSlot, 0 );
+  else
+    if ( CoreGroup_OnGetVisible((CoreGroup)&_this->LightScreen ))
+      CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->LightScreen ), 
+      0, 0, 0, EwNullSlot, EwNullSlot, 0 );
+    else
+      CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->AirScreen ), 
+      0, 0, 0, EwNullSlot, EwNullSlot, 0 );
+
   EffectsEffect_OnSetEnabled((EffectsEffect)&_this->AirEffect, 1 );
+  CoreGroup_PresentDialog((CoreGroup)_this, ((CoreGroup)&_this->AirScreen ), 0, 
+  0, 0, 0, 0, 0, EwNullSlot, EwNullSlot, 0 );
 }
 
 /* 'C' function for method : 'Application_2::Application.AlarmFunction()' */
@@ -548,11 +597,21 @@ void Application_2Application_AlarmFunction( Application_2Application _this, XOb
   /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
   EW_UNUSED_ARG( sender );
 
-  CoreGroup_OnSetVisible((CoreGroup)&_this->LightScreen, 0 );
-  CoreGroup_OnSetVisible((CoreGroup)&_this->AirScreen, 0 );
-  CoreGroup_OnSetVisible((CoreGroup)&_this->SetAlarm, 1 );
-  EffectsEffect_OnSetReversed((EffectsEffect)&_this->AlarmEffect, 0 );
+  if ( CoreGroup_OnGetVisible((CoreGroup)&_this->LightScreen ))
+    CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->LightScreen ), 
+    0, 0, 0, EwNullSlot, EwNullSlot, 0 );
+  else
+    if ( CoreGroup_OnGetVisible((CoreGroup)&_this->AirScreen ))
+      CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->AirScreen ), 
+      0, 0, 0, EwNullSlot, EwNullSlot, 0 );
+    else
+      CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->SetAlarm ), 
+      0, 0, 0, EwNullSlot, EwNullSlot, 0 );
+
   EffectsEffect_OnSetEnabled((EffectsEffect)&_this->AlarmEffect, 1 );
+  CoreSimpleTouchHandler_OnSetEnabled( &_this->SimpleTouchHandler, 1 );
+  CoreGroup_PresentDialog((CoreGroup)_this, ((CoreGroup)&_this->SetAlarm ), 0, 0, 
+  0, 0, 0, 0, EwNullSlot, EwNullSlot, 0 );
 }
 
 /* 'C' function for method : 'Application_2::Application.slotSetAlarm()' */
@@ -569,13 +628,12 @@ void Application_2Application_slotSetAlarm( Application_2Application _this, XObj
   ViewsText_OnSetString( &_this->amPmText, _this->SetAlarm.amPmText.String );
   ViewsText_OnSetColor( &_this->amPmText, _Const003A );
   ViewsText_OnSetColor( &_this->Text1, _Const003A );
-  CoreGroup_OnSetVisible((CoreGroup)&_this->SetAlarm, 0 );
+  CoreGroup_DismissDialog((CoreGroup)_this, ((CoreGroup)&_this->SetAlarm ), 0, 0, 
+  0, EwNullSlot, EwNullSlot, 0 );
+  CoreSimpleTouchHandler_OnSetEnabled( &_this->SimpleTouchHandler, 0 );
 }
 
 /* 'C' function for method : 'Application_2::Application.TimerTick()' */
-
-//float temp , humid;
-//unsigned int lux = 0;
 void Application_2Application_TimerTick( Application_2Application _this, XObject 
   sender )
 {
@@ -586,8 +644,6 @@ void Application_2Application_TimerTick( Application_2Application _this, XObject
   0, 1 ));
   ViewsText_OnSetString( &_this->HumdValue, EwNewStringFloat( humid,
   0, 1 ));
-  ViewsText_OnSetString( &_this->LightValue, EwNewStringInt( lux, 0,
-  10 ));
 }
 
 /* Variants derived from the class : 'Application_2::Application' */
@@ -608,6 +664,7 @@ EW_DEFINE_CLASS( Application_2Application, CoreRoot, Component, Component, Compo
   CoreRoot_ChangeViewState,
   CoreGroup_OnSetBounds,
   CoreRoot_OnSetFocus,
+  CoreRoot_OnSetOpacity,
   CoreRoot_DispatchEvent,
   CoreRoot_BroadcastEvent,
   CoreGroup_UpdateLayout,
@@ -719,6 +776,7 @@ EW_DEFINE_CLASS( Application_2background, CoreGroup, Image, Image, Image, Image,
   CoreGroup_ChangeViewState,
   CoreGroup_OnSetBounds,
   CoreGroup_OnSetFocus,
+  CoreGroup_OnSetOpacity,
   CoreGroup_DispatchEvent,
   CoreGroup_BroadcastEvent,
   Application_2background_UpdateLayout,
@@ -992,7 +1050,6 @@ void Application_2AirScreen_down( Application_2AirScreen _this, XObject sender )
   ViewsImage_OnSetVisible( &_this->down_apper, 0 );
   ViewsText_OnSetString( &_this->tempuText, EwNewStringInt( EwStringParseInt32( 
   _this->tempuText.String, 0, 10 ) - 1, 0, 10 ));
-  EwTrace( "%s", EwLoadString( &_Const0063 ));
 }
 
 /* 'C' function for method : 'Application_2::AirScreen.down1()' */
@@ -1015,7 +1072,6 @@ void Application_2AirScreen_up( Application_2AirScreen _this, XObject sender )
   ViewsImage_OnSetVisible( &_this->up_apper, 0 );
   ViewsText_OnSetString( &_this->tempuText, EwNewStringInt( EwStringParseInt32( 
   _this->tempuText.String, 0, 10 ) + 1, 0, 10 ));
-  EwTrace( "%s", EwLoadString( &_Const0064 ));
 }
 
 /* 'C' function for method : 'Application_2::AirScreen.up1()' */
@@ -1036,7 +1092,6 @@ void Application_2AirScreen_On( Application_2AirScreen _this, XObject sender )
 
   ViewsImage_OnSetVisible( &_this->power_hiden, 1 );
   ViewsImage_OnSetVisible( &_this->power_apper, 0 );
-  EwTrace( "%s", EwLoadString( &_Const0065 ));
 }
 
 /* 'C' function for method : 'Application_2::AirScreen.Off()' */
@@ -1062,27 +1117,27 @@ void Application_2AirScreen_OnSpeed( Application_2AirScreen _this, XObject sende
       ViewsText_OnGetColor( &_this->Mid ), _Const0009 )) && !EwCompColor( ViewsText_OnGetColor( 
       &_this->High ), _Const0009 ))
   {
-    ViewsText_OnSetColor( &_this->Low, _Const0066 );
+    ViewsText_OnSetColor( &_this->Low, _Const0063 );
     ViewsText_OnSetColor( &_this->Mid, _Const0009 );
     ViewsText_OnSetColor( &_this->High, _Const0009 );
   }
   else
-    if ( !EwCompColor( ViewsText_OnGetColor( &_this->Low ), _Const0066 ))
+    if ( !EwCompColor( ViewsText_OnGetColor( &_this->Low ), _Const0063 ))
     {
       ViewsText_OnSetColor( &_this->Low, _Const0009 );
-      ViewsText_OnSetColor( &_this->Mid, _Const0066 );
+      ViewsText_OnSetColor( &_this->Mid, _Const0063 );
       ViewsText_OnSetColor( &_this->High, _Const0009 );
     }
     else
-      if ( !EwCompColor( ViewsText_OnGetColor( &_this->Mid ), _Const0066 ))
+      if ( !EwCompColor( ViewsText_OnGetColor( &_this->Mid ), _Const0063 ))
       {
         ViewsText_OnSetColor( &_this->Low, _Const0009 );
         ViewsText_OnSetColor( &_this->Mid, _Const0009 );
-        ViewsText_OnSetColor( &_this->High, _Const0066 );
+        ViewsText_OnSetColor( &_this->High, _Const0063 );
       }
       else
       {
-        ViewsText_OnSetColor( &_this->Low, _Const0066 );
+        ViewsText_OnSetColor( &_this->Low, _Const0063 );
         ViewsText_OnSetColor( &_this->Mid, _Const0009 );
         ViewsText_OnSetColor( &_this->High, _Const0009 );
       }
@@ -1116,6 +1171,7 @@ EW_DEFINE_CLASS( Application_2AirScreen, CoreGroup, Rectangle, Rectangle, Rectan
   CoreGroup_ChangeViewState,
   CoreGroup_OnSetBounds,
   CoreGroup_OnSetFocus,
+  CoreGroup_OnSetOpacity,
   CoreGroup_DispatchEvent,
   CoreGroup_BroadcastEvent,
   Application_2AirScreen_UpdateLayout,
@@ -1237,51 +1293,51 @@ void Application_2screenLight__Init( Application_2screenLight _this, XObject aLi
   /* ... and initialize objects, variables, properties, etc. */
   CoreRectView__OnSetBounds( _this, _Const003B );
   CoreRectView__OnSetBounds( &_this->Rectangle, _Const003B );
-  ViewsRectangle_OnSetColor( &_this->Rectangle, _Const0067 );
-  CoreRectView__OnSetBounds( &_this->Border, _Const0068 );
+  ViewsRectangle_OnSetColor( &_this->Rectangle, _Const0064 );
+  CoreRectView__OnSetBounds( &_this->Border, _Const0065 );
   ViewsBorder_OnSetWidth( &_this->Border, 2 );
-  CoreRectView__OnSetBounds( &_this->Border1, _Const0069 );
+  CoreRectView__OnSetBounds( &_this->Border1, _Const0066 );
   ViewsBorder_OnSetWidth( &_this->Border1, 2 );
-  CoreRectView__OnSetBounds( &_this->Border2, _Const006A );
+  CoreRectView__OnSetBounds( &_this->Border2, _Const0067 );
   ViewsBorder_OnSetWidth( &_this->Border2, 2 );
-  CoreRectView__OnSetBounds( &_this->imgMaster, _Const006B );
+  CoreRectView__OnSetBounds( &_this->imgMaster, _Const0068 );
   ViewsImage_OnSetFrameNumber( &_this->imgMaster, 24 );
-  CoreRectView__OnSetBounds( &_this->master, _Const006C );
-  ViewsText_OnSetString( &_this->master, EwLoadString( &_Const006D ));
-  CoreRectView__OnSetBounds( &_this->imgNight, _Const006A );
-  CoreRectView__OnSetBounds( &_this->Text, _Const006E );
-  ViewsText_OnSetString( &_this->Text, EwLoadString( &_Const006F ));
-  CoreRectView__OnSetBounds( &_this->Text1, _Const0070 );
-  ViewsText_OnSetString( &_this->Text1, EwLoadString( &_Const0071 ));
-  CoreRectView__OnSetBounds( &_this->colorMaster, _Const0072 );
+  CoreRectView__OnSetBounds( &_this->master, _Const0069 );
+  ViewsText_OnSetString( &_this->master, EwLoadString( &_Const006A ));
+  CoreRectView__OnSetBounds( &_this->imgNight, _Const0067 );
+  CoreRectView__OnSetBounds( &_this->Text, _Const006B );
+  ViewsText_OnSetString( &_this->Text, EwLoadString( &_Const006C ));
+  CoreRectView__OnSetBounds( &_this->Text1, _Const006D );
+  ViewsText_OnSetString( &_this->Text1, EwLoadString( &_Const006E ));
+  CoreRectView__OnSetBounds( &_this->colorMaster, _Const006F );
   ViewsRectangle_OnSetColor( &_this->colorMaster, _Const0036 );
-  CoreRectView__OnSetBounds( &_this->imgRead, _Const0069 );
-  CoreRectView__OnSetBounds( &_this->colorNight, _Const0073 );
+  CoreRectView__OnSetBounds( &_this->imgRead, _Const0066 );
+  CoreRectView__OnSetBounds( &_this->colorNight, _Const0070 );
   ViewsRectangle_OnSetColor( &_this->colorNight, _Const0036 );
-  CoreRectView__OnSetBounds( &_this->colorRead, _Const0074 );
+  CoreRectView__OnSetBounds( &_this->colorRead, _Const0071 );
   ViewsRectangle_OnSetColor( &_this->colorRead, _Const0036 );
-  CoreRectView__OnSetBounds( &_this->Text2, _Const0075 );
-  ViewsText_OnSetString( &_this->Text2, EwLoadString( &_Const0076 ));
-  CoreQuadView_OnSetPoint4((CoreQuadView)&_this->touchMaster, _Const0077 );
-  CoreQuadView_OnSetPoint3((CoreQuadView)&_this->touchMaster, _Const0078 );
-  CoreQuadView_OnSetPoint2((CoreQuadView)&_this->touchMaster, _Const0079 );
-  CoreQuadView_OnSetPoint1((CoreQuadView)&_this->touchMaster, _Const007A );
+  CoreRectView__OnSetBounds( &_this->Text2, _Const0072 );
+  ViewsText_OnSetString( &_this->Text2, EwLoadString( &_Const0073 ));
+  CoreQuadView_OnSetPoint4((CoreQuadView)&_this->touchMaster, _Const0074 );
+  CoreQuadView_OnSetPoint3((CoreQuadView)&_this->touchMaster, _Const0075 );
+  CoreQuadView_OnSetPoint2((CoreQuadView)&_this->touchMaster, _Const0076 );
+  CoreQuadView_OnSetPoint1((CoreQuadView)&_this->touchMaster, _Const0077 );
   _this->touchMaster.EnableMultiTouch = 1;
-  CoreRectView__OnSetBounds( &_this->Image, _Const007B );
-  CoreQuadView_OnSetPoint4((CoreQuadView)&_this->touchNight, _Const007C );
-  CoreQuadView_OnSetPoint3((CoreQuadView)&_this->touchNight, _Const007D );
-  CoreQuadView_OnSetPoint2((CoreQuadView)&_this->touchNight, _Const007E );
-  CoreQuadView_OnSetPoint1((CoreQuadView)&_this->touchNight, _Const007F );
+  CoreRectView__OnSetBounds( &_this->Image, _Const005C );
+  CoreQuadView_OnSetPoint4((CoreQuadView)&_this->touchNight, _Const0078 );
+  CoreQuadView_OnSetPoint3((CoreQuadView)&_this->touchNight, _Const0079 );
+  CoreQuadView_OnSetPoint2((CoreQuadView)&_this->touchNight, _Const007A );
+  CoreQuadView_OnSetPoint1((CoreQuadView)&_this->touchNight, _Const007B );
   _this->touchNight.EnableMultiTouch = 1;
-  CoreQuadView_OnSetPoint4((CoreQuadView)&_this->touchRead, _Const0080 );
-  CoreQuadView_OnSetPoint3((CoreQuadView)&_this->touchRead, _Const0081 );
-  CoreQuadView_OnSetPoint2((CoreQuadView)&_this->touchRead, _Const0082 );
-  CoreQuadView_OnSetPoint1((CoreQuadView)&_this->touchRead, _Const0083 );
+  CoreQuadView_OnSetPoint4((CoreQuadView)&_this->touchRead, _Const007C );
+  CoreQuadView_OnSetPoint3((CoreQuadView)&_this->touchRead, _Const007D );
+  CoreQuadView_OnSetPoint2((CoreQuadView)&_this->touchRead, _Const007E );
+  CoreQuadView_OnSetPoint1((CoreQuadView)&_this->touchRead, _Const007F );
   _this->touchRead.EnableMultiTouch = 1;
-  CoreQuadView_OnSetPoint4((CoreQuadView)&_this->toughtLight, _Const0084 );
-  CoreQuadView_OnSetPoint3((CoreQuadView)&_this->toughtLight, _Const0085 );
-  CoreQuadView_OnSetPoint2((CoreQuadView)&_this->toughtLight, _Const0086 );
-  CoreQuadView_OnSetPoint1((CoreQuadView)&_this->toughtLight, _Const0087 );
+  CoreQuadView_OnSetPoint4((CoreQuadView)&_this->toughtLight, _Const0080 );
+  CoreQuadView_OnSetPoint3((CoreQuadView)&_this->toughtLight, _Const0081 );
+  CoreQuadView_OnSetPoint2((CoreQuadView)&_this->toughtLight, _Const0082 );
+  CoreQuadView_OnSetPoint1((CoreQuadView)&_this->toughtLight, _Const0083 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Rectangle ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Border ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Border1 ), 0 );
@@ -1428,7 +1484,7 @@ void Application_2screenLight_changeColorMaster( Application_2screenLight _this,
   /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
   EW_UNUSED_ARG( sender );
 
-  ViewsRectangle_OnSetColor( &_this->colorMaster, _Const0088 );
+  ViewsRectangle_OnSetColor( &_this->colorMaster, _Const0084 );
   ViewsRectangle_OnSetColor( &_this->colorNight, _Const0036 );
   ViewsRectangle_OnSetColor( &_this->colorRead, _Const0036 );
 }
@@ -1440,7 +1496,7 @@ void Application_2screenLight_changeColorNight( Application_2screenLight _this,
   /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
   EW_UNUSED_ARG( sender );
 
-  ViewsRectangle_OnSetColor( &_this->colorNight, _Const0089 );
+  ViewsRectangle_OnSetColor( &_this->colorNight, _Const0085 );
   ViewsRectangle_OnSetColor( &_this->colorMaster, _Const0036 );
   ViewsRectangle_OnSetColor( &_this->colorRead, _Const0036 );
 }
@@ -1452,7 +1508,7 @@ void Application_2screenLight_changeColorRead( Application_2screenLight _this, X
   /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
   EW_UNUSED_ARG( sender );
 
-  ViewsRectangle_OnSetColor( &_this->colorRead, _Const008A );
+  ViewsRectangle_OnSetColor( &_this->colorRead, _Const0086 );
   ViewsRectangle_OnSetColor( &_this->colorNight, _Const0036 );
   ViewsRectangle_OnSetColor( &_this->colorMaster, _Const0036 );
 }
@@ -1487,6 +1543,7 @@ EW_DEFINE_CLASS( Application_2screenLight, CoreGroup, Rectangle, Rectangle, Rect
   CoreGroup_ChangeViewState,
   CoreGroup_OnSetBounds,
   CoreGroup_OnSetFocus,
+  CoreGroup_OnSetOpacity,
   CoreGroup_DispatchEvent,
   CoreGroup_BroadcastEvent,
   Application_2screenLight_UpdateLayout,

@@ -1,8 +1,6 @@
-DHT11.c:14:6:delay_us	16	static
-DHT11.c:24:6:Set_Pin_Output	32	static
-DHT11.c:32:6:Set_Pin_Input	40	static
-DHT11.c:39:6:DHT_start	8	static
-DHT11.c:47:6:DHT_check	16	static
-DHT11.c:62:6:DHT_Byte	16	static
-DHT11.c:78:6:DHT_ReadByte	16	static
-DHT11.c:85:6:DHT11_init	8	static
+DHT11.c:18:6:delay_us	16	static
+DHT11.c:28:6:DHT_Set_Output	32	static
+DHT11.c:36:6:DHT_Set_Input	40	static
+DHT11.c:43:5:DH11_ReadByte	24	static
+DHT11.c:72:6:DHT11_ReadData	16	static
+DHT11.c:117:6:DHT11_init	8	static
