@@ -2,16 +2,16 @@ EmbeddedWizard/Application/GeneratedCode/Application_2.o: \
  ../EmbeddedWizard/Application/GeneratedCode/Application_2.c \
  ../EmbeddedWizard/Application/GeneratedCode/ewlocale.h \
  ../EmbeddedWizard/Application/GeneratedCode/_Application_2AirScreen.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfx.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdriver.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextgfx.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdefs.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextbmp.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextfnt.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxcore.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfx.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdriver.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextgfx.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdefs.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextbmp.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextfnt.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxcore.h \
  ../EmbeddedWizard/Application/GeneratedCode/_CoreGroup.h \
  ../EmbeddedWizard/Application/GeneratedCode/_CoreRectView.h \
  ../EmbeddedWizard/Application/GeneratedCode/_CoreView.h \
@@ -58,45 +58,7 @@ EmbeddedWizard/Application/GeneratedCode/Application_2.o: \
  ../EmbeddedWizard/Application/GeneratedCode/Templates.h \
  ../EmbeddedWizard/Application/GeneratedCode/Views.h \
  ../EmbeddedWizard/Application/GeneratedCode/_ViewsFrame.h \
- ../EmbeddedWizard/Application/GeneratedCode/WidgetSet.h ../Inc/main.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
- ../Inc/stm32f7xx_hal_conf.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h \
- ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h \
- ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h \
- ../Drivers/CMSIS/Include/core_cm7.h \
- ../Drivers/CMSIS/Include/cmsis_version.h \
- ../Drivers/CMSIS/Include/cmsis_compiler.h \
- ../Drivers/CMSIS/Include/cmsis_gcc.h \
- ../Drivers/CMSIS/Include/mpu_armv7.h \
- ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_exti.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma2d.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sdram.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_fmc.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_ltdc.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_ltdc_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_qspi.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rtc.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rtc_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
+ ../EmbeddedWizard/Application/GeneratedCode/WidgetSet.h \
  ../EmbeddedWizard/Application/GeneratedCode/_Application_2backGroundMap.h \
  ../EmbeddedWizard/Application/GeneratedCode/_Application_2exiticon.h \
  ../EmbeddedWizard/Application/GeneratedCode/_Application_2down.h \
@@ -119,25 +81,25 @@ EmbeddedWizard/Application/GeneratedCode/Application_2.o: \
 
 ../EmbeddedWizard/Application/GeneratedCode/_Application_2AirScreen.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfx.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfx.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdriver.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdriver.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextgfx.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextgfx.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdefs.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxdefs.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextbmp.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextbmp.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextfnt.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewextfnt.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxcore.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RGB565/ewgfxcore.h:
 
 ../EmbeddedWizard/Application/GeneratedCode/_CoreGroup.h:
 
@@ -232,84 +194,6 @@ C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard
 ../EmbeddedWizard/Application/GeneratedCode/_ViewsFrame.h:
 
 ../EmbeddedWizard/Application/GeneratedCode/WidgetSet.h:
-
-../Inc/main.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
-
-../Inc/stm32f7xx_hal_conf.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h:
-
-../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h:
-
-../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h:
-
-../Drivers/CMSIS/Include/core_cm7.h:
-
-../Drivers/CMSIS/Include/cmsis_version.h:
-
-../Drivers/CMSIS/Include/cmsis_compiler.h:
-
-../Drivers/CMSIS/Include/cmsis_gcc.h:
-
-../Drivers/CMSIS/Include/mpu_armv7.h:
-
-../Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_exti.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma2d.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sdram.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_fmc.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_ltdc.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_ltdc_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_qspi.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rtc.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rtc_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
 
 ../EmbeddedWizard/Application/GeneratedCode/_Application_2backGroundMap.h:
 

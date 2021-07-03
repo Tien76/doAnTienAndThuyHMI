@@ -149,9 +149,6 @@ XBool EffectsEffect_runFwdRev( EffectsEffect _this );
 /* 'C' function for method : 'Effects::Effect.runFwdFwd()' */
 XBool EffectsEffect_runFwdFwd( EffectsEffect _this );
 
-/* 'C' function for method : 'Effects::Effect.OnSetReversed()' */
-void EffectsEffect_OnSetReversed( EffectsEffect _this, XBool value );
-
 /* 'C' function for method : 'Effects::Effect.OnSetNoOfCycles()' */
 void EffectsEffect_OnSetNoOfCycles( EffectsEffect _this, XInt32 value );
 

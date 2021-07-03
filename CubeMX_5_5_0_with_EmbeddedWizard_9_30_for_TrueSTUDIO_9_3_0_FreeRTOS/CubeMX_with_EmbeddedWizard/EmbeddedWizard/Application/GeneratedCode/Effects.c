@@ -25,15 +25,41 @@
 *******************************************************************************/
 
 #include "ewlocale.h"
+#include "_CoreGroup.h"
 #include "_CoreTimer.h"
+#include "_CoreView.h"
 #include "_EffectsEffect.h"
 #include "_EffectsEffectTimerClass.h"
+#include "_EffectsFader.h"
+#include "_EffectsFaderTask.h"
 #include "_EffectsRectEffect.h"
+#include "_EffectsShowHideTransition.h"
 #include "_EffectsTimingList.h"
+#include "_EffectsTransition.h"
+#include "_EffectsVisibilityFader.h"
+#include "Core.h"
 #include "Effects.h"
+
+/* Compressed strings for the language 'Default'. */
+static const unsigned int _StringsDefault0[] =
+{
+  0x0000019E, /* ratio 53.14 % */
+  0xB8008500, 0x000A8452, 0x00F20039, 0x0DC00348, 0x40003380, 0xE003A000, 0x0083C44D,
+  0x536800CA, 0x8C9D8011, 0x345CC317, 0x19244003, 0x92250890, 0xA3916844, 0x29129144,
+  0x60039C8A, 0x1716000D, 0xB34000EF, 0x9D98C010, 0x7CD21917, 0x802273E9, 0xB001253A,
+  0x22F09A51, 0x1D0EA442, 0x11087432, 0x03140000, 0xA8D5020B, 0x8D49E932, 0xB49C0129,
+  0xC3A691A8, 0x8A254613, 0x22D4B901, 0x2D148BD5, 0x142A04C6, 0x369A526E, 0x6AC8F6AD,
+  0xA9C2A110, 0xF5CAED0F, 0x48E4362A, 0x1B0560C2, 0xE6B33B9E, 0x8B749CCD, 0x975894F2,
+  0x488A4FE8, 0xAA5D2E45, 0x86D3E250, 0x055701A0, 0xD6EF8260, 0x5E5126C3, 0x2DB1AB5C,
+  0x93438868, 0x31A8452E, 0x83A36775, 0x9C6D1A61, 0x80EFAAD7, 0x00000000
+};
 
 /* Constant values used in this 'C' module only. */
 static const XRect _Const0000 = {{ 0, 0 }, { 100, 100 }};
+static const XStringRes _Const0001 = { _StringsDefault0, 0x0002 };
+static const XStringRes _Const0002 = { _StringsDefault0, 0x0044 };
+static const XStringRes _Const0003 = { _StringsDefault0, 0x006C };
+static const XStringRes _Const0004 = { _StringsDefault0, 0x00A9 };
 
 #ifndef EW_DONT_CHECK_INDEX
   /* This function is used to check the indices when accessing an array.
@@ -741,25 +767,6 @@ XBool EffectsEffect_runFwdFwd( EffectsEffect _this )
   return done;
 }
 
-/* 'C' function for method : 'Effects::Effect.OnSetReversed()' */
-void EffectsEffect_OnSetReversed( EffectsEffect _this, XBool value )
-{
-  if ( _this->Reversed == value )
-    return;
-
-  _this->Reversed = value;
-
-  if ( !_this->Enabled || ( _this->startDirection == 0 ))
-    return;
-
-  if ( value )
-    _this->direction = -1;
-  else
-    _this->direction = 1;
-
-  _this->startTime = ( CoreTimer_GetCurrentTime( _this->timer ) * 2 ) - _this->startTime;
-}
-
 /* 'C' function for method : 'Effects::Effect.OnSetNoOfCycles()' */
 void EffectsEffect_OnSetNoOfCycles( EffectsEffect _this, XInt32 value )
 {
@@ -889,6 +896,542 @@ EW_DEFINE_CLASS( EffectsRectEffect, EffectsEffect, Outlet, Outlet, Outlet, Value
   EffectsRectEffect_Animate,
 EW_END_OF_CLASS( EffectsRectEffect )
 
+/* Initializer for the class 'Effects::Fader' */
+void EffectsFader__Init( EffectsFader _this, XObject aLink, XHandle aArg )
+{
+  /* At first initialize the super class ... */
+  XObject__Init( &_this->_Super, aLink, aArg );
+
+  /* Allow the Immediate Garbage Collection to evalute the members of this class. */
+  _this->_GCT = EW_CLASS_GCT( EffectsFader );
+
+  /* Setup the VMT pointer */
+  _this->_VMT = EW_CLASS( EffectsFader );
+
+  /* ... and initialize objects, variables, properties, etc. */
+  _this->RemoveIfHidden = 1;
+  _this->RestackTopmost = 1;
+  _this->AssignFocus = 1;
+  _this->UseCurrentState = 1;
+  _this->Visible = 1;
+}
+
+/* Re-Initializer for the class 'Effects::Fader' */
+void EffectsFader__ReInit( EffectsFader _this )
+{
+  /* At first re-initialize the super class ... */
+  XObject__ReInit( &_this->_Super );
+}
+
+/* Finalizer method for the class 'Effects::Fader' */
+void EffectsFader__Done( EffectsFader _this )
+{
+  /* Finalize this class */
+  _this->_Super._VMT = EW_CLASS( XObject );
+
+  /* Don't forget to deinitialize the super class ... */
+  XObject__Done( &_this->_Super );
+}
+
+/* The method Complete() is intended to be called by the implementation of your 
+   adapted fader as soon as the animation effects used inside the fader has finalized 
+   their work. This is essential in order to ensure, that next faders waiting for 
+   execution can start with their animations. */
+void EffectsFader_Complete( EffectsFader _this )
+{
+  if ( _this->task != 0 )
+    CoreTask__Complete( _this->task );
+}
+
+/* The method IsFinished() should return 'true' if the fader has finalized its fading 
+   animation and 'false' if the animation is not started or it is still in progress. 
+   This method should therefore be overridden in derived classes to evaluate the 
+   state of animation effects used inside the fader. */
+XBool EffectsFader_IsFinished( EffectsFader _this )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( _this );
+
+  return 1;
+}
+
+/* Wrapper function for the virtual method : 'Effects::Fader.IsFinished()' */
+XBool EffectsFader__IsFinished( void* _this )
+{
+  return ((EffectsFader)_this)->_VMT->IsFinished((EffectsFader)_this );
+}
+
+/* The method OnEnd() is invoked automatically just in the moment, when this fader 
+   and all other faders belonging to the same fading task have signaled that they 
+   are finished with their animations. The default implementation of this method 
+   simply does nothing.
+   Derived classes can override this method and implement there the code to complete 
+   the animation (e.g. to remove the group from its owner after it has been faded-out, 
+   etc.). The implementation of the overridden OnEnd() method has to use the variables 
+   @Group and @Owner to determine on which group the fader has applied the animation. 
+   Depending on the kind of the implemented animation, the OnEnd() method can also 
+   evaluate the properties @UseCurrentState, @AssignFocus and @RestackTopmost. */
+void EffectsFader_OnEnd( EffectsFader _this )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( _this );
+}
+
+/* Wrapper function for the virtual method : 'Effects::Fader.OnEnd()' */
+void EffectsFader__OnEnd( void* _this )
+{
+  ((EffectsFader)_this)->_VMT->OnEnd((EffectsFader)_this );
+}
+
+/* The method OnStart() is invoked automatically just in the moment, when the fader 
+   is triggered to begin its animation. The default implementation of this method 
+   simply calls the @Complete() method indicating so, that the fader is done with 
+   its work. Thereupon the next fader waiting for its execution can start.
+   Derived classes should override this method and implement there the code to prepare 
+   and start the desired fade-in/out animation effects. The implementation of the 
+   overridden OnStart() method has to use the variables @Group and @Owner to determine 
+   on which group the fader should apply the animation. Depending on the kind of 
+   the implemented animation, the OnStart() method can also evaluate the properties 
+   @UseCurrentState, @AssignFocus and @RestackTopmost.
+   Please note, if there is a slot method associated to the property @OnInitialize, 
+   this slot method is signaled shortly before the method OnStart() is executed 
+   given the slot method a possibility to apply more individual initialization steps 
+   on the fader just before the animation begins.
+   When the animation reaches its end (e.g. when the animation effects used inside 
+   the fader do terminate), your implementation of the fader should invoke the method 
+   @Complete() otherwise the animation is considered as still being in progress 
+   causing other pending faders to wait. */
+void EffectsFader_OnStart( EffectsFader _this )
+{
+  EffectsFader_Complete( _this );
+}
+
+/* Wrapper function for the virtual method : 'Effects::Fader.OnStart()' */
+void EffectsFader__OnStart( void* _this )
+{
+  ((EffectsFader)_this)->_VMT->OnStart((EffectsFader)_this );
+}
+
+/* Variants derived from the class : 'Effects::Fader' */
+EW_DEFINE_CLASS_VARIANTS( EffectsFader )
+EW_END_OF_CLASS_VARIANTS( EffectsFader )
+
+/* Virtual Method Table (VMT) for the class : 'Effects::Fader' */
+EW_DEFINE_CLASS( EffectsFader, XObject, task, onCancel, Visible, Visible, Visible, 
+                 Visible, "Effects::Fader" )
+  EffectsFader_IsFinished,
+  EffectsFader_OnEnd,
+  EffectsFader_OnStart,
+EW_END_OF_CLASS( EffectsFader )
+
+/* Initializer for the class 'Effects::VisibilityFader' */
+void EffectsVisibilityFader__Init( EffectsVisibilityFader _this, XObject aLink, XHandle aArg )
+{
+  /* At first initialize the super class ... */
+  EffectsFader__Init( &_this->_Super, aLink, aArg );
+
+  /* Allow the Immediate Garbage Collection to evalute the members of this class. */
+  _this->_GCT = EW_CLASS_GCT( EffectsVisibilityFader );
+
+  /* Setup the VMT pointer */
+  _this->_VMT = EW_CLASS( EffectsVisibilityFader );
+
+  /* ... and initialize objects, variables, properties, etc. */
+  _this->ShowAtStart = 1;
+}
+
+/* Re-Initializer for the class 'Effects::VisibilityFader' */
+void EffectsVisibilityFader__ReInit( EffectsVisibilityFader _this )
+{
+  /* At first re-initialize the super class ... */
+  EffectsFader__ReInit( &_this->_Super );
+}
+
+/* Finalizer method for the class 'Effects::VisibilityFader' */
+void EffectsVisibilityFader__Done( EffectsVisibilityFader _this )
+{
+  /* Finalize this class */
+  _this->_Super._VMT = EW_CLASS( EffectsFader );
+
+  /* Don't forget to deinitialize the super class ... */
+  EffectsFader__Done( &_this->_Super );
+}
+
+/* The method IsFinished() should return 'true' if the fader has finalized its fading 
+   animation and 'false' if the animation is not started or it is still in progress. 
+   This method should therefore be overridden in derived classes to evaluate the 
+   state of animation effects used inside the fader. */
+XBool EffectsVisibilityFader_IsFinished( EffectsVisibilityFader _this )
+{
+  return _this->finished;
+}
+
+/* The method OnEnd() is invoked automatically just in the moment, when this fader 
+   and all other faders belonging to the same fading task have signaled that they 
+   are finished with their animations. The default implementation of this method 
+   simply does nothing.
+   Derived classes can override this method and implement there the code to complete 
+   the animation (e.g. to remove the group from its owner after it has been faded-out, 
+   etc.). The implementation of the overridden OnEnd() method has to use the variables 
+   @Group and @Owner to determine on which group the fader has applied the animation. 
+   Depending on the kind of the implemented animation, the OnEnd() method can also 
+   evaluate the properties @UseCurrentState, @AssignFocus and @RestackTopmost. */
+void EffectsVisibilityFader_OnEnd( EffectsVisibilityFader _this )
+{
+  if (( _this->Super1.Visible && !_this->ShowAtStart ) && !_this->Super1.UseCurrentState )
+    CoreRectView__OnSetBounds( _this->Super1.Group, EwSetRectOrigin( _this->Super1.Group->Super1.Bounds, 
+    _this->Position ));
+
+  if ( _this->Super1.Visible && !_this->ShowAtStart )
+  {
+    CoreGroup__OnSetOpacity( _this->Super1.Group, 255 );
+    CoreGroup_OnSetVisible( _this->Super1.Group, 1 );
+  }
+
+  if (( !_this->Super1.Visible && !_this->HideAtStart ) && ( _this->Super1.Group->Super2.Owner 
+      != 0 ))
+    CoreGroup_OnSetVisible( _this->Super1.Group, 0 );
+
+  if (( !_this->Super1.Visible && _this->Super1.RemoveIfHidden ) && ( _this->Super1.Group->Super2.Owner 
+      != 0 ))
+    CoreGroup_Remove( _this->Super1.Group->Super2.Owner, ((CoreView)_this->Super1.Group ));
+}
+
+/* The method OnStart() is invoked automatically just in the moment, when the fader 
+   is triggered to begin its animation. The default implementation of this method 
+   simply calls the @Complete() method indicating so, that the fader is done with 
+   its work. Thereupon the next fader waiting for its execution can start.
+   Derived classes should override this method and implement there the code to prepare 
+   and start the desired fade-in/out animation effects. The implementation of the 
+   overridden OnStart() method has to use the variables @Group and @Owner to determine 
+   on which group the fader should apply the animation. Depending on the kind of 
+   the implemented animation, the OnStart() method can also evaluate the properties 
+   @UseCurrentState, @AssignFocus and @RestackTopmost.
+   Please note, if there is a slot method associated to the property @OnInitialize, 
+   this slot method is signaled shortly before the method OnStart() is executed 
+   given the slot method a possibility to apply more individual initialization steps 
+   on the fader just before the animation begins.
+   When the animation reaches its end (e.g. when the animation effects used inside 
+   the fader do terminate), your implementation of the fader should invoke the method 
+   @Complete() otherwise the animation is considered as still being in progress 
+   causing other pending faders to wait. */
+void EffectsVisibilityFader_OnStart( EffectsVisibilityFader _this )
+{
+  if (( _this->Super1.Visible || _this->Super1.AddToOwner ) && ( _this->Super1.Group->Super2.Owner 
+      == 0 ))
+  {
+    CoreGroup_OnSetVisible( _this->Super1.Group, 0 );
+    CoreGroup_Add( _this->Super1.Owner, ((CoreView)_this->Super1.Group ), 0 );
+  }
+
+  if ( _this->Super1.Visible && _this->Super1.RestackTopmost )
+    CoreGroup_RestackTop( _this->Super1.Group->Super2.Owner, ((CoreView)_this->Super1.Group ));
+
+  if ( _this->Super1.Visible && _this->Super1.AssignFocus )
+    CoreGroup__OnSetFocus( _this->Super1.Group->Super2.Owner, ((CoreView)_this->Super1.Group ));
+
+  if (( _this->Super1.Visible && _this->ShowAtStart ) && !_this->Super1.UseCurrentState )
+    CoreRectView__OnSetBounds( _this->Super1.Group, EwSetRectOrigin( _this->Super1.Group->Super1.Bounds, 
+    _this->Position ));
+
+  if ( _this->Super1.Visible && _this->ShowAtStart )
+  {
+    CoreGroup__OnSetOpacity( _this->Super1.Group, 255 );
+    CoreGroup_OnSetVisible( _this->Super1.Group, 1 );
+  }
+
+  if (( !_this->Super1.Visible && _this->HideAtStart ) && ( _this->Super1.Group->Super2.Owner 
+      != 0 ))
+    CoreGroup_OnSetVisible( _this->Super1.Group, 0 );
+
+  if ( !_this->Super1.Visible && ( _this->Super1.Owner->Focus == (CoreView)_this->Super1.Group ))
+    CoreGroup__OnSetFocus( _this->Super1.Owner, 0 );
+
+  _this->finished = 1;
+  EffectsFader_Complete((EffectsFader)_this );
+}
+
+/* Variants derived from the class : 'Effects::VisibilityFader' */
+EW_DEFINE_CLASS_VARIANTS( EffectsVisibilityFader )
+EW_END_OF_CLASS_VARIANTS( EffectsVisibilityFader )
+
+/* Virtual Method Table (VMT) for the class : 'Effects::VisibilityFader' */
+EW_DEFINE_CLASS( EffectsVisibilityFader, EffectsFader, _None, _None, _None, _None, 
+                 _None, _None, "Effects::VisibilityFader" )
+  EffectsVisibilityFader_IsFinished,
+  EffectsVisibilityFader_OnEnd,
+  EffectsVisibilityFader_OnStart,
+EW_END_OF_CLASS( EffectsVisibilityFader )
+
+/* Initializer for the class 'Effects::Transition' */
+void EffectsTransition__Init( EffectsTransition _this, XObject aLink, XHandle aArg )
+{
+  /* At first initialize the super class ... */
+  XObject__Init( &_this->_Super, aLink, aArg );
+
+  /* Allow the Immediate Garbage Collection to evalute the members of this class. */
+  _this->_GCT = EW_CLASS_GCT( EffectsTransition );
+
+  /* Setup the VMT pointer */
+  _this->_VMT = EW_CLASS( EffectsTransition );
+}
+
+/* Re-Initializer for the class 'Effects::Transition' */
+void EffectsTransition__ReInit( EffectsTransition _this )
+{
+  /* At first re-initialize the super class ... */
+  XObject__ReInit( &_this->_Super );
+}
+
+/* Finalizer method for the class 'Effects::Transition' */
+void EffectsTransition__Done( EffectsTransition _this )
+{
+  /* Finalize this class */
+  _this->_Super._VMT = EW_CLASS( XObject );
+
+  /* Don't forget to deinitialize the super class ... */
+  XObject__Done( &_this->_Super );
+}
+
+/* The method CreatePresentFader() creates an object of one of the classes descending 
+   from Effects::Fader and configures it with parameters according to the desired 
+   fade-in (present) transition. Finally the prepared fader object is returned to 
+   the caller. Typically, the created fader is used to show (to present) a GUI component 
+   when the user navigates to it. The method has to be overridden and implemented 
+   in derived classes. The actual implementation does nothing and returns 'null'. */
+EffectsFader EffectsTransition_CreatePresentFader( EffectsTransition _this )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( _this );
+
+  return 0;
+}
+
+/* Wrapper function for the virtual method : 'Effects::Transition.CreatePresentFader()' */
+EffectsFader EffectsTransition__CreatePresentFader( void* _this )
+{
+  return ((EffectsTransition)_this)->_VMT->CreatePresentFader((EffectsTransition)_this );
+}
+
+/* The method CreateDismissFader() creates an object of one of the classes descending 
+   from Effects::Fader and configures it with parameters according to the desired 
+   fade-out (dismiss) transition. Finally the prepared fader object is returned 
+   to the caller. Typically, the created fader is used to hide (to dismiss) a GUI 
+   component when the user leaves it while he/she navigates in the GUI system. The 
+   method has to be overridden and implemented in derived classes. The actual implementation 
+   does nothing and returns 'null'. */
+EffectsFader EffectsTransition_CreateDismissFader( EffectsTransition _this )
+{
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( _this );
+
+  return 0;
+}
+
+/* Wrapper function for the virtual method : 'Effects::Transition.CreateDismissFader()' */
+EffectsFader EffectsTransition__CreateDismissFader( void* _this )
+{
+  return ((EffectsTransition)_this)->_VMT->CreateDismissFader((EffectsTransition)_this );
+}
+
+/* The method CreateRestoreFader() creates an object of one of the classes descending 
+   from Effects::Fader and configures it with parameters according to the desired 
+   fade-in (restore) transition. Finally the prepared fader object is returned to 
+   the caller. Typically, the created fader is used to show (to restore the original 
+   visible state) of a GUI component, which has been obscured (overlaid) by other 
+   GUI components during the user navigates in the GUI system. The method has to 
+   be overridden and implemented in derived classes. The actual implementation of 
+   this method redirects the operation to the method @CreatePresentFader(). */
+EffectsFader EffectsTransition_CreateRestoreFader( EffectsTransition _this )
+{
+  return EffectsTransition__CreatePresentFader( _this );
+}
+
+/* Wrapper function for the virtual method : 'Effects::Transition.CreateRestoreFader()' */
+EffectsFader EffectsTransition__CreateRestoreFader( void* _this )
+{
+  return ((EffectsTransition)_this)->_VMT->CreateRestoreFader((EffectsTransition)_this );
+}
+
+/* The method CreateOverlayFader() creates an object of one of the classes descending 
+   from Effects::Fader and configures it with parameters according to the desired 
+   fade-out (overlay) transition. Finally the prepared fader object is returned 
+   to the caller. Typically, the created fader is used to temporarily hide (to overlay) 
+   a GUI component when the user navigates a deeper level in the GUI system. The 
+   method has to be overridden and implemented in derived classes. The actual implementation 
+   of this method redirects the operation to the method @CreateDismissFader(). */
+EffectsFader EffectsTransition_CreateOverlayFader( EffectsTransition _this )
+{
+  return EffectsTransition__CreateDismissFader( _this );
+}
+
+/* Wrapper function for the virtual method : 'Effects::Transition.CreateOverlayFader()' */
+EffectsFader EffectsTransition__CreateOverlayFader( void* _this )
+{
+  return ((EffectsTransition)_this)->_VMT->CreateOverlayFader((EffectsTransition)_this );
+}
+
+/* Variants derived from the class : 'Effects::Transition' */
+EW_DEFINE_CLASS_VARIANTS( EffectsTransition )
+EW_END_OF_CLASS_VARIANTS( EffectsTransition )
+
+/* Virtual Method Table (VMT) for the class : 'Effects::Transition' */
+EW_DEFINE_CLASS( EffectsTransition, XObject, _None, _None, _None, _None, _None, 
+                 _None, "Effects::Transition" )
+  EffectsTransition_CreatePresentFader,
+  EffectsTransition_CreateDismissFader,
+  EffectsTransition_CreateRestoreFader,
+  EffectsTransition_CreateOverlayFader,
+EW_END_OF_CLASS( EffectsTransition )
+
+/* Initializer for the class 'Effects::ShowHideTransition' */
+void EffectsShowHideTransition__Init( EffectsShowHideTransition _this, XObject aLink, XHandle aArg )
+{
+  /* At first initialize the super class ... */
+  EffectsTransition__Init( &_this->_Super, aLink, aArg );
+
+  /* Allow the Immediate Garbage Collection to evalute the members of this class. */
+  _this->_GCT = EW_CLASS_GCT( EffectsShowHideTransition );
+
+  /* Setup the VMT pointer */
+  _this->_VMT = EW_CLASS( EffectsShowHideTransition );
+
+  /* ... and initialize objects, variables, properties, etc. */
+  _this->Alignment = EffectsDialogAlignmentAlignHorzCenter | EffectsDialogAlignmentAlignVertCenter;
+  _this->ShowAtStart = 1;
+}
+
+/* Re-Initializer for the class 'Effects::ShowHideTransition' */
+void EffectsShowHideTransition__ReInit( EffectsShowHideTransition _this )
+{
+  /* At first re-initialize the super class ... */
+  EffectsTransition__ReInit( &_this->_Super );
+}
+
+/* Finalizer method for the class 'Effects::ShowHideTransition' */
+void EffectsShowHideTransition__Done( EffectsShowHideTransition _this )
+{
+  /* Finalize this class */
+  _this->_Super._VMT = EW_CLASS( EffectsTransition );
+
+  /* Don't forget to deinitialize the super class ... */
+  EffectsTransition__Done( &_this->_Super );
+}
+
+/* The method CreatePresentFader() creates an object of one of the classes descending 
+   from Effects::Fader and configures it with parameters according to the desired 
+   fade-in (present) transition. Finally the prepared fader object is returned to 
+   the caller. Typically, the created fader is used to show (to present) a GUI component 
+   when the user navigates to it. The method has to be overridden and implemented 
+   in derived classes. The actual implementation does nothing and returns 'null'. */
+EffectsFader EffectsShowHideTransition_CreatePresentFader( EffectsShowHideTransition _this )
+{
+  EffectsVisibilityFader fader = EwNewObject( EffectsVisibilityFader, 0 );
+
+  fader->Super1.Visible = 1;
+  fader->Super1.AssignFocus = 0;
+  fader->Super1.RestackTopmost = 1;
+  fader->Super1.UseCurrentState = 0;
+  fader->ShowAtStart = _this->ShowAtStart;
+  fader->Super1.OnInitialize = EwNewSlot( _this, EffectsShowHideTransition_onInitializeIn );
+  return ((EffectsFader)fader );
+}
+
+/* The method CreateDismissFader() creates an object of one of the classes descending 
+   from Effects::Fader and configures it with parameters according to the desired 
+   fade-out (dismiss) transition. Finally the prepared fader object is returned 
+   to the caller. Typically, the created fader is used to hide (to dismiss) a GUI 
+   component when the user leaves it while he/she navigates in the GUI system. The 
+   method has to be overridden and implemented in derived classes. The actual implementation 
+   does nothing and returns 'null'. */
+EffectsFader EffectsShowHideTransition_CreateDismissFader( EffectsShowHideTransition _this )
+{
+  EffectsVisibilityFader fader = EwNewObject( EffectsVisibilityFader, 0 );
+
+  fader->Super1.Visible = 0;
+  fader->HideAtStart = _this->HideAtStart;
+  fader->Super1.RemoveIfHidden = 1;
+  return ((EffectsFader)fader );
+}
+
+/* The method CreateRestoreFader() creates an object of one of the classes descending 
+   from Effects::Fader and configures it with parameters according to the desired 
+   fade-in (restore) transition. Finally the prepared fader object is returned to 
+   the caller. Typically, the created fader is used to show (to restore the original 
+   visible state) of a GUI component, which has been obscured (overlaid) by other 
+   GUI components during the user navigates in the GUI system. The method has to 
+   be overridden and implemented in derived classes. The actual implementation of 
+   this method redirects the operation to the method @CreatePresentFader(). */
+EffectsFader EffectsShowHideTransition_CreateRestoreFader( EffectsShowHideTransition _this )
+{
+  EffectsFader fader = EffectsTransition_CreateRestoreFader((EffectsTransition)_this );
+
+  fader->RestackTopmost = 0;
+  return fader;
+}
+
+/* The method CreateOverlayFader() creates an object of one of the classes descending 
+   from Effects::Fader and configures it with parameters according to the desired 
+   fade-out (overlay) transition. Finally the prepared fader object is returned 
+   to the caller. Typically, the created fader is used to temporarily hide (to overlay) 
+   a GUI component when the user navigates a deeper level in the GUI system. The 
+   method has to be overridden and implemented in derived classes. The actual implementation 
+   of this method redirects the operation to the method @CreateDismissFader(). */
+EffectsFader EffectsShowHideTransition_CreateOverlayFader( EffectsShowHideTransition _this )
+{
+  EffectsVisibilityFader fader = EwNewObject( EffectsVisibilityFader, 0 );
+
+  fader->Super1.Visible = 0;
+  fader->Super1.AddToOwner = 1;
+  fader->Super1.RemoveIfHidden = 0;
+  fader->HideAtStart = _this->HideAtStart;
+  return ((EffectsFader)fader );
+}
+
+/* 'C' function for method : 'Effects::ShowHideTransition.onInitializeIn()' */
+void EffectsShowHideTransition_onInitializeIn( EffectsShowHideTransition _this, 
+  XObject sender )
+{
+  EffectsVisibilityFader fader = EwCastObject( sender, EffectsVisibilityFader );
+  XSet align = _this->Alignment;
+  XRect bounds = EwGetRectORect( fader->Super1.Owner->Super1.Bounds );
+  XPoint size = EwGetRectSize( fader->Super1.Group->Super1.Bounds );
+  XPoint pos;
+
+  bounds.Point1.X = ( bounds.Point1.X + _this->MarginLeft );
+  bounds.Point2.X = ( bounds.Point2.X - _this->MarginRight );
+  bounds.Point1.Y = ( bounds.Point1.Y + _this->MarginTop );
+  bounds.Point2.Y = ( bounds.Point2.Y - _this->MarginBottom );
+  pos = bounds.Point1;
+
+  if ((( align & EffectsDialogAlignmentAlignHorzRight ) == EffectsDialogAlignmentAlignHorzRight ))
+    pos.X = ( bounds.Point2.X - size.X );
+  else
+    if ((( align & EffectsDialogAlignmentAlignHorzCenter ) == EffectsDialogAlignmentAlignHorzCenter ))
+      pos.X = (( bounds.Point1.X + ( EwGetRectW( bounds ) / 2 )) - ( size.X / 2 ));
+
+  if ((( align & EffectsDialogAlignmentAlignVertBottom ) == EffectsDialogAlignmentAlignVertBottom ))
+    pos.Y = ( bounds.Point2.Y - size.Y );
+  else
+    if ((( align & EffectsDialogAlignmentAlignVertCenter ) == EffectsDialogAlignmentAlignVertCenter ))
+      pos.Y = (( bounds.Point1.Y + ( EwGetRectH( bounds ) / 2 )) - ( size.Y / 2 ));
+
+  fader->Position = pos;
+}
+
+/* Variants derived from the class : 'Effects::ShowHideTransition' */
+EW_DEFINE_CLASS_VARIANTS( EffectsShowHideTransition )
+EW_END_OF_CLASS_VARIANTS( EffectsShowHideTransition )
+
+/* Virtual Method Table (VMT) for the class : 'Effects::ShowHideTransition' */
+EW_DEFINE_CLASS( EffectsShowHideTransition, EffectsTransition, _None, _None, _None, 
+                 _None, _None, _None, "Effects::ShowHideTransition" )
+  EffectsShowHideTransition_CreatePresentFader,
+  EffectsShowHideTransition_CreateDismissFader,
+  EffectsShowHideTransition_CreateRestoreFader,
+  EffectsShowHideTransition_CreateOverlayFader,
+EW_END_OF_CLASS( EffectsShowHideTransition )
+
 /* Initializer for the class 'Effects::EffectTimerClass' */
 void EffectsEffectTimerClass__Init( EffectsEffectTimerClass _this, XObject aLink, XHandle aArg )
 {
@@ -994,5 +1537,270 @@ EW_END_OF_CLASS_VARIANTS( EffectsTimingList )
 EW_DEFINE_CLASS( EffectsTimingList, XObject, _None, _None, _None, _None, _None, 
                  _None, "Effects::TimingList" )
 EW_END_OF_CLASS( EffectsTimingList )
+
+/* Initializer for the class 'Effects::FaderTask' */
+void EffectsFaderTask__Init( EffectsFaderTask _this, XObject aLink, XHandle aArg )
+{
+  /* At first initialize the super class ... */
+  CoreTask__Init( &_this->_Super, aLink, aArg );
+
+  /* Allow the Immediate Garbage Collection to evalute the members of this class. */
+  _this->_GCT = EW_CLASS_GCT( EffectsFaderTask );
+
+  /* Setup the VMT pointer */
+  _this->_VMT = EW_CLASS( EffectsFaderTask );
+}
+
+/* Re-Initializer for the class 'Effects::FaderTask' */
+void EffectsFaderTask__ReInit( EffectsFaderTask _this )
+{
+  /* At first re-initialize the super class ... */
+  CoreTask__ReInit( &_this->_Super );
+}
+
+/* Finalizer method for the class 'Effects::FaderTask' */
+void EffectsFaderTask__Done( EffectsFaderTask _this )
+{
+  /* Finalize this class */
+  _this->_Super._VMT = EW_CLASS( CoreTask );
+
+  /* Don't forget to deinitialize the super class ... */
+  CoreTask__Done( &_this->_Super );
+}
+
+/* The method OnComplete() is called when the task is done with its work. The default 
+   implementation of this method does nothing. You can override this method in derived 
+   task classes and implement what to do when the task is finished. For example, 
+   you can release resources used temporarily during animations.
+   To complete a task you should call explicitly the method @Complete(). The parameter 
+   aQueue refers to the queue this task belonged to. It can be used e.g. to schedule 
+   again a task to the same queue, etc. */
+void EffectsFaderTask_OnComplete( EffectsFaderTask _this, CoreTaskQueue aQueue )
+{
+  EffectsFader fader;
+
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( aQueue );
+
+  fader = _this->first;
+
+  while ( fader != 0 )
+  {
+    EffectsFader__OnEnd( fader );
+    fader->Group->Super2.viewState = fader->Group->Super2.viewState & ~CoreViewStateRunningFader;
+    fader = fader->next;
+  }
+
+  fader = _this->first;
+
+  while ( fader != 0 )
+  {
+    EwPostSignal( fader->onComplete, ((XObject)fader ));
+    fader = fader->next;
+  }
+}
+
+/* The method OnCancel() is called when the task is canceled after being started. 
+   The default implementation of this method does nothing. You can override this 
+   method in derived task classes and implement what to do when the task is prematurely 
+   aborted. For example, you can stop running timers and effects started in the 
+   preceding @OnStart() method.
+   To cancel a task you should call explicitly the method @Cancel(). The parameter 
+   aQueue refers to the queue this task belonged to. It can be used e.g. to schedule 
+   again a task to the same queue, etc. */
+void EffectsFaderTask_OnCancel( EffectsFaderTask _this, CoreTaskQueue aQueue )
+{
+  EffectsFader fader;
+
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( aQueue );
+
+  fader = _this->first;
+
+  while ( fader != 0 )
+  {
+    EwPostSignal( fader->onCancel, ((XObject)fader ));
+    fader = fader->next;
+  }
+
+  _this->first = 0;
+  _this->last = 0;
+}
+
+/* The method OnStart() is called at the begin of the execution of this task. The 
+   default implementation of the method simply cancels the task causing the next 
+   available task in the task queue to be started. You should override this method 
+   in derived task classes to implement what the task should do.
+   There are three typical application cases how to implement the OnStart() method:
+   - In its simplest case the entire task algorithm is implemented in the OnStart() 
+   method. In this case the method @Complete() should be called before leaving OnStart().
+   - If the task does take long time for execution by using timers or effects, you 
+   should put in OnStart() the code necessary to start the timers/effects. Don't 
+   forget to call @Complete() when all timers/effects are done.
+   - If the task is divided in many small execution steps, the OnStart() method 
+   should call @Continue() to request the @OnContinue() method to be executed after 
+   a short delay (usually after the next screen update). In @OnContinue() you can 
+   perform the next step of the task. If necessary, @OnContinue() can also request 
+   to be called again after a short delay. At the end of the task, after the last 
+   step is terminated, don't forget to call @Complete().
+   The parameter aQueue refers to the queue this task belongs to. It can be used 
+   to schedule more task to execute later. */
+void EffectsFaderTask_OnStart( EffectsFaderTask _this, CoreTaskQueue aQueue )
+{
+  EffectsFader fader;
+
+  /* Dummy expressions to avoid the 'C' warning 'unused argument'. */
+  EW_UNUSED_ARG( aQueue );
+
+  if ( _this->first == 0 )
+    CoreTask__Complete( _this );
+
+  fader = _this->first;
+
+  while ( fader != 0 )
+  {
+    fader->Group->Super2.viewState = ( fader->Group->Super2.viewState | CoreViewStateRunningFader ) 
+    & ~CoreViewStatePendingFader;
+    fader->Group->pendingFader = 0;
+    fader = fader->next;
+  }
+
+  fader = _this->first;
+
+  while ( fader != 0 )
+  {
+    EwSignal( fader->OnInitialize, ((XObject)fader ));
+    EffectsFader__OnStart( fader );
+    fader = fader->next;
+  }
+}
+
+/* The method Complete() informs the task queue about the completion of this task. 
+   Thereupon the next available task in the queue can be executed. This method is 
+   usually called in context of the @OnStart() or @OnContinue() method when the 
+   task has finalized its work. Calling the method for a not current task has no 
+   effect. */
+void EffectsFaderTask_Complete( EffectsFaderTask _this )
+{
+  EffectsFader fader = _this->first;
+
+  while (( fader != 0 ) && EffectsFader__IsFinished( fader ))
+    fader = fader->next;
+
+  if ( fader == 0 )
+    CoreTask_Complete((CoreTask)_this );
+}
+
+/* 'C' function for method : 'Effects::FaderTask.RemoveFader()' */
+void EffectsFaderTask_RemoveFader( EffectsFaderTask _this, EffectsFader aFader )
+{
+  if ( aFader == 0 )
+    return;
+
+  if ( CoreTask_IsCurrent((CoreTask)_this ))
+  {
+    EwThrow( EwLoadString( &_Const0001 ));
+    return;
+  }
+
+  if ( aFader->task != _this )
+  {
+    EwThrow( EwLoadString( &_Const0002 ));
+    return;
+  }
+
+  if ( aFader->next != 0 )
+    aFader->next->prev = aFader->prev;
+  else
+    _this->last = aFader->prev;
+
+  if ( aFader->prev != 0 )
+    aFader->prev->next = aFader->next;
+  else
+    _this->first = aFader->next;
+
+  aFader->task = 0;
+  aFader->next = 0;
+  aFader->prev = 0;
+
+  if ( aFader->Group != 0 )
+    aFader->Group->pendingFader = 0;
+
+  EwPostSignal( aFader->onCancel, ((XObject)aFader ));
+
+  if ( _this->first == 0 )
+    CoreTask_Cancel((CoreTask)_this );
+}
+
+/* 'C' function for method : 'Effects::FaderTask.AddFader()' */
+void EffectsFaderTask_AddFader( EffectsFaderTask _this, EffectsFader aFader )
+{
+  if ( aFader == 0 )
+    return;
+
+  if ( CoreTask_IsCurrent((CoreTask)_this ))
+  {
+    EwThrow( EwLoadString( &_Const0003 ));
+    return;
+  }
+
+  if ( aFader->task != 0 )
+  {
+    EwThrow( EwLoadString( &_Const0004 ));
+    return;
+  }
+
+  aFader->prev = _this->last;
+  aFader->next = 0;
+
+  if ( _this->last != 0 )
+    _this->last->next = aFader;
+  else
+    _this->first = aFader;
+
+  _this->last = aFader;
+  aFader->task = _this;
+}
+
+/* Variants derived from the class : 'Effects::FaderTask' */
+EW_DEFINE_CLASS_VARIANTS( EffectsFaderTask )
+EW_END_OF_CLASS_VARIANTS( EffectsFaderTask )
+
+/* Virtual Method Table (VMT) for the class : 'Effects::FaderTask' */
+EW_DEFINE_CLASS( EffectsFaderTask, CoreTask, last, _None, _None, _None, _None, _None, 
+                 "Effects::FaderTask" )
+  EffectsFaderTask_OnComplete,
+  EffectsFaderTask_OnCancel,
+  EffectsFaderTask_OnStart,
+  EffectsFaderTask_Complete,
+EW_END_OF_CLASS( EffectsFaderTask )
+
+/* The global autoobject Effects::ShowHideCentered represents the most primitive 
+   fade-in/out operation affecting the pure visibility of a given GUI component. 
+   When using the transition for the fade-in operation, the GUI component is automatically 
+   arranged to appear centered within the area of its owner component. This transition 
+   is thus ideal wherever one GUI component should instantly appear or disappear 
+   in context of another component without any animation effects.
+   Please note, with this transition the fade-in operation is performed just at 
+   the beginning of all other transitions running simultaneously, in other words, 
+   the GUI component appears during the start phase of the transition. In turn, 
+   to fade-out the component, the operation is executed during the end phase of 
+   the transition. 
+   This object exists for your convenience permitting you to simply refer the transition 
+   wherever it is required in your implementation without having to take care of 
+   the creation and configuration of the object. If you require the transition to 
+   run with other configuration (e.g. to show the GUI component at the end instead 
+   of the start phase), create a copy of this object and adapt its properties accordingly. */
+EW_DEFINE_AUTOOBJECT( EffectsShowHideCentered, EffectsShowHideTransition )
+
+/* Initializer for the auto object 'Effects::ShowHideCentered' */
+void EffectsShowHideCentered__Init( EffectsShowHideTransition _this )
+{
+  EW_UNUSED_ARG( _this );
+}
+
+/* Table with links to derived variants of the auto object : 'Effects::ShowHideCentered' */
+EW_DEFINE_AUTOOBJECT_VARIANTS( EffectsShowHideCentered )
+EW_END_OF_AUTOOBJECT_VARIANTS( EffectsShowHideCentered )
 
 /* Embedded Wizard */

@@ -67,7 +67,7 @@ main-build: CubeMX_with_EmbeddedWizard.elf secondary-outputs
 
 # Tool invocations
 CubeMX_with_EmbeddedWizard.elf: $(OBJS) $(USER_OBJS) ../STM32F746NG_FLASH.ld
-	arm-none-eabi-gcc -o "CubeMX_with_EmbeddedWizard.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"../STM32F746NG_FLASH.ld" --specs=nosys.specs -Wl,-Map="CubeMX_with_EmbeddedWizard.map" -Wl,--gc-sections -static -L"C:\Embedded wizard\doAnTienAndThuy\HMI_4\HMI_4\CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS\CubeMX_with_EmbeddedWizard\EmbeddedWizard\PlatformPackage\RGB565" -L"C:\Embedded wizard\doAnTienAndThuy\HMI_4\HMI_4\CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS\CubeMX_with_EmbeddedWizard\EmbeddedWizard\PlatformPackage\RTE" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "CubeMX_with_EmbeddedWizard.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"../STM32F746NG_FLASH.ld" --specs=nosys.specs -Wl,-Map="CubeMX_with_EmbeddedWizard.map" -Wl,--gc-sections -static -L"D:\CODE\Embedded wizard\doAnTienAndThuy\HMI_4\HMI_4\CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS\CubeMX_with_EmbeddedWizard\EmbeddedWizard\PlatformPackage\RGB565" -L"D:\CODE\Embedded wizard\doAnTienAndThuy\HMI_4\HMI_4\CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS\CubeMX_with_EmbeddedWizard\EmbeddedWizard\PlatformPackage\RTE" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

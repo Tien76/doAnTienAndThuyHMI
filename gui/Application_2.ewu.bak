@@ -25,11 +25,16 @@ class Application : Core::Root
   $rect <520,180,720,220>
   slot LightFunction
   {
-    SetAlarm.Visible = false;
-    AirScreen.Visible = false;
-    LightScreen.Visible = true;
-    LightEffect.Reversed = false;
+    //SetAlarm.Visible = false;
+    //AirScreen.Visible = false;
+    //LightScreen.Visible = true;
+    //LightEffect.Reversed = false;
+     SimpleTouchHandler.Enabled = false;
+    if(SetAlarm.Visible) DismissDialog( SetAlarm, null, null, null, null, null, false );
+    else if(AirScreen.Visible)  DismissDialog( AirScreen, null, null, null, null, null, false );
+    else DismissDialog( LightScreen, null, null, null, null, null, false );
     LightEffect.Enabled  = true;
+    PresentDialog( LightScreen, null, null, null, null, null, null, null, null, false );
 
 
   }
@@ -38,13 +43,15 @@ class Application : Core::Root
   slot Exit
   {
     if(SetAlarm.Visible){
+      SimpleTouchHandler.Enabled = false;
       hourText.Color = #FFFFFFFF;
       minText.Color = #FFFFFFFF;
       amPmText.Color = #FFFFFFFF;
       Text1.Color =  #FFFFFFFF;
-      SetAlarm.Visible = false;
+      DismissDialog( SetAlarm, null, null, null, null, null, false );
     }
     else if(LightScreen.Visible){
+      SimpleTouchHandler.Enabled = false;
       if(LightScreen.colorMaster.Color!=#3300008E)
         LightValue.String = "100";
       else if(LightScreen.colorRead.Color!=#3300008E)
@@ -53,11 +60,12 @@ class Application : Core::Root
         LightValue.String = "20";
       else
         LightValue.String = "0";
-      LightScreen.Visible = false;
+      DismissDialog( LightScreen, null, null, null, null, null, false );
     }
     else{
-      TempValue.String = AirScreen.tempuText.String;
-      AirScreen.Visible = false;
+      SimpleTouchHandler.Enabled = false;
+      //TempValue.String = AirScreen.tempuText.String;
+      DismissDialog( AirScreen, null, null, null, null, null, false );
     }
   }
 
@@ -169,11 +177,17 @@ class Application : Core::Root
   $rect <520,220,720,260>
   slot AirFunction
   {
-    LightScreen.Visible = false;
-    SetAlarm.Visible = false;
-    AirScreen.Visible = true;
-    AirEffect.Reversed = false;
+    //PresentDialog( AirScreen, null, null, null, false );
+    //LightScreen.Visible = false;
+    //SetAlarm.Visible = false;
+    //AirScreen.Visible = true;
+    //AirEffect.Reversed = false;
+     SimpleTouchHandler.Enabled = false;
+    if(SetAlarm.Visible) DismissDialog( SetAlarm, null, null, null, null, null, false );
+    else if(LightScreen.Visible) DismissDialog( LightScreen, null, null, null, null, null, false );
+    else  DismissDialog( AirScreen, null, null, null, null, null, false );
     AirEffect.Enabled  = true;
+    PresentDialog( AirScreen,null,null,null,null,null,null,null,null,false );
   }
 
   $rect <20,20,160,60>
@@ -222,11 +236,17 @@ class Application : Core::Root
   $rect <520,260,720,300>
   slot AlarmFunction
   {
-    LightScreen.Visible = false;
-    AirScreen.Visible = false;
-    SetAlarm.Visible = true;
-    AlarmEffect.Reversed = false;
+    //LightScreen.Visible = false;
+    //AirScreen.Visible = false;
+    //SetAlarm.Visible = true;
+    //AlarmEffect.Reversed = false;
+    if(LightScreen.Visible) DismissDialog( LightScreen, null, null, null, null, null, false );
+    else if(AirScreen.Visible) DismissDialog( AirScreen, null, null, null, null, null, false );
+    else   DismissDialog( SetAlarm, null, null, null, null, null, false );
     AlarmEffect.Enabled  = true;
+    SimpleTouchHandler.Enabled = true;
+    PresentDialog( SetAlarm, null, null, null, null, null, null, null, null, false );
+    //SimpleTouchHandler.Enabled = true;
   }
 
   $rect <20,20,160,60>
@@ -239,10 +259,10 @@ class Application : Core::Root
   $rect <20,20,160,60>
   object Core::SimpleTouchHandler TouchExit
   {
-    preset Point4 = <437,6>;
-    preset Point3 = <480,6>;
-    preset Point2 = <480,50>;
-    preset Point1 = <437,50>;
+    preset Point4 = <432,11>;
+    preset Point3 = <460,11>;
+    preset Point2 = <460,36>;
+    preset Point1 = <432,36>;
     preset OnPress = Exit;
   }
 
@@ -288,10 +308,10 @@ class Application : Core::Root
   $rect <20,20,160,60>
   object Core::SimpleTouchHandler SimpleTouchHandler
   {
-    preset Point4 = <428,185>;
-    preset Point3 = <469,185>;
-    preset Point2 = <469,224>;
-    preset Point1 = <428,224>;
+    preset Point4 = <421,188>;
+    preset Point3 = <464,188>;
+    preset Point2 = <464,211>;
+    preset Point1 = <421,212>;
     preset OnPress = slotSetAlarm;
   }
 
@@ -305,7 +325,8 @@ class Application : Core::Root
     amPmText.String = SetAlarm.amPmText.String;
     amPmText.Color= #FA0DFFFF;
     Text1.Color = #FA0DFFFF;
-    SetAlarm.Visible = false;
+    DismissDialog( SetAlarm, null, null, null, null, null, false );
+    SimpleTouchHandler.Enabled = false;
   }
 
   $rect <20,20,160,60>
@@ -341,6 +362,7 @@ class Application : Core::Root
   object Core::Timer Timer
   {
     preset OnTrigger = TimerTick;
+    preset Period = 5000;
     preset Enabled = true;
   }
 
@@ -349,7 +371,7 @@ class Application : Core::Root
   {
     TempValue.String = string(valueTemp, 0, 1);
     HumdValue.String = string(valueHumid,0,1);
-    LightValue.String = valueLux;
+
   }
 
   $rect <720,100,920,140>
@@ -357,9 +379,6 @@ class Application : Core::Root
 
   $rect <720,140,920,180>
   var float valueHumid;
-
-  $rect <720,180,920,220>
-  var int16 valueLux;
 }
 
 $rect <270,20,470,60>
@@ -742,7 +761,7 @@ class AirScreen : Core::Group
     down_hiden.Visible = true;
     down_apper.Visible = false;
     tempuText.String = tempuText.String.parse_int32(0) -1;
-    trace "da do down";
+
 
   }
 
@@ -790,7 +809,7 @@ class AirScreen : Core::Group
     up_hiden.Visible = true;
     up_apper.Visible = false;
     tempuText.String = tempuText.String.parse_int32(0) +1;
-    trace "da do up";
+
 
 
 
@@ -836,7 +855,6 @@ class AirScreen : Core::Group
   {
     power_hiden.Visible = true;
     power_apper.Visible = false;
-    trace "da do power";
 
 
 
@@ -916,7 +934,7 @@ class AirScreen : Core::Group
   $rect <20,20,160,60>
   object Views::Image exit
   {
-    preset Bounds = <253,-7,291,43>;
+    preset Bounds = <247,-10,297,40>;
     preset Bitmap = Application_2::exiticon;
   }
 

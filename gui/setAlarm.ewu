@@ -337,16 +337,6 @@ class SetAlarm : Core::Group
     preset Appearance = setAlarm::buttonSetAlarm;
   }
 
-  $rect <20,20,160,60>
-  object WidgetSet::PushButton pushSave
-  {
-    preset Bounds = <239,186,288,220>;
-    preset OnRelease = null;
-    preset OnPress = SlotUpHour;
-    preset Label = "Caption";
-    preset Appearance = setAlarm::buttonSetAlarm;
-  }
-
   $rect <300,40,500,80>
   slot SlotDoHour
   {
@@ -435,22 +425,6 @@ class SetAlarm : Core::Group
   {
     preset Bounds = <0,34,61,94>;
     preset Bitmap = Application_2::iconAlarm;
-  }
-
-  $rect <20,20,160,60>
-  object WidgetSet::PushButton pushButtonSave
-  {
-    preset Bounds = <239,186,288,220>;
-    preset Label = "Caption";
-    preset Appearance = setAlarm::buttonSetAlarm;
-  }
-
-  $rect <20,20,160,60>
-  object WidgetSet::PushButton pushButtonExit
-  {
-    preset Bounds = <256,-2,288,36>;
-    preset Label = "Caption";
-    preset Appearance = setAlarm::buttonSetAlarm;
   }
 }
 

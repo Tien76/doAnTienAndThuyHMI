@@ -79,6 +79,12 @@
 #define _CoreView_
 #endif
 
+/* Forward declaration of the class Effects::Fader */
+#ifndef _EffectsFader_
+  EW_DECLARE_CLASS( EffectsFader )
+#define _EffectsFader_
+#endif
+
 /* Forward declaration of the class Graphics::Canvas */
 #ifndef _GraphicsCanvas_
   EW_DECLARE_CLASS( GraphicsCanvas )
@@ -114,13 +120,10 @@ EW_DEFINE_FIELDS( setAlarmSetAlarm, CoreGroup )
   EW_OBJECT  ( pushDoHour,      WidgetSetPushButton )
   EW_OBJECT  ( pushDoMin,       WidgetSetPushButton )
   EW_OBJECT  ( pushDoAmPm,      WidgetSetPushButton )
-  EW_OBJECT  ( pushSave,        WidgetSetPushButton )
   EW_OBJECT  ( Rectangle2,      ViewsRectangle )
   EW_OBJECT  ( Image,           ViewsImage )
   EW_OBJECT  ( Text,            ViewsText )
   EW_OBJECT  ( Image1,          ViewsImage )
-  EW_OBJECT  ( pushButtonSave,  WidgetSetPushButton )
-  EW_OBJECT  ( pushButtonExit,  WidgetSetPushButton )
 EW_END_OF_FIELDS( setAlarmSetAlarm )
 
 /* Virtual Method Table (VMT) for the class : 'setAlarm::SetAlarm' */
@@ -141,6 +144,7 @@ EW_DEFINE_METHODS( setAlarmSetAlarm, CoreGroup )
   EW_METHOD( ChangeViewState,   void )( CoreGroup _this, XSet aSetState, XSet aClearState )
   EW_METHOD( OnSetBounds,       void )( CoreGroup _this, XRect value )
   EW_METHOD( OnSetFocus,        void )( CoreGroup _this, CoreView value )
+  EW_METHOD( OnSetOpacity,      void )( CoreGroup _this, XInt32 value )
   EW_METHOD( DispatchEvent,     XObject )( CoreGroup _this, CoreEvent aEvent )
   EW_METHOD( BroadcastEvent,    XObject )( CoreGroup _this, CoreEvent aEvent, XSet 
     aFilter )

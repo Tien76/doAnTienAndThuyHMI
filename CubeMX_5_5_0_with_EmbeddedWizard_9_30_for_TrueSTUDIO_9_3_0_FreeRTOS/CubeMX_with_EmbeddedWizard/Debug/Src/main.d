@@ -54,16 +54,16 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../Inc/DHT11.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewmain.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/TargetSpecific/ew_bsp_console.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h \
- C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_qspi.h \
- c:\embedded\ wizard\doantienandthuy\hmi_4\hmi_4\cubemx_5_5_0_with_embeddedwizard_9_30_for_truestudio_9_3_0_freertos\cubemx_with_embeddedwizard\embeddedwizard\thirdparty\stm32cube_fw_f7\drivers\bsp\components\n25q128a\n25q128a.h
+ ../Inc/DHT11.h ../Inc/main.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewmain.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/TargetSpecific/ew_bsp_console.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h \
+ D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_qspi.h \
+ d:\code\embedded\ wizard\doantienandthuy\hmi_4\hmi_4\cubemx_5_5_0_with_embeddedwizard_9_30_for_truestudio_9_3_0_freertos\cubemx_with_embeddedwizard\embeddedwizard\thirdparty\stm32cube_fw_f7\drivers\bsp\components\n25q128a\n25q128a.h
 
 ../Inc/main.h:
 
@@ -179,20 +179,22 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
 
 ../Inc/DHT11.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewmain.h:
+../Inc/main.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewmain.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/PlatformPackage/RTE/ewrte.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewconfig.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/TargetSpecific/ew_bsp_console.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/Application/Source/ewdef.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/TargetSpecific/ew_bsp_console.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h:
 
-C:/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_qspi.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h:
 
-c:\embedded\ wizard\doantienandthuy\hmi_4\hmi_4\cubemx_5_5_0_with_embeddedwizard_9_30_for_truestudio_9_3_0_freertos\cubemx_with_embeddedwizard\embeddedwizard\thirdparty\stm32cube_fw_f7\drivers\bsp\components\n25q128a\n25q128a.h:
+D:/CODE/Embedded\ wizard/doAnTienAndThuy/HMI_4/HMI_4/CubeMX_5_5_0_with_EmbeddedWizard_9_30_for_TrueSTUDIO_9_3_0_FreeRTOS/CubeMX_with_EmbeddedWizard/EmbeddedWizard/ThirdParty/STM32Cube_FW_F7/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_qspi.h:
+
+d:\code\embedded\ wizard\doantienandthuy\hmi_4\hmi_4\cubemx_5_5_0_with_embeddedwizard_9_30_for_truestudio_9_3_0_freertos\cubemx_with_embeddedwizard\embeddedwizard\thirdparty\stm32cube_fw_f7\drivers\bsp\components\n25q128a\n25q128a.h:

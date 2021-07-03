@@ -81,13 +81,42 @@
    job quickly, use timers or effects to delay execution and when the job is done 
    inform the queue about its completion. */
 EW_DEFINE_FIELDS( CoreTaskQueue, XObject )
+  EW_VARIABLE( toContinue,      CoreTask )
   EW_VARIABLE( current,         CoreTask )
+  EW_VARIABLE( last,            CoreTask )
   EW_VARIABLE( first,           CoreTask )
+  EW_PROPERTY( OnDone,          XSlot )
+  EW_VARIABLE( isInOnStart,     XBool )
 EW_END_OF_FIELDS( CoreTaskQueue )
 
 /* Virtual Method Table (VMT) for the class : 'Core::TaskQueue' */
 EW_DEFINE_METHODS( CoreTaskQueue, XObject )
 EW_END_OF_METHODS( CoreTaskQueue )
+
+/* 'C' function for method : 'Core::TaskQueue.completeTask()' */
+void CoreTaskQueue_completeTask( CoreTaskQueue _this );
+
+/* 'C' function for method : 'Core::TaskQueue.onDispatchNext()' */
+void CoreTaskQueue_onDispatchNext( CoreTaskQueue _this, XObject sender );
+
+/* 'C' function for method : 'Core::TaskQueue.onPreDispatchNext()' */
+void CoreTaskQueue_onPreDispatchNext( CoreTaskQueue _this, XObject sender );
+
+/* The method CancelTask() allows the application to remove a previously registered 
+   task from the task queue. The affected task is determined by the parameter aTask.
+   If the affected task is currently executed, the task is notified to immediately 
+   finalize its work. Afterwards the queue starts the next available task. The method 
+   will throw an error if you try to cancel a task not belonging to this queue. */
+void CoreTaskQueue_CancelTask( CoreTaskQueue _this, CoreTask aTask );
+
+/* The method ScheduleTask() registers the task passed in the parameter aTask for 
+   later execution.
+   The tasks are executed in the order in which they have been previously scheduled. 
+   If the parameter aWithPriority is false, the new task will be arranged at the 
+   end of the list with waiting tasks. If the parameter is true, the task is enqueued 
+   in front of all waiting tasks.
+   The method will throw an error if you try to schedule the same task twice. */
+void CoreTaskQueue_ScheduleTask( CoreTaskQueue _this, CoreTask aTask, XBool aWithPriority );
 
 #ifdef __cplusplus
   }

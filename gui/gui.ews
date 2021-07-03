@@ -4,9 +4,9 @@ attr active = Application_2::Application;
 attr callStackMonitor_Show = false;
 attr codeColSelect = false;
 attr codeFirstPos = <0,0>;
-attr codeInspector = Application_2::Application.TimerTick;
-attr codeSelEnd = <29,2>;
-attr codeSelStart = <29,2>;
+attr codeInspector = Application_2::Application.AlarmFunction;
+attr codeSelEnd = <34,8>;
+attr codeSelStart = <34,8>;
 attr connectInspectors = false;
 attr debug_TrackUpdates = false;
 attr extractDoc_ClassOverview = true;
@@ -48,7 +48,7 @@ view unit setAlarm
 view unit Application_2
 {
   attr enableWireMode = false;
-  attr scrollTo = <113,-71>;
+  attr scrollTo = <416,-135>;
   attr zoom = 1.0;
 }
 
@@ -56,22 +56,24 @@ view class Application_2::Application
 {
   attr codeColSelect = false;
   attr codeFirstPos = <0,0>;
-  attr codeInspector = TimerTick;
-  attr codeSelEnd = <29,2>;
-  attr codeSelStart = <29,2>;
+  attr codeInspector = AlarmFunction;
+  attr codeSelEnd = <34,8>;
+  attr codeSelStart = <34,8>;
   attr enableWireMode = false;
   attr scrollTo = <-7,-3>;
   attr zoom = 1.0;
 }
 
+view class setAlarm::SetAlarm
+{
+  attr enableWireMode = false;
+  attr scrollTo = <-7,-7>;
+  attr zoom = 1.0;
+}
+
 view class Application_2::AirScreen
 {
-  attr codeColSelect = false;
-  attr codeFirstPos = <0,0>;
-  attr codeInspector = up;
-  attr codeSelEnd = <50,2>;
-  attr codeSelStart = <36,2>;
   attr enableWireMode = false;
-  attr scrollTo = <-7,-28>;
-  attr zoom = 1.5;
+  attr scrollTo = <-7,-7>;
+  attr zoom = 1.0;
 }

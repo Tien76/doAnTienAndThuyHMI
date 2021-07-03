@@ -86,12 +86,11 @@ static const XRect _Const0020 = {{ 256, 0 }, { 288, 36 }};
 static const XRect _Const0021 = {{ 55, 2 }, { 228, 32 }};
 static const XStringRes _Const0022 = { _StringsDefault0, 0x001F };
 static const XRect _Const0023 = {{ 0, 34 }, { 61, 94 }};
-static const XRect _Const0024 = {{ 256, -2 }, { 288, 36 }};
-static const XStringRes _Const0025 = { _StringsDefault0, 0x002F };
-static const XStringRes _Const0026 = { _StringsDefault0, 0x0033 };
-static const XStringRes _Const0027 = { _StringsDefault0, 0x0038 };
-static const XStringRes _Const0028 = { _StringsDefault0, 0x003C };
-static const XStringRes _Const0029 = { _StringsDefault0, 0x0041 };
+static const XStringRes _Const0024 = { _StringsDefault0, 0x002F };
+static const XStringRes _Const0025 = { _StringsDefault0, 0x0033 };
+static const XStringRes _Const0026 = { _StringsDefault0, 0x0038 };
+static const XStringRes _Const0027 = { _StringsDefault0, 0x003C };
+static const XStringRes _Const0028 = { _StringsDefault0, 0x0041 };
 
 /* Initializer for the class 'setAlarm::SetAlarm' */
 void setAlarmSetAlarm__Init( setAlarmSetAlarm _this, XObject aLink, XHandle aArg )
@@ -123,13 +122,10 @@ void setAlarmSetAlarm__Init( setAlarmSetAlarm _this, XObject aLink, XHandle aArg
   WidgetSetPushButton__Init( &_this->pushDoHour, &_this->_XObject, 0 );
   WidgetSetPushButton__Init( &_this->pushDoMin, &_this->_XObject, 0 );
   WidgetSetPushButton__Init( &_this->pushDoAmPm, &_this->_XObject, 0 );
-  WidgetSetPushButton__Init( &_this->pushSave, &_this->_XObject, 0 );
   ViewsRectangle__Init( &_this->Rectangle2, &_this->_XObject, 0 );
   ViewsImage__Init( &_this->Image, &_this->_XObject, 0 );
   ViewsText__Init( &_this->Text, &_this->_XObject, 0 );
   ViewsImage__Init( &_this->Image1, &_this->_XObject, 0 );
-  WidgetSetPushButton__Init( &_this->pushButtonSave, &_this->_XObject, 0 );
-  WidgetSetPushButton__Init( &_this->pushButtonExit, &_this->_XObject, 0 );
 
   /* Setup the VMT pointer */
   _this->_VMT = EW_CLASS( setAlarmSetAlarm );
@@ -176,18 +172,12 @@ void setAlarmSetAlarm__Init( setAlarmSetAlarm _this, XObject aLink, XHandle aArg
   WidgetSetPushButton_OnSetLabel( &_this->pushDoMin, EwLoadString( &_Const0018 ));
   CoreRectView__OnSetBounds( &_this->pushDoAmPm, _Const001D );
   WidgetSetPushButton_OnSetLabel( &_this->pushDoAmPm, EwLoadString( &_Const0018 ));
-  CoreRectView__OnSetBounds( &_this->pushSave, _Const0016 );
-  WidgetSetPushButton_OnSetLabel( &_this->pushSave, EwLoadString( &_Const0018 ));
   CoreRectView__OnSetBounds( &_this->Rectangle2, _Const001E );
   ViewsRectangle_OnSetColor( &_this->Rectangle2, _Const001F );
   CoreRectView__OnSetBounds( &_this->Image, _Const0020 );
   CoreRectView__OnSetBounds( &_this->Text, _Const0021 );
   ViewsText_OnSetString( &_this->Text, EwLoadString( &_Const0022 ));
   CoreRectView__OnSetBounds( &_this->Image1, _Const0023 );
-  CoreRectView__OnSetBounds( &_this->pushButtonSave, _Const0016 );
-  WidgetSetPushButton_OnSetLabel( &_this->pushButtonSave, EwLoadString( &_Const0018 ));
-  CoreRectView__OnSetBounds( &_this->pushButtonExit, _Const0024 );
-  WidgetSetPushButton_OnSetLabel( &_this->pushButtonExit, EwLoadString( &_Const0018 ));
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Rectangle ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Border ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->upHour ), 0 );
@@ -208,13 +198,10 @@ void setAlarmSetAlarm__Init( setAlarmSetAlarm _this, XObject aLink, XHandle aArg
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->pushDoHour ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->pushDoMin ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->pushDoAmPm ), 0 );
-  CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->pushSave ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Rectangle2 ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Image ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Text ), 0 );
   CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->Image1 ), 0 );
-  CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->pushButtonSave ), 0 );
-  CoreGroup_Add((CoreGroup)_this, ((CoreView)&_this->pushButtonExit ), 0 );
   ViewsImage_OnSetBitmap( &_this->upHour, EwLoadResource( &ResourcesNavigationIconsMedium, 
   ResourcesBitmap ));
   ViewsImage_OnSetBitmap( &_this->upMin, EwLoadResource( &ResourcesNavigationIconsMedium, 
@@ -258,19 +245,11 @@ void setAlarmSetAlarm__Init( setAlarmSetAlarm _this, XObject aLink, XHandle aArg
   _this->pushDoAmPm.OnPress = EwNewSlot( _this, setAlarmSetAlarm_SlotUpAm );
   WidgetSetPushButton_OnSetAppearance( &_this->pushDoAmPm, EwGetAutoObject( &setAlarmbuttonSetAlarm, 
   WidgetSetPushButtonConfig ));
-  _this->pushSave.OnRelease = EwNullSlot;
-  _this->pushSave.OnPress = EwNewSlot( _this, setAlarmSetAlarm_SlotUpHour );
-  WidgetSetPushButton_OnSetAppearance( &_this->pushSave, EwGetAutoObject( &setAlarmbuttonSetAlarm, 
-  WidgetSetPushButtonConfig ));
   ViewsImage_OnSetBitmap( &_this->Image, EwLoadResource( &Application_2exiticon, 
   ResourcesBitmap ));
   ViewsText_OnSetFont( &_this->Text, EwLoadResource( &Application_2fontMedium, ResourcesFont ));
   ViewsImage_OnSetBitmap( &_this->Image1, EwLoadResource( &Application_2iconAlarm, 
   ResourcesBitmap ));
-  WidgetSetPushButton_OnSetAppearance( &_this->pushButtonSave, EwGetAutoObject( 
-  &setAlarmbuttonSetAlarm, WidgetSetPushButtonConfig ));
-  WidgetSetPushButton_OnSetAppearance( &_this->pushButtonExit, EwGetAutoObject( 
-  &setAlarmbuttonSetAlarm, WidgetSetPushButtonConfig ));
 }
 
 /* Re-Initializer for the class 'setAlarm::SetAlarm' */
@@ -300,13 +279,10 @@ void setAlarmSetAlarm__ReInit( setAlarmSetAlarm _this )
   WidgetSetPushButton__ReInit( &_this->pushDoHour );
   WidgetSetPushButton__ReInit( &_this->pushDoMin );
   WidgetSetPushButton__ReInit( &_this->pushDoAmPm );
-  WidgetSetPushButton__ReInit( &_this->pushSave );
   ViewsRectangle__ReInit( &_this->Rectangle2 );
   ViewsImage__ReInit( &_this->Image );
   ViewsText__ReInit( &_this->Text );
   ViewsImage__ReInit( &_this->Image1 );
-  WidgetSetPushButton__ReInit( &_this->pushButtonSave );
-  WidgetSetPushButton__ReInit( &_this->pushButtonExit );
 }
 
 /* Finalizer method for the class 'setAlarm::SetAlarm' */
@@ -336,13 +312,10 @@ void setAlarmSetAlarm__Done( setAlarmSetAlarm _this )
   WidgetSetPushButton__Done( &_this->pushDoHour );
   WidgetSetPushButton__Done( &_this->pushDoMin );
   WidgetSetPushButton__Done( &_this->pushDoAmPm );
-  WidgetSetPushButton__Done( &_this->pushSave );
   ViewsRectangle__Done( &_this->Rectangle2 );
   ViewsImage__Done( &_this->Image );
   ViewsText__Done( &_this->Text );
   ViewsImage__Done( &_this->Image1 );
-  WidgetSetPushButton__Done( &_this->pushButtonSave );
-  WidgetSetPushButton__Done( &_this->pushButtonExit );
 
   /* Don't forget to deinitialize the super class ... */
   CoreGroup__Done( &_this->_Super );
@@ -400,7 +373,7 @@ void setAlarmSetAlarm_SlotUpHour( setAlarmSetAlarm _this, XObject sender )
       ViewsText_OnSetString( &_this->hourText, EwNewStringInt( valueNew, 0, 10 ));
     }
     else
-      ViewsText_OnSetString( &_this->hourText, EwLoadString( &_Const0025 ));
+      ViewsText_OnSetString( &_this->hourText, EwLoadString( &_Const0024 ));
   }
 }
 
@@ -425,7 +398,7 @@ void setAlarmSetAlarm_SlotDoHour( setAlarmSetAlarm _this, XObject sender )
       ViewsText_OnSetString( &_this->hourText, EwNewStringInt( valueNew, 0, 10 ));
     }
     else
-      ViewsText_OnSetString( &_this->hourText, EwLoadString( &_Const0026 ));
+      ViewsText_OnSetString( &_this->hourText, EwLoadString( &_Const0025 ));
   }
 }
 
@@ -450,7 +423,7 @@ void setAlarmSetAlarm_SlotUpMin( setAlarmSetAlarm _this, XObject sender )
       ViewsText_OnSetString( &_this->minText, EwNewStringInt( valueNew, 0, 10 ));
     }
     else
-      ViewsText_OnSetString( &_this->minText, EwLoadString( &_Const0027 ));
+      ViewsText_OnSetString( &_this->minText, EwLoadString( &_Const0026 ));
   }
 }
 
@@ -475,7 +448,7 @@ void setAlarmSetAlarm_SlotDoMin( setAlarmSetAlarm _this, XObject sender )
       ViewsText_OnSetString( &_this->minText, EwNewStringInt( valueNew, 0, 10 ));
     }
     else
-      ViewsText_OnSetString( &_this->minText, EwLoadString( &_Const0028 ));
+      ViewsText_OnSetString( &_this->minText, EwLoadString( &_Const0027 ));
   }
 }
 
@@ -489,7 +462,7 @@ void setAlarmSetAlarm_SlotUpAm( setAlarmSetAlarm _this, XObject sender )
 
   if ( !EwCompString( _this->amPmText.String, EwLoadString( &_Const0013 )))
   {
-    ViewsText_OnSetString( &_this->amPmText, EwLoadString( &_Const0029 ));
+    ViewsText_OnSetString( &_this->amPmText, EwLoadString( &_Const0028 ));
   }
   else
     ViewsText_OnSetString( &_this->amPmText, EwLoadString( &_Const0013 ));
@@ -513,6 +486,7 @@ EW_DEFINE_CLASS( setAlarmSetAlarm, CoreGroup, Rectangle, Rectangle, Rectangle, R
   CoreGroup_ChangeViewState,
   CoreGroup_OnSetBounds,
   CoreGroup_OnSetFocus,
+  CoreGroup_OnSetOpacity,
   CoreGroup_DispatchEvent,
   CoreGroup_BroadcastEvent,
   setAlarmSetAlarm_UpdateLayout,

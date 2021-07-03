@@ -428,8 +428,10 @@ HAL_StatusTypeDef HAL_TIM_Base_Stop(TIM_HandleTypeDef *htim)
   * @param  htim TIM Base handle
   * @retval HAL status
   */
+//extern int flag_time;
 HAL_StatusTypeDef HAL_TIM_Base_Start_IT(TIM_HandleTypeDef *htim)
 {
+//	flag_time = 1;
   uint32_t tmpsmcr;
 
   /* Check the parameters */
